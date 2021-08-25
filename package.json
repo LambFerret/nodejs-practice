@@ -1,0 +1,22 @@
+{
+  "name": "nodejsandroid",
+  "version": "1.0.0",
+  "description": "for project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LambFerret/nodejsAndroid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LambFerret/nodejsAndroid/issues"
+  },
+  "homepage": "https://github.com/LambFerret/nodejsAndroid#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
