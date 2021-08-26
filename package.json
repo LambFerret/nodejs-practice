@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/LambFerret/nodejsAndroid#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3",
+    "express-session": "^1.17.2",
+    "fs": "^0.0.1-security",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }

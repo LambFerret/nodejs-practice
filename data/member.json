@@ -1,0 +1,12 @@
+{
+    "member1" : {
+        "name" : "hi",
+        "password": "951203",
+        "age" : 20
+    },
+    "member2" : {
+        "name" : "hellow?",
+        "password": "1231234",
+        "age" : 25
+    }
+}
