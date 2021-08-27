@@ -1,27 +1,18 @@
 {
   "name": "nodejsandroid",
-  "version": "1.0.0",
-  "description": "for project",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.0.0",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LambFerret/nodejsAndroid.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LambFerret/nodejsAndroid/issues"
-  },
-  "homepage": "https://github.com/LambFerret/nodejsAndroid#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
     "express-handlebars": "^5.3.3",
-    "express-session": "^1.17.2",
-    "fs": "^0.0.1-security",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
   }
 }
