@@ -1,14 +1,3 @@
 {
-    "member1" : {
-        "id" : "hi",
-        "email":"hi@asdf.com",
-        "password": "951203",
-        "age" : 20
-    },
-    "member2" : {
-        "id" : "hellow?",
-        "email":"hellow@asdf.com",
-        "password": "1231234",
-        "age" : 25
-    }
+    
 }
