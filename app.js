@@ -5,10 +5,44 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const handlebars = require('express-handlebars')
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var profileRouter = require('./routes/profile');
 var loginRouter = require('./routes/login');
 var regiRouter = require('./routes/register')
 var app = express();
+const mongoose = require("mongoose");
+const passport = require("passport")
+const LocalStrategy = require("passport-local")
+const passportLocalMongoose = require("passport-local-mongoose")
+const User = require("./data/users")
+
+//connect MongoDB
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://root:root1234@Cluster0.qcnmf.mongodb.net/6129ec393fcdfa4e1808ad68?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect((err,client) => {
+  if (err) console.log('failed to connect')
+  else {
+    console.log('connected')
+    const collection = client.db("test").collection("students")
+  }
+  // perform actions on the collection object
+});
+
+
+//important
+//In app.js
+app.use(require("express-session")({
+secret:"hey i am nothing",//decode or encode session
+    resave: false,          
+    saveUninitialized:false    
+}));
+
+passport.serializeUser(User.serializeUser());       //session encoding
+passport.deserializeUser(User.deserializeUser());   //session decoding
+passport.use(new LocalStrategy(User.authenticate()));
+app.use(passport.initialize());
+app.use(passport.session());
+//paste end
 
 
 app.engine('hbs', handlebars({
@@ -26,7 +60,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
 app.use('/register', regiRouter);
 
@@ -47,3 +81,4 @@ app.use(function(err, req, res, next) {
 app.listen(3000,()=>{
   console.log(`localhost opened`)
 })
+ 
