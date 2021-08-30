@@ -1,15 +1,16 @@
 const express = require('express');
-const passport = require('passport');
 const app = express()
 const router = express.Router()
 const User = require("../data/users")
 const mdb = require("../data/mongodatabase");
-const { collection } = require('../data/users');
-router.get('/', function(req, res, next) {
+const sql = require("../data/mysqldatabase");
+
+
+router.get('/', function (req, res) {
   res.render('register', { title: 'this is register form' });
 });
 
-router.post('/',(req, res)=>{
+router.post('/', (req, res) => {
   /*
     User.register(new User({
       id:req.body.id,
@@ -34,19 +35,23 @@ router.post('/',(req, res)=>{
      })
      
     */
+  var id = req.body.id
+  var email = req.body.email
+  var password = req.body.pwd
 
-    const collection = mdb.db("thisisnewname").collection("user")
+  sql.register(id, email, password)
 
-    collection.insertOne({
-      id:req.body.id,
-      email:req.body.email,
-      password:req.body.pwd,
+  const collection = mdb.db("thisisnewname").collection("user")
+  collection.insertOne({
+    id: id,
+    email: email,
+    password: password,
   })
-  .then(
-    res.redirect("/login")
-  )
-    
+    .then(
+      res.redirect("/login")
+    )
+
 
 })
- 
+
 module.exports = router;

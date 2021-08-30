@@ -6,9 +6,8 @@ client.connect((err,client) => {
   if (err) console.log('failed to connect')
   else {
     console.log('connected')
-//connect MongoDB
-
 }
-// perform actions on the collection object
 });
+//connect MongoDB
+// perform actions on the collection object
 module.exports = client;
