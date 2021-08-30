@@ -14,21 +14,9 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local")
 const passportLocalMongoose = require("passport-local-mongoose")
 const User = require("./data/users")
+const mdb = require("./data/mongodatabase")
 
-//connect MongoDB
-const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://root:root1234@Cluster0.qcnmf.mongodb.net/6129ec393fcdfa4e1808ad68?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect((err,client) => {
-  if (err) console.log('failed to connect')
-  else {
-    console.log('connected')
-    const collection = client.db("test").collection("students")
-  }
-  // perform actions on the collection object
-});
-
-
+/*
 //important
 //In app.js
 app.use(require("express-session")({
@@ -43,7 +31,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 app.use(passport.initialize());
 app.use(passport.session());
 //paste end
-
+*/
 
 app.engine('hbs', handlebars({
   defaultLayout:'basic',
