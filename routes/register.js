@@ -41,17 +41,16 @@ router.post('/', (req, res) => {
 
   sql.register(id, email, password)
 
+
+  //this is mongoDB insert
+  /*
   const collection = mdb.db("thisisnewname").collection("user")
   collection.insertOne({
     id: id,
     email: email,
     password: password,
-  })
-    .then(
-      res.redirect("/login")
-    )
-
-
+  }).then(res.redirect("/login"))
+  */
 })
 
 module.exports = router;

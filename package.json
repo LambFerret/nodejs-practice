@@ -26,7 +26,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "pm2": "^5.1.1"
+    "pm2": "^5.1.1",
+    "tfjs": "^0.6.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

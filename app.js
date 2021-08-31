@@ -15,7 +15,7 @@ const LocalStrategy = require("passport-local")
 const passportLocalMongoose = require("passport-local-mongoose")
 const User = require("./data/users")
 const mdb = require("./data/mongodatabase")
-
+const session = require("express-session")
 /*
 //important
 //In app.js
@@ -33,6 +33,7 @@ app.use(passport.session());
 //paste end
 */
 
+//express SETTINGS
 app.engine('hbs', handlebars({
   defaultLayout:'basic',
   extname:'hbs',
@@ -41,12 +42,20 @@ app.engine('hbs', handlebars({
 })) 
 app.set('view engine', 'hbs');
 
+
+app.use(session({ secret: "hi" }))
+app.use(passport.initialize())
+app.use(passport.session())
+
+/*
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+*/
 
+//router modules
 app.use('/', indexRouter);
 app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
