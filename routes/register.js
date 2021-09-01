@@ -11,30 +11,6 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', (req, res) => {
-  /*
-    User.register(new User({
-      id:req.body.id,
-      email:req.body.email,
-    }), req.body.password, (err,user)=>{
-      if(err){
-        res.render("register")
-        return console.log(err);
-      }
-      passport.authenticate("local")(req,res,()=>{
-        res.redirect("/login")
-      })
-    })
-
-    db.createCollection("students", {
-   validator: {
-      $jsonSchema: {
-          bsonType: "object",
-          required: [ "name", "year", "major", "gpa", "address.city", "address.street" ],        
-                    }
-               }
-     })
-     
-    */
   var id = req.body.id
   var email = req.body.email
   var password = req.body.pwd
