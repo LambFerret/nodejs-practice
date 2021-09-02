@@ -1,18 +1,23 @@
 var mysql = require("mysql")
+const mariadb = require("mariadb")
 
-sqlInit = ()=>{
-    var connection = mysql.createConnection({
-        host:'localhost',
-        user:'root',
-        password:'root1234',
-        database:'datas'
+
+exports.register = async (id, name, email, pwd) => {
+    const pool = mariadb.createPool({
+        host: '34.64.143.233',
+        port: '8080',
+        user: 'jiha',
+        password: 'qkrwlgk0102!',
+        database: 'mysql',
+        connectionLimit:5,
     })
-    connection.connect(); 
+    try {
+        conn = await pool.getConnection().then(()=>{console.log('!!really connected!!');})
+        await conn.query(`INSERT INTO USER (UserID, UserNM, UserPw, UserEmail) VALUES '${id}','${name},'${pwd}','${email}';`)
+    } catch (err) { console.log(err); }
+    finally { ;}
 }
-
-exports.register = (id, email, pwd) => {
-    sqlInit()
-    connection.query(`INSERT INTO table1 (id, email, pwd) VALUES '${id}','${email}','${pwd}'`)
-    connection.close()
-}
-
+// 34.64.143.233
+// jiha
+// qkrwlgk0102!
+//10.5.12
