@@ -11,14 +11,15 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', (req, res) => {
+
   var id = req.body.id
   var email = req.body.email
   var name = req.body.name
-
   var password = req.body.pwd
-
+  
+  //maria db insert
   db.register(id,name, password, email)
-
+  
 
   //this is mongoDB insert
   /*
