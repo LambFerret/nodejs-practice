@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const model = require("../lib/transformModel")
-//const spawn = require("child_process").spawn
-//const pythonProcess = spawn('python',[''])
+const spawn = require("child_process").spawn
 
 var beforePic = "models/imgs/fall wallpaper4.jpg"
 
@@ -11,7 +10,7 @@ router.get('/', function (req, res) {
             res.render('transform', {
                 title: 'Transform',
                 before: beforePic,
-                after: value
+                after: value,
             })
         ))
 });
