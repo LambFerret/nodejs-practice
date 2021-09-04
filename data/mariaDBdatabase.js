@@ -1,4 +1,5 @@
 const mariadb = require("mariadb")
+
 const pool = mariadb.createPool({
     host: '34.64.143.233',
     port: '3306',
@@ -9,30 +10,37 @@ const pool = mariadb.createPool({
 })
 console.log("connecting mariaDB.. just wait..")
 
-exports.register = async (id, name, email, pwd) => {
-    try {
-        
-        conn = await pool.getConnection()
-        .then((con)=>{
-            console.log('!!mariaDB connected!!');
-            con.query(`INSERT INTO USER VALUES ('${id}','${name}','${pwd}','${email}');`)
-    })
 
-    } catch (err) { console.error(err); }
-    finally { ;}
-}
+function DB(){
+    this.getConnection = function(callback) {
+        pool.getConnection()
+        .then(conn => {
+            callback(conn)
+        }).catch(err =>{
+            console.log("this is mistake.. can't connect DB");
+        })
+    }
 
-exports.IDcheck = async (id) =>{
-    try{
-        conn = await pool.getConnection()
-        .then((con)=>{
-            console.log('!!markaDB connected!!');
-            con.query(`select * from user where user.id = ${id};`)
-    })
+    this.getConnectionAsync = async ()=>{
+        try{
+            let conn = await pool.getConnection()
+            this.conn = conn
+            return conn;
+        } catch (err){ throw err;} 
+    }
+    
+    this.register = (id, name, email, pwd) =>{
+        this.getConnection((conn)=>{
+            conn.query(`INSERT INTO USER VALUES ('${id}','${name}','${pwd}','${email}');`)
+        })
+    }
+    this.IDcheck = (id) =>{
+        this.getConnection((conn)=>{
+            conn.query(`SELECT COUNT (UserID) FROM USER WHERE ${id} == UserID`)
+        }) 
+    }
 }
-    catch (err) {console.error(err)}
-}
-
+module.exports = new DB();
 
 // 34.64.143.233
 // jiha
