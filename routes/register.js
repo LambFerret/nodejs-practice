@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const db = require("../data/mariaDBdatabase");
+const crypt = require("bcrypt")
+//const db = require("../data/mariaDBdatabase");
 /*
 //mongoDB Import
 const mdb = require("../data/mongodatabase");
@@ -16,10 +17,10 @@ router.post('/', (req, res) => {
   var id = req.body.id
   var email = req.body.email
   var name = req.body.name
-  var password = req.body.pwd
+  var password = crypt.hashSync(req.body.pwd, 5)
   
   //maria db insert
-  db.register(id,name, password, email)
+  //db.register(id,name, password, email)
   
 
   /*

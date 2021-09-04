@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const model = require("../lib/transformModel")
+//const model = require("../lib/transformModel")
 
 var beforePic = "models/imgs/fall wallpaper4.jpg"
 
