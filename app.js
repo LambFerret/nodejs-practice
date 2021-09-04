@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const handlebars = require('express-handlebars')
+const port = 8080
 
 //router modules declare
 const indexRouter = require('./routes/index');
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 //router modules
 app.use('/', indexRouter);
 app.use('/profile', profileRouter);
@@ -39,7 +41,7 @@ app.use('/transform', transRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
-// error else
+// else error
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -48,6 +50,6 @@ app.use(function (err, req, res, next) {
 });
 
 // app start
-app.listen(3000, () => {
-  console.log(`localhost opened`)
+app.listen(port, () => {
+  console.log(`http://localhost:${port} is opened`)
 })

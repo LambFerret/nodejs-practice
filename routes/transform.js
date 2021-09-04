@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const model = require("../lib/transformModel")
-const spawn = require("child_process").spawn
 
 var beforePic = "models/imgs/fall wallpaper4.jpg"
 

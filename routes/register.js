@@ -1,10 +1,11 @@
-const express = require('express');
-const app = express()
+const express = require("express")
 const router = express.Router()
-const User = require("../data/users")
+const db = require("../data/mariaDBdatabase");
+/*
+//mongoDB Import
 const mdb = require("../data/mongodatabase");
-const db = require("../data/mysqldatabase");
-
+const User = require("../data/users")
+*/
 
 router.get('/', function (req, res) {
   res.render('register', { title: 'this is register form' });
@@ -21,8 +22,8 @@ router.post('/', (req, res) => {
   db.register(id,name, password, email)
   
 
-  //this is mongoDB insert
   /*
+  //this is mongoDB insert
   const collection = mdb.db("thisisnewname").collection("user")
   collection.insertOne({
     id: id,
