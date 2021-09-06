@@ -18,11 +18,11 @@ router.post('/', (req, res) => {
   var email = req.body.email
   var name = req.body.name
   var password = crypt.hashSync(req.body.pwd, 5)
-  
-  //maria db insert
-  db.register(id,name, password, email)
-  
 
+  //maria db insert
+  db.register(id, name, password, email)
+  
+  //res.redirect("/login")
   /*
   //this is mongoDB insert
   const collection = mdb.db("thisisnewname").collection("user")

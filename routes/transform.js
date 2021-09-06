@@ -4,14 +4,14 @@ const router = require('express').Router();
 var beforePic = "models/imgs/fall wallpaper4.jpg"
 
 router.get('/', function (req, res) {
-    model.prediction(0, true, beforePic)
-        .then((value, err) => (
+    // model.prediction(0, true, beforePic)
+    //     .then((value, err) => (
             res.render('transform', {
                 title: 'Transform',
                 before: beforePic,
                 after: value,
             })
-        ))
+//         ))
 });
 
 module.exports = router;

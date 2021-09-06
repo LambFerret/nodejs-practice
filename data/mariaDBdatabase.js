@@ -6,41 +6,52 @@ const pool = mariadb.createPool({
     user: 'jiha',
     password: 'qkrwlgk0102!',
     database: 'mysql',
-    connectionLimit:5,
+    connectionLimit: 5,
 })
 console.log("connecting mariaDB.. just wait..")
 
 
-function DB(){
-    this.getConnection = function(callback) {
-        pool.getConnection()
+
+exports.getConnection = function (callback) {
+    pool.getConnection()
         .then(conn => {
             callback(conn)
-        }).catch(err =>{
+        }).catch(err => {
             console.log("this is mistake.. can't connect DB");
         })
-    }
-
-    this.getConnectionAsync = async ()=>{
-        try{
-            let conn = await pool.getConnection()
-            this.conn = conn
-            return conn;
-        } catch (err){ throw err;} 
-    }
-    
-    this.register = (id, name, email, pwd) =>{
-        this.getConnection((conn)=>{
-            conn.query(`INSERT INTO USER VALUES ('${id}','${name}','${pwd}','${email}');`)
-        })
-    }
-    this.IDcheck = (id) =>{
-        this.getConnection((conn)=>{
-            conn.query(`SELECT COUNT (UserID) FROM USER WHERE ${id} == UserID`)
-        }) 
-    }
 }
-module.exports = new DB();
+
+exports.getConnectionAsync = async () => {
+    try {
+        let conn = await pool.getConnection()
+        this.conn = conn
+        return conn;
+    } catch (err) { throw err; }
+}
+
+exports.register = async (id, name, pwd, email) => {
+    getConnection((conn) => {
+        conn.query(`INSERT INTO USER(UserID, UserNM, UserPw, UserEmail) VALUES ('${id}','${name}','${pwd}','${email}');`)
+
+    })
+}
+exports.IDcheck =async (id) => {
+    temp1 =await this.getConnectionAsync(async (conn) => {
+        temp = await conn.query(`select count(*) cnt from USER where UserID LIKE '${id}';`)
+            .then((value) => {
+                result = value[0].cnt
+                //console.log(result);
+                return result
+            })
+        console.log(temp + " temp ");
+        return temp
+    })
+    console.log(temp1 + "temp1");
+    return temp1
+
+}
+
+
 
 // 34.64.143.233
 // jiha
