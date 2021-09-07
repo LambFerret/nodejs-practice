@@ -22,5 +22,6 @@ router.post('/', (req, res) => {
 
 module.exports = router;
 
+// http://34.64.143.233:8080/
 // id : adminad
 // pwd : admin

@@ -9,7 +9,7 @@ const pool = mariadb.createPool({
     connectionLimit: 5,
 })
 console.log("connecting mariaDB.. just wait..")
-
+var connect = pool.getConnection()
 
 
 exports.getConnection = function (callback) {
@@ -38,10 +38,11 @@ exports.register = async (id, name, pwd, email) => {
 exports.IDcheck = (id) => {
     return new Promise ((resolve, reject) => {
         this.getConnection(async(con)=>{
-            await con.query(`select count(*) cnt from USER where UserID LIKE '${id}';`)
+            await con.query(`select count(*) cnt from USER where UserID = '${id}';`)
                 .then((value) => {
                     result = value[0].cnt
                     resolve(result)
+                    
                 })
         })
     })
