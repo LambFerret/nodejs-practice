@@ -1,24 +1,55 @@
 
-<form action="/register" method="post">
-<div>
+<form action="/register" method="post" id="register">
     <div>
-        이메일 :
-        <input type="email" name="email" id="email" required>
+        <div>
+            이메일 :
+            <input type="email" name="email" id="email" required>
+        </div>
+        <div>
+            아이디 5에서 15자 사이 영문 :
+            <input type="text" name="id" id="id" pattern="[A-Za-z].{5,15}" required>
+            <p id="isFailed"></p>
+            <p id="test">에러입니다 다시시도해주세요</p>
+
+        </div>
+        <div>
+            비번 5에서 10자 사이:
+            <input type="password" name="pwd" id="pwd" pattern=".{5,10}" required>
+        </div>
+        <div>
+            이름 1에서 8자 사이:
+            <input type="text" name="name" id="name" pattern=".{1,8}" required>
+        </div>
+        <div>
+            <button>회원가입</button>
+        </div>
     </div>
-    <div>
-        아이디 5에서 15자 사이 영문 :
-        <input type="text" name="id" id="id" pattern="[A-Za-z].{5,15}" required>
-    </div>
-    <div>
-        비번 5에서 10자 사이:
-        <input type="password" name="pwd" id="pwd" pattern=".{5,10}" required>
-    </div>
-    <div>
-        이름  1에서 8자 사이:
-        <input type="text" name="name" id="name" pattern=".{1,8}" required>
-    </div>
-    <div>
-        <button>회원가입</button>
-    </div>
-</div>
-</form> 
+</form>
+<style>
+    #isFailed{
+        display: none;
+        color: red;
+    }
+    #test{
+        display: none;
+    }
+    
+</style>
+<script>
+$(()=>{
+    $("#id").focusout(()=>{
+        var id = $('#id').val();
+        $.ajax({
+            type:'POST',
+            data:{id:id},
+            url:"/register/idcheck",
+            success:(txt)=>{
+                console.log(txt)
+                if (txt == 1) $("#isFailed").css("display","inline").text("존재하는 아이디입니다.")
+                else $("#isFailed").css("display","inline").text("사용할 수 있는 아이디입니다.")
+            },
+            error: (txt)=>$("#test").css("display","inline")
+        })
+    })
+})
+</script>

@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
   //maria db insert
   db.register(id, name, password, email)
   
-  //res.redirect("/login")
+  res.redirect("/login")
   /*
   //this is mongoDB insert
   const collection = mdb.db("thisisnewname").collection("user")
@@ -32,6 +32,10 @@ router.post('/', (req, res) => {
     password: password,
   }).then(res.redirect("/login"))
   */
+})
+
+router.post("/idcheck",async(req, res)=>{
+  res.json(await db.IDcheck(req.body.id))
 })
 
 module.exports = router;

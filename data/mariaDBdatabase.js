@@ -35,20 +35,16 @@ exports.register = async (id, name, pwd, email) => {
 
     })
 }
-exports.IDcheck =async (id) => {
-    temp1 =await this.getConnectionAsync(async (conn) => {
-        temp = await conn.query(`select count(*) cnt from USER where UserID LIKE '${id}';`)
-            .then((value) => {
-                result = value[0].cnt
-                //console.log(result);
-                return result
-            })
-        console.log(temp + " temp ");
-        return temp
+exports.IDcheck = (id) => {
+    return new Promise ((resolve, reject) => {
+        this.getConnection(async(con)=>{
+            await con.query(`select count(*) cnt from USER where UserID LIKE '${id}';`)
+                .then((value) => {
+                    result = value[0].cnt
+                    resolve(result)
+                })
+        })
     })
-    console.log(temp1 + "temp1");
-    return temp1
-
 }
 
 
