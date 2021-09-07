@@ -30,7 +30,7 @@ exports.getConnectionAsync = async () => {
 }
 
 exports.register = async (id, name, pwd, email) => {
-    getConnection((conn) => {
+    this.getConnection((conn) => {
         conn.query(`INSERT INTO USER(UserID, UserNM, UserPw, UserEmail) VALUES ('${id}','${name}','${pwd}','${email}');`)
 
     })

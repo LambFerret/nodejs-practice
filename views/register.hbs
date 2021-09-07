@@ -1,4 +1,3 @@
-
 <form action="/register" method="post" id="register">
     <div>
         <div>
@@ -20,36 +19,40 @@
             이름 1에서 8자 사이:
             <input type="text" name="name" id="name" pattern=".{1,8}" required>
         </div>
-        <div>
-            <button>회원가입</button>
-        </div>
+        <input type="submit" value="회원가입" id="target" disabled="false">
     </div>
 </form>
 <style>
-    #isFailed{
+    #isFailed {
         display: none;
         color: red;
     }
-    #test{
+    #test {
         display: none;
     }
-    
 </style>
 <script>
-$(()=>{
-    $("#id").focusout(()=>{
-        var id = $('#id').val();
-        $.ajax({
-            type:'POST',
-            data:{id:id},
-            url:"/register/idcheck",
-            success:(txt)=>{
-                console.log(txt)
-                if (txt == 1) $("#isFailed").css("display","inline").text("존재하는 아이디입니다.")
-                else $("#isFailed").css("display","inline").text("사용할 수 있는 아이디입니다.")
-            },
-            error: (txt)=>$("#test").css("display","inline")
+    $(() => {
+        $("#id").focusout(() => {
+            var id = $('#id').val();
+            $.ajax({
+                type: 'POST',
+                data: { id: id },
+                url: "/register/idcheck",
+                success: (txt) => {
+                    var target = document.getElementById("target_btn");
+                    console.log(txt)
+                    if (txt == 1) {
+                        $("#isFailed").css("display", "inline").text("존재하는 아이디입니다.")
+                        $('#target').attr('disabled', true);
+                    }
+                    else {
+                        $("#isFailed").css("display", "inline").text("사용할 수 있는 아이디입니다.")
+                        $('#target').attr('disabled', false)
+                    }
+                },
+                error: (txt) => $("#test").css("display", "inline")
+            })
         })
     })
-})
 </script>

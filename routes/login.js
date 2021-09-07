@@ -21,3 +21,6 @@ router.post('/', (req, res) => {
 })
 
 module.exports = router;
+
+// id : adminad
+// pwd : admin
