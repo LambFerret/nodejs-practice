@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const passport = require("../lib/pass")
-const session = require("../lib/session")
 
 
-router.use(passport.initialize())
-router.use(passport.session())
+// router.use(passport.initialize())
+// router.use(passport.session())
 
 router.get('/', function (req, res) {
   res.render('LoginPage', { title: 'login page' });
