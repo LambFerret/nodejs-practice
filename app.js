@@ -13,7 +13,7 @@ const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login');
 const regiRouter = require('./routes/register')
 const transRouter = require('./routes/transform')
-const logoutRouter = require('./routes/logout')
+const logoutRouter = require('./routes/logout');
 
 
 //express SETTINGS
@@ -23,6 +23,7 @@ app.engine('hbs', handlebars({
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/',
 }))
+
 app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());

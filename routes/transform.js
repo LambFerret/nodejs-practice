@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
             res.render('transform', {
                 title: 'Transform',
                 before: beforePic,
-                after: value,
+                after: beforePic,
             })
 //         ))
 });

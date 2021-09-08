@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require("../lib/pass")
+const session = require("../lib/session")
 
 
 router.use(passport.initialize())
