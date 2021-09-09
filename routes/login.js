@@ -1,27 +1,22 @@
-const router = require('express').Router();
-const passport = require("../lib/pass")
+module.exports = function (passport) {
+  const router = require('express').Router();
 
 
-// router.use(passport.initialize())
-// router.use(passport.session())
+  router.get('/', function (req, res) {
+    res.render('LoginPage', { title: 'login page' });
+  });
 
-router.get('/', function (req, res) {
-  res.render('LoginPage', { title: 'login page' });
-});
 
-router.post('/', (req, res) => {
-  passport.authenticate(
-    'local',
-    {
-      successRedirect: '/profile',
+  router.post('/process',
+  passport.authenticate('local',{
+    successRedirect: '/',
       failureRedirect: '/login',
-      failureFlash: false
-    }
-  )
-})
+      failureFlash: true,
+      successFlash: true
+  }))
 
-module.exports = router;
-
+  return router;
+}
 // http://34.64.143.233:8080/
 // id : adminad
 // pwd : admin

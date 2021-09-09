@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 
   //maria db insert
   db.register(id, name, password, email)
-  
+
   res.redirect("/login")
   /*
   //this is mongoDB insert
@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
   */
 })
 
-router.post("/idcheck",async(req, res)=>{
+router.post("/idcheck", async (req, res) => {
   res.json(await db.IDcheck(req.body.id))
 })
 

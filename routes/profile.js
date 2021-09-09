@@ -1,9 +1,11 @@
 const router = require('express').Router();
 
-
 router.get('/', function(req, res) {
   //  req.session.views = {"this":'is'}
-  res.render('userprofile', { title: req.session });
+  res.render('userprofile', { 
+    title: req.session,
+    id : req.session
+   });
 });
 
 module.exports = router;
