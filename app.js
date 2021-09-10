@@ -24,7 +24,6 @@ const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login')(passport);
 const regiRouter = require('./routes/register')
 const transRouter = require('./routes/transform')
-const logoutRouter = require('./routes/logout');
 
 
 //express SETTINGS
@@ -50,7 +49,6 @@ app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
 app.use('/register', regiRouter);
 app.use('/transform', transRouter);
-app.use("/logout",logoutRouter)
 
 // 404 error
 app.use(function (req, res, next) {

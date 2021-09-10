@@ -6,7 +6,6 @@ module.exports = function (passport) {
     res.render('LoginPage', { title: 'login page' });
   });
 
-
   router.post('/process',
   passport.authenticate('local',{
     successRedirect: '/',
@@ -15,6 +14,11 @@ module.exports = function (passport) {
       successFlash: true
   }))
 
+  router.get("/logout", (req, res)=>{
+    req.session.destroy()
+    console.log("logout");
+    res.redirect('/')
+  })
   return router;
 }
 // http://34.64.143.233:8080/
