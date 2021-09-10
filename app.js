@@ -7,16 +7,7 @@ const flash = require("connect-flash")
 const logger = require('morgan');
 const port = 8080;
 const passport = require("./lib/pass")(app);
-
-//session 
-var session = require('express-session')
-var FileStore = require('session-file-store')(session)
-app.use(session({
-  secret: 'hey i am secret!',
-  resave: false,
-  saveUninitialized: true,
-  store: new FileStore()
-}))
+const sessionConfig = require("./lib/session")
 
 //router modules declare
 const indexRouter = require('./routes/index');
@@ -35,9 +26,9 @@ app.engine('hbs', handlebars({
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/',
 }))
-
 app.set('view engine', 'hbs');
 app.use(logger('dev'));
+app.use(sessionConfig)
 app.use(flash())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
