@@ -1,6 +1,14 @@
 const router = require('express').Router();
 const db = require("../data/mariaDBdatabase");
 
+
+var date = new Date();
+var day = date.toLocaleDateString()
+var hour = date.getHours()
+var min = date.getMinutes()
+
+var now = `${day} ${hour}:${min}`
+
 router.get("/", (req, res) => {
     if (!req.session.passport) res.redirect("/")
 
@@ -19,12 +27,12 @@ router.get("/create", (req, res) => {
 })
 
 router.post("/create",(req,res)=>{
-    var title = req.body.title
     var content = req.body.content
-
+    var type = req.body.type
+    
     db.createPost(title, content)
     res.render("create",{
-        title:req.body.title
+        title:now
     })
     //res.redirect("/community")
 })

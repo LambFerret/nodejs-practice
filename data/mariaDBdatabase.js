@@ -49,7 +49,7 @@ exports.IDcheck = (id) => {
 
 exports.createPost = async (id, content, time, type) => {
     this.getConnection((conn) => {
-        conn.query(`INSERT INTO Posting(PostID, Post_Text, Post_Time, PostBoard_Type) VALUES ('${id}','${name}','${pwd}','${email}');`)
+        conn.query(`INSERT INTO Posting(PostID, Post_Text, Post_Time, PostBoard_Type) VALUES ('${id}','${content}','${time}','${type}');`)
     })
 }
 
