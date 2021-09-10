@@ -32,19 +32,24 @@ exports.getConnectionAsync = async () => {
 exports.register = async (id, name, pwd, email) => {
     this.getConnection((conn) => {
         conn.query(`INSERT INTO USER(UserID, UserNM, UserPw, UserEmail) VALUES ('${id}','${name}','${pwd}','${email}');`)
-
     })
 }
+
 exports.IDcheck = (id) => {
     return new Promise ((resolve, reject) => {
         this.getConnection(async(con)=>{
             await con.query(`select count(*) cnt from USER where UserID = '${id}';`)
                 .then((value) => {
                     result = value[0].cnt
-                    resolve(result)
-                    
+                    resolve(result) 
                 })
         })
+    })
+}
+
+exports.createPost = async (id, content, time, type) => {
+    this.getConnection((conn) => {
+        conn.query(`INSERT INTO Posting(PostID, Post_Text, Post_Time, PostBoard_Type) VALUES ('${id}','${name}','${pwd}','${email}');`)
     })
 }
 

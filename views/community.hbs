@@ -1,0 +1,30 @@
+<p> huh, this is cozy </p>
+<div>
+    <input type="checkbox" name="season" id="spring" onclick="check(this)">봄
+    <input type="checkbox" name="season" id="summer" onclick="check(this)">여름
+    <input type="checkbox" name="season" id="autumn" onclick="check(this)">가을
+    <input type="checkbox" name="season" id="winter" onclick="check(this)">겨울
+</div>
+<div>
+    <button onclick="location.href='/community/create'">생성하기</button>
+</div>
+<table border="1">
+    <tr>
+        <td>번호</td>
+        <td>작성자</td>
+        <td>제목</td>
+        <td>조회수</td>
+        <td>수정일</td>
+        <td>등록일</td>
+    </tr>
+</table>
+
+<script>
+    function check(here){
+        const checkbox = document.getElementsByName("season");
+        checkbox.forEach((i)=>{
+            i.checked = false;
+        })
+        here.checked = true
+    }
+</script>

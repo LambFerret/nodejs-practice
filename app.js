@@ -8,7 +8,7 @@ const logger = require('morgan');
 const port = 8080;
 const passport = require("./lib/pass")(app);
 
-//CHECK HERE
+//session 
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
 app.use(session({
@@ -24,6 +24,8 @@ const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login')(passport);
 const regiRouter = require('./routes/register')
 const transRouter = require('./routes/transform')
+const commuRouter = require('./routes/community')
+
 
 
 //express SETTINGS
@@ -49,6 +51,8 @@ app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
 app.use('/register', regiRouter);
 app.use('/transform', transRouter);
+app.use('/community', commuRouter);
+
 
 // 404 error
 app.use(function (req, res, next) {
