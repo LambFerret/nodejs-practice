@@ -17,11 +17,11 @@ router.post('/', (req, res) => {
   var email = req.body.email
   var name = req.body.name
   var password = crypt.hashSync(req.body.pwd, 5)
-
+  var list = [id, name, password, email]
   //maria db insert
-  db.register(id, name, password, email)
-
+  db.insertRow("USER", list)
   res.redirect("/login")
+
   /*
   //this is mongoDB insert
   const collection = mdb.db("thisisnewname").collection("user")
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
 })
 
 router.post("/idcheck", async (req, res) => {
-  res.json(await db.IDcheck(req.body.id))
+  res.json(await db.getRow("USER","UserID",req.body.id))
 })
 
 module.exports = router;

@@ -1,12 +1,13 @@
 const router = require('express').Router();
+const info = require("../data/DBinfo.json")
 
 router.get('/', function(req, res) {
-  //  req.session.views = {"this":'is'}
-  if (!req.session.passport) res.redirect("/")
-  
+  // if (!req.session.passport) res.redirect("/")
+  console.log(info.USER.toString());
   res.render('userprofile', { 
+    
     title: "Profile",
-    id : req.session.passport.user,
+    // id : req.session.passport.user,
    });
 });
 

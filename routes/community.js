@@ -9,28 +9,39 @@ var min = date.getMinutes()
 
 var now = `${day} ${hour}:${min}`
 
-router.get("/", (req, res) => {
-    if (!req.session.passport) res.redirect("/")
+// router.get("*",(req,res,next)=>{
+//   if (!req.session.passport) res.redirect("/")
+//     else next()
+// })
 
+router.get("/", (req, res) => {
     res.render("community", {
         title: "community",
-        id: req.session.passport.user,
+        //id: req.session.passport.user,
+    })
+})
+
+router.get("/post/:id", async (req, res)=>{
+    var searchID = req.params.id
+    var row = await db.getRow('Posting','PostID',searchID)
+    res.render("post",{
+        image:searchID,
+        content:'content',
     })
 })
 
 router.get("/create", (req, res) => {
-    if (!req.session.passport) res.redirect("/")
     res.render("create",{
         title: "create",
-        id: req.session.passport.user,
+        //id: req.session.passport.user,
     })
 })
 
 router.post("/create",(req,res)=>{
     var content = req.body.content
-    var type = req.body.type
-    
-    db.createPost(title, content)
+    var type = 'winter' //req.query.type
+    var list = [PostID, content, now, type]
+    db.insertRow("Posting", list)
     res.render("create",{
         title:now
     })

@@ -42,8 +42,8 @@
                 url: "/register/idcheck",
                 success: (txt) => {
                     var target = document.getElementById("target_btn");
-                    console.log(txt)
-                    if (txt == 1) {
+                    console.log(txt.length)
+                    if (txt.length) {
                         $("#isFailed").css("display", "inline").text("존재하는 아이디입니다.")
                         $('#target').attr('disabled', true);
                     }
