@@ -3,24 +3,27 @@ module.exports = function (passport) {
 
 
   router.get('/', function (req, res) {
-    res.render('LoginPage', { title: 'login page' });
+    res.render('LoginPage', {
+      title: 'login page',
+      message: req.flash("error")
+    });
   });
 
   router.post('/process',
-  passport.authenticate('local',{
-    successRedirect: '/',
+    passport.authenticate('local', {
+      successRedirect: '/',
       failureRedirect: '/login',
       failureFlash: true,
-      successFlash: true
-  }))
+    }))
 
-  router.get("/logout", (req, res)=>{
+  router.get("/logout", (req, res) => {
     req.session.destroy()
     console.log("!!LOGOUT!!");
     res.redirect('/')
   })
   return router;
 }
+
 // http://34.64.143.233:8080/
-// id : admina
+// id : adminad
 // pwd : admin

@@ -9,6 +9,9 @@ const port = 8080;
 const passport = require("./lib/pass")(app);
 const sessionConfig = require("./lib/session")
 
+//controller modules declare
+const header = require('./controller/header');
+
 //router modules declare
 const indexRouter = require('./routes/index');
 const profileRouter = require('./routes/profile');
@@ -36,6 +39,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 
+app.use('*',header)
 //router modules
 app.use('/', indexRouter);
 app.use('/profile', profileRouter);
