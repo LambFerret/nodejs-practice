@@ -7,15 +7,18 @@ router.get('/', function(req, res) {
 
   // if (!req.session.passport) res.redirect("/")
   res.render('userprofile', { 
-    title: hi,
-    // id : req.session.passport.user,
+    id : req.session.passport.user,
    });
+   console.log(req.session);
 });
 
 router.post('/',(req, res)=>{
   res.render("userprofile", {
-    id:req.body.id
+    origin:req.body.origin,
+    convert:req.body.convert,
+    image:req.body.imgArray,
   })
+  var qwerqwer = req.body.imgArray
 })
 
 module.exports = router;

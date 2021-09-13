@@ -8,6 +8,7 @@ const logger = require('morgan');
 const port = 8080;
 const passport = require("./lib/pass")(app);
 const sessionConfig = require("./lib/session")
+const cors = require("cors")
 
 //controller modules declare
 const header = require('./controller/header');
@@ -29,6 +30,7 @@ app.engine('hbs', handlebars({
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/',
 }))
+app.use(cors())
 app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(sessionConfig)

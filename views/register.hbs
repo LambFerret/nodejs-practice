@@ -17,6 +17,11 @@
             <input type="password" name="pwd" id="pwd" pattern=".{5,10}" required>
         </div>
         <div>
+            비번 다시적어요:
+            <input type="password" name="check" id="check" pattern=".{5,10}" required>
+            <p id="same"></p>
+        </div>
+        <div>
             이름 1에서 8자 사이:
             <input type="text" name="name" id="name" pattern=".{1,8}" required>
         </div>
@@ -28,13 +33,38 @@
         display: none;
         color: red;
     }
+
+    #same {
+        color: red;
+    }
+
     #test {
         display: none;
     }
 </style>
 <script>
     $(() => {
+        var ischecked = false
+        var isPassed = false
+        $("#check").focusout(() => {
+            var pwd = $("#pwd").val()
+            var cd = $("#check").val()
+            if (!(pwd == cd)) {
+                console.log("why")
+                $("#same").text("달라요")
+                ischecked = false
+            }
+            else { 
+                $("#same").text("OK!")
+                ischecked = true
+                 }
+
+                 if (isPassed && ischecked) { $('#target').attr('disabled', false); }
+        else { $('#target').attr('disabled', true); }
+        })
+
         $("#id").focusout(() => {
+            
             var id = $('#id').val();
             $.ajax({
                 type: 'POST',
@@ -45,15 +75,24 @@
                     console.log(txt.length)
                     if (txt.length) {
                         $("#isFailed").css("display", "inline").text("존재하는 아이디입니다.")
-                        $('#target').attr('disabled', true);
+                        isPassed = false
                     }
                     else {
                         $("#isFailed").css("display", "inline").text("사용할 수 있는 아이디입니다.")
-                        $('#target').attr('disabled', false)
+                        isPassed = true
                     }
                 },
                 error: (txt) => $("#test").css("display", "inline")
+
             })
+        if (isPassed && ischecked) { $('#target').attr('disabled', false); }
+        else { $('#target').attr('disabled', true); }
+
         })
+
     })
+    btn = document.getElementById("target")
+    btn.onclick = () => {
+        alert("환영합니다~")
+    }
 </script>

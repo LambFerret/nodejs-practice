@@ -14,7 +14,8 @@ module.exports = function (passport) {
       successRedirect: '/',
       failureRedirect: '/login',
       failureFlash: true,
-    }))
+    })
+  )
 
   router.get("/logout", (req, res) => {
     req.session.destroy()

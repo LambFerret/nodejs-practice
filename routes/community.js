@@ -17,8 +17,8 @@ function dateFormat(date) {
 
     return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 }
-var date = new Date()
-var now = dateFormat(date)
+
+
 
 // router.get("*",(req,res,next)=>{
 //   if (!req.session.passport) res.redirect("/")
@@ -35,6 +35,7 @@ router.get("/", (req, res) => {
 router.get("/post/:id", async (req, res)=>{
     var searchID = req.params.id
     var row = await db.getRow('Posting','PostID',searchID)
+    console.log(row);
     res.render("post",{
         image:searchID,
         content:'content',
@@ -49,6 +50,8 @@ router.get("/create", (req, res) => {
 })
 
 router.post("/create",(req,res)=>{
+    var date = new Date()
+    var now = dateFormat(date)
     var content = req.body.content
     var type = 'winter' //req.query.type
     var list = [content, now, type]
