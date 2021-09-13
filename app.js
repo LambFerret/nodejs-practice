@@ -6,12 +6,10 @@ const handlebars = require('express-handlebars')
 const flash = require("connect-flash")
 const logger = require('morgan');
 const port = 8080;
-const passport = require("./lib/pass")(app);
 const sessionConfig = require("./lib/session")
+app.use(sessionConfig)
+const passport = require("./lib/pass")(app);
 const cors = require("cors")
-
-//controller modules declare
-const header = require('./controller/header');
 
 //router modules declare
 const indexRouter = require('./routes/index');
@@ -20,7 +18,6 @@ const loginRouter = require('./routes/login')(passport);
 const regiRouter = require('./routes/register')
 const transRouter = require('./routes/transform')
 const commuRouter = require('./routes/community')
-
 
 
 //express SETTINGS
@@ -33,15 +30,12 @@ app.engine('hbs', handlebars({
 app.use(cors())
 app.set('view engine', 'hbs');
 app.use(logger('dev'));
-app.use(sessionConfig)
 app.use(flash())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
 
-
-app.use('*',header)
 //router modules
 app.use('/', indexRouter);
 app.use('/profile', profileRouter);

@@ -32,16 +32,17 @@ exports.getConnectionAsync = async () => {
  * @param {string} Table table name
  * @param {string} searchRow column name; usually PK
  * @param {string} searchID name you looking for
- * @returns 
+ * @returns rows
  */
 exports.getRow = (Table, searchRow, searchID) => {
     return new Promise((resolve, reject)=>{
         this.getConnection((conn)=>{
-            const rows = conn.query(`SELECT * FROM ${Table} WHERE ${searchRow} = '${searchID}';`)
-            resolve(rows)
+            const row = conn.query(`SELECT * FROM ${Table} WHERE ${searchRow} = '${searchID}';`)
+            resolve(row)
         })
     })
 }
+//여기는 getRow를 each돌릴까 아니면 getRows 메소드를 따로만들까?
 
 exports.getMaxCount = (Table, searchID) => {
     return new Promise((resolve, reject)=>{
