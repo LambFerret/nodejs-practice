@@ -1,10 +1,30 @@
-
-    {
-        "USER":["UserID", "UserNM", "UserPw", "UserEmail"],
-        "UploadImg":["Up_Img_ID", "UserID", "Up_Img_Nm"],
-        "Conv_Info":["Conv_ID", "Original_Img_Type", "Conv_Img_Type"],
-        "Conv_Img":["Conv_Img_ID", "Up_Img_Nm", "Conv_ID", "Conv_Img_Nm"],
-        "Posting":["PostID", "Post_Text", "Post_Time", "PostBoard_Type"]
-        
-
-    }
+{
+    "USER": [
+        "UserID",
+        "UserNM",
+        "UserPw",
+        "UserEmail"
+    ],
+    "UploadImg": [
+        "Up_Img_ID",
+        "UserID",
+        "Up_Img_Nm"
+    ],
+    "Conv_Info": [
+        "Conv_ID",
+        "Original_Img_Type",
+        "Conv_Img_Type"
+    ],
+    "Conv_Img": [
+        "Conv_Img_ID",
+        "Up_Img_Nm",
+        "Conv_ID",
+        "Conv_Img_Nm"
+    ],
+    "Posting": [
+        "PostID",
+        "Post_Text",
+        "Post_Time",
+        "PostBoard_Type"
+    ]
+}

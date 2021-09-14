@@ -1,5 +1,4 @@
 const mariadb = require("mariadb")
-const info = require("./DBinfo.json")
 const pool = mariadb.createPool({
     host: '34.64.143.233',
     port: '3306',
@@ -32,23 +31,45 @@ exports.getConnectionAsync = async () => {
  * @param {string} Table table name
  * @param {string} searchRow column name; usually PK
  * @param {string} searchID name you looking for
- * @returns rows
+ * @returns row
  */
 exports.getRow = (Table, searchRow, searchID) => {
-    return new Promise((resolve, reject)=>{
-        this.getConnection((conn)=>{
+    return new Promise((resolve, reject) => {
+        this.getConnection((conn) => {
             const row = conn.query(`SELECT * FROM ${Table} WHERE ${searchRow} = '${searchID}';`)
             resolve(row)
+            conn.release()
         })
     })
 }
-//여기는 getRow를 each돌릴까 아니면 getRows 메소드를 따로만들까?
+/**
+ * 
+ * @param {string} Table table name
+ * @param {string} searchRow column name; usually PK
+ * @param {int} page where are you in
+ * @param {int} showNumber how many
+ * @returns rows
+ */
+exports.getRows = (Table, searchRow, page, showNumber) => {
+    return new Promise((resolve, reject) => {
+        this.getConnection((conn) => {
+            var num = page * showNumber
+            const query = `SELECT * FROM ${Table} ORDER BY ${searchRow} DESC LIMIT ${num} OFFSET ${num - showNumber};`
+            const row = conn.query(query)
+            resolve(row)
+            conn.release()
+        })
+    })
+}
+
+// getRows("Posting","PostID",10)
 
 exports.getMaxCount = (Table, searchID) => {
-    return new Promise((resolve, reject)=>{
-        this.getConnection((conn)=>{
+    return new Promise((resolve, reject) => {
+        this.getConnection((conn) => {
             const rows = conn.query(`SELECT ${searchID} FROM ${Table} ORDER BY '${searchID}' DESC LIMIT 1;`)
             resolve(rows)
+            conn.release()
         })
     })
 }
@@ -62,9 +83,9 @@ exports.insertRow = (table, list) => {
     this.getConnection(async (conn) => {
         var times = Array(list.length).fill('?').toString()
         var pstmt = `INSERT INTO ${table} VALUES (${times})`
-        try {conn.query(pstmt, list)}
-        catch (err) {console.log(err);}
-        finally {if (conn) conn.release()}
+        try { conn.query(pstmt, list) }
+        catch (err) { console.log(err); }
+        finally { if (conn) conn.release() }
     })
 }
 
@@ -72,4 +93,3 @@ exports.insertRow = (table, list) => {
 // jiha
 // qkrwlgk0102!
 //10.5.12
-// conn.query(`SELECT PostID from Posting order by PostID desc limit 1`))

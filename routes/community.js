@@ -24,9 +24,26 @@ router.get("*", (req, res, next) => {
     else res.redirect("/")
 })
 
-router.get("/",(req, res)=>{config(req, res, "community")})
+router.get("/:page", async (req, res) => {
+    var page = req.params.page
+    var showNumber = 10 //req.query.number
+    rows = await db.getRows("Posting", "PostID", page, showNumber)
+    console.log(rows[0]);
+    var teapot = rows[0]
+    ls = {
+        num : teapot.PostID,
+        userid : "유저아이디",
+        content : teapot.Post_Text,
+        look :5,
+        like : 1,
+        comment:1,
+        date : teapot.Post_Time,
 
-router.get("/post/:id",async (req, res)=>{
+    }
+    config(req, res, "community", ls)
+})
+
+router.get("/post/:id", async (req, res) => {
     var searchID = req.params.id
     var row = await db.getRow('Posting', 'PostID', searchID)
     var teapot = row[0]
@@ -34,12 +51,12 @@ router.get("/post/:id",async (req, res)=>{
         image: searchID,
         content: teapot.Post_Text,
         time: teapot.Post_Time,
-        type:teapot.PostBoard_Type,
+        type: teapot.PostBoard_Type,
     }
     config(req, res, "post", ls)
 })
 
-router.get("/create", (req, res) => {config(req, res, "post")})
+router.get("/create", (req, res) => { config(req, res, "post") })
 
 router.post("/create", (req, res) => {
     var date = new Date()
