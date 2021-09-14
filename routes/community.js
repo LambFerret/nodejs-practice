@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const db = require("../data/mariaDBdatabase");
-
+const config = require("../lib/partial").partialConfig
 
 function dateFormat(date) {
     let month = date.getMonth() + 1;
@@ -25,23 +25,30 @@ router.get("*", (req, res, next) => {
         // 여기에 
         // var location = req.originalUrl.replace("/","in ")
         // res.render("footer or header",{
-        //     isLoggined:true
-        //     title:location
-        //     name:req.user.name
+        //     isLoggined:true,
+        //     title:location,
+        //     name:req.user.name,
         // }) 
         // 이렇게 넣고싶어요 
     }
     else res.redirect("/")
 })
 
-router.get("/", (req, res) => {
-    res.render("community", {
-        title: "community",
-        name: req.user.name,
-    })
-})
+router.get("/",(req, res)=>{config(req, res, "community")})
+
+
+//  (req, res) => {
+//     var location = req.originalUrl.replace("/","in ")
+//         res.render("community",{
+//             isLoggedIn:true,
+//             title:location,
+//             name:req.user.name,
+//         }) 
+// })
 
 router.get("/post/:id", async (req, res) => {
+    var location = req.originalUrl.replace("/","in ")
+
     var searchID = req.params.id
     var row = await db.getRow('Posting', 'PostID', searchID)
     var teapot = row[0]
@@ -53,13 +60,18 @@ router.get("/post/:id", async (req, res) => {
         content: content,
         time: time,
         type:type,
+        isLoggedIn:true,
+        title:location,
+        name:req.user.name,
     })
 })
 
 router.get("/create", (req, res) => {
+    var location = req.originalUrl.replace("/","in ")
     res.render("create", {
-        title: "create",
-        //id: req.session.passport.user,
+        isLoggedIn:true,
+        title:location,
+        name:req.user.name,
     })
 })
 
