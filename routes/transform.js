@@ -1,19 +1,23 @@
 const router = require('express').Router();
-const multer = require("multer")
-const upload = multer({ dest: 'images/' })
+const fs = require("fs")
 //const model = require("../lib/transformModel")
 const db = require("../data/mariaDBdatabase")
 
 var beforePic = "models/imgs/fall wallpaper4.jpg"
 
-router.post('/', upload.single("imgArray"), (req, res) => {
-    res.json(req.file)
-    console.log(req.file);
+router.post('/', (req, res) => {
+    var date = new Date()
+    var now = date.getTime()
+    var imgArray = req.body.imgArray;
+    var file = `public/images/${now}.txt`
+    console.log(file);
+    fs.writeFile(file,imgArray, 'utf-8',(err,fd)=>{
+        if (err) throw err;
+        console.log(file+"위치 확인 바람");
+    })
     var origin = req.body.origin;
     var convert = req.body.convert;
-    var useridid = "test01"
-    var ls = [useridid, origin, convert]
-    db.insertRow("UploadImg", ls)
+    console.log(origin + convert);
 
 })
 router.get('/', function (req, res) {

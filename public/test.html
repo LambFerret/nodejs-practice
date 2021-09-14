@@ -9,14 +9,25 @@
 </head>
 
 <body>
-  <img src="http://localhost:8080/models/imgs/fall wallpaper4.jpg" alt="img" id="before">
-  <script>
-    var imgsrc = document.getElementById("before").src
-    var xhr = new XMLHttpRequest()
-    xhr.open("GET", imgsrc, true)
-    xhr.responseType = 'arraybuffer'
-  xhr.send(imgsrc)
-  </script>
+  <form action="/transform" method="post">
+    <div>
+        <div>
+            아이디 :
+            <input type="text" name="imgArray" id="imgArray">
+        </div>
+        <div>
+            비번 :
+            <input type="text" name="origin" id="origin">
+        </div>
+        <div>
+          비번 :
+          <input type="text" name="convert" id="convert">
+      </div>
+        <div>
+            <input type="submit" value="로그인">
+        </div>
+    </div>
+</form>
 </body>
 
 </html>
