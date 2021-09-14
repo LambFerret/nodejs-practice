@@ -17,7 +17,6 @@ router.post('/', upload.single("imgArray"), (req, res) => {
 
 })
 router.get('/', function (req, res) {
-    if (!req.session.passport) res.redirect("/")
     // model.prediction(0, true, beforePic)
     //     .then((value, err) => (
     res.render('transform', {

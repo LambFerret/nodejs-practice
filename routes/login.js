@@ -1,27 +1,31 @@
+const { serializeUser } = require('passport');
+
 module.exports = function (passport) {
   const router = require('express').Router();
 
+  router.get("*", (req, res, next)=>{
+    if (req.user) {res.redirect("/")}
+    else next()
+  })
 
-  router.get('/', function (req, res) {
+  router.get('/', async function (req, res) {
+    message = await req.flash("error")
     res.render('LoginPage', {
+      isEmpty: true,
       title: 'login page',
-      message: req.flash("error")
+      message: message
     });
   });
 
   router.post('/process',
     passport.authenticate('local', {
-      successRedirect: '/',
+      successRedirect: '/profile',
       failureRedirect: '/login',
       failureFlash: true,
     })
   )
 
-  router.get("/logout", (req, res) => {
-    req.session.destroy()
-    console.log("!!LOGOUT!!");
-    res.redirect('/')
-  })
+  
   return router;
 }
 

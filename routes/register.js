@@ -2,15 +2,19 @@ const express = require("express")
 const router = express.Router()
 const crypt = require("bcrypt")
 const db = require("../data/mariaDBdatabase");
+const config = require("../lib/partial").partialConfig
+
 /*
 //mongoDB Import
 const mdb = require("../data/mongodatabase");
 const User = require("../data/users")
 */
+router.get("*", (req, res, next)=>{
+  if (req.user) {res.redirect("/")}
+  else next()
+})
 
-router.get('/', function (req, res) {
-  res.render('register', { title: 'this is register form' });
-});
+router.get("/",(req, res)=> config(req, res, "register",{isEmpty:true}, true) )
 
 router.post('/', (req, res) => {
   var id = req.body.id

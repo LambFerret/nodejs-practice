@@ -20,60 +20,26 @@ function dateFormat(date) {
 
 
 router.get("*", (req, res, next) => {
-    if (req.user) {
-        next()
-        // 여기에 
-        // var location = req.originalUrl.replace("/","in ")
-        // res.render("footer or header",{
-        //     isLoggined:true,
-        //     title:location,
-        //     name:req.user.name,
-        // }) 
-        // 이렇게 넣고싶어요 
-    }
+    if (req.user) next()
     else res.redirect("/")
 })
 
 router.get("/",(req, res)=>{config(req, res, "community")})
 
-
-//  (req, res) => {
-//     var location = req.originalUrl.replace("/","in ")
-//         res.render("community",{
-//             isLoggedIn:true,
-//             title:location,
-//             name:req.user.name,
-//         }) 
-// })
-
-router.get("/post/:id", async (req, res) => {
-    var location = req.originalUrl.replace("/","in ")
-
+router.get("/post/:id",async (req, res)=>{
     var searchID = req.params.id
     var row = await db.getRow('Posting', 'PostID', searchID)
     var teapot = row[0]
-    var content = teapot.Post_Text
-    var time = teapot.Post_Time
-    var type = teapot.PostBoard_Type
-    res.render("post", {
+    ls = {
         image: searchID,
-        content: content,
-        time: time,
-        type:type,
-        isLoggedIn:true,
-        title:location,
-        name:req.user.name,
-    })
+        content: teapot.Post_Text,
+        time: teapot.Post_Time,
+        type:teapot.PostBoard_Type,
+    }
+    config(req, res, "post", ls)
 })
 
-router.get("/create", (req, res) => {
-    var location = req.originalUrl.replace("/","in ")
-    res.render("create", {
-        isLoggedIn:true,
-        title:location,
-        name:req.user.name,
-    })
-})
+router.get("/create", (req, res) => {config(req, res, "post")})
 
 router.post("/create", (req, res) => {
     var date = new Date()
@@ -82,9 +48,6 @@ router.post("/create", (req, res) => {
     var type = 'winter' //req.query.type
     var list = [content, now, type]
     db.insertRow("Posting", list)
-    res.render("create", {
-        title: now
-    })
     res.redirect("/community")
 })
 

@@ -1,0 +1,17 @@
+{{#if isLoggedIn}}
+<p>
+<ul>
+  <li><a href="/logout">Logout</a></li>
+  <li><a href="/transform">transform</a></li>
+  <li><a href="/profile">profile</a></li>
+  <li><a href="/community">community</a></li>
+</ul>
+</p>
+{{else}}
+<p>
+<ul>
+  <li><a href="/login">Login</a></li>
+  <li><a href="/register">Register</a></li>
+</ul>
+</p>
+{{/if}}
