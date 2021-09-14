@@ -24,7 +24,7 @@ router.get("*", (req, res, next) => {
     else res.redirect("/")
 })
 
-router.get("/:page", async (req, res) => {
+router.get("/page/:page", async (req, res) => {
     var page = req.params.page
     var showNumber = 10 //req.query.number
     rows = await db.getRows("Posting", "PostID", page, showNumber)
@@ -56,7 +56,7 @@ router.get("/post/:id", async (req, res) => {
     config(req, res, "post", ls)
 })
 
-router.get("/create", (req, res) => { config(req, res, "post") })
+router.get("/create", (req, res) => { config(req, res, "create") })
 
 router.post("/create", (req, res) => {
     var date = new Date()
