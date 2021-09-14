@@ -11,7 +11,7 @@ router.post('/', upload.single("imgArray"), (req, res) => {
     console.log(req.file);
     var origin = req.body.origin;
     var convert = req.body.convert;
-    var useridid = 1
+    var useridid = "test01"
     var ls = [useridid, origin, convert]
     db.insertRow("UploadImg", ls)
 
