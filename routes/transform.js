@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { rand } = require('@tensorflow/tfjs-core');
 const multer = require("multer")
 const upload = multer({ dest: 'images/' })
 //const model = require("../lib/transformModel")
@@ -10,12 +9,10 @@ var beforePic = "models/imgs/fall wallpaper4.jpg"
 router.post('/', upload.single("imgArray"), (req, res) => {
     res.json(req.file)
     console.log(req.file);
-    var date = new Date()
-    var randn = date.getTime()
-    var filename = 2
     var origin = req.body.origin;
     var convert = req.body.convert;
-    var ls = [randn, origin, convert]
+    var useridid = 1
+    var ls = [useridid, origin, convert]
     db.insertRow("UploadImg", ls)
 
 })
