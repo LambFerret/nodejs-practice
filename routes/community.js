@@ -26,10 +26,11 @@ router.get("*", (req, res, next) => {
 
 router.get("/page/:page", async (req, res) => {
     var page = req.params.page
-    var showNumber = 10 //req.query.number
+    var showNumber = req.query.number
     rows = await db.getRows("Posting", "PostID", page, showNumber)
     console.log(rows[0]);
     var teapot = rows[0]
+    console.log(showNumber);
     ls = {
         num : teapot.PostID,
         userid : "유저아이디",
@@ -56,16 +57,18 @@ router.get("/post/:id", async (req, res) => {
     config(req, res, "post", ls)
 })
 
-router.get("/create", (req, res) => { config(req, res, "create") })
+router.get("/create", (req, res) => config(req, res, "create"))
 
 router.post("/create", (req, res) => {
     var date = new Date()
     var now = dateFormat(date)
     var content = req.body.content
+    var Postnumber = 1
     var type = 'winter' //req.query.type
-    var list = [content, now, type]
-    db.insertRow("Posting", list)
-    res.redirect("/community")
+    var list = [Postnumber, content, now, type]
+    db.insertRow("UploadImg", [2,'asdfasdf','sampleimgName22'])
+    //db.insertRow("Posting", list)
+    res.redirect("/community/post/"+Postnumber)
 })
 
 module.exports = router;

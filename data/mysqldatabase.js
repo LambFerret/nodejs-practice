@@ -1,5 +1,4 @@
 const mariadb = require("mariadb")
-const { conn } = require("./mariaDBdatabase")
 const pool = mariadb.createPool({
     host: '34.64.143.233',
     port: '3306',
