@@ -4,3 +4,5 @@ node_modules/
 legacy/
 .images/*
 sessions/*
+.app.js.swp
+
