@@ -6,7 +6,7 @@ const handlebars = require('express-handlebars')
 const flash = require("connect-flash")
 const logger = require('morgan');
 const port = process.env.PORT || 8080
-const hostname = '10.178.0.2'
+//const hostname = '10.178.0.2'
 const sessionConfig = require("./lib/session")
 app.use(sessionConfig)
 const passport = require("./lib/pass")(app);
@@ -60,6 +60,6 @@ app.use(function (err, req, res, next) {
 });
 
 // app start
-app.listen(port,hostname, () => {
-  console.log(`http://${hostname}:${port} is opened`)
+app.listen(port, () => {
+  console.log(`http://${port} is opened`)
 })

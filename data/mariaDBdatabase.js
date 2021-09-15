@@ -36,9 +36,13 @@ exports.getConnectionAsync = async () => {
 exports.getRow = (Table, searchRow, searchID) => {
     return new Promise((resolve, reject) => {
         this.getConnection((conn) => {
-            const row = conn.query(`SELECT * FROM ${Table} WHERE ${searchRow} = '${searchID}';`)
-            resolve(row)
-            conn.release()
+            try {
+                const row = conn.query(`SELECT * FROM ${Table} WHERE ${searchRow} = '${searchID}';`)
+                resolve(row)
+            }
+            catch (err) { console.log(err); }
+            finally { if (conn) conn.release() }
+
         })
     })
 }
@@ -55,9 +59,12 @@ exports.getRows = (Table, searchRow, page, showNumber) => {
         this.getConnection((conn) => {
             var num = page * showNumber
             const query = `SELECT * FROM ${Table} ORDER BY ${searchRow} DESC LIMIT ${num} OFFSET ${num - showNumber};`
-            const row = conn.query(query)
-            resolve(row)
-            conn.release()
+            try {
+                const row = conn.query(query)
+                resolve(row)
+            }
+            catch (err) { console.log(err); }
+            finally { if (conn) conn.release() }
         })
     })
 }
@@ -67,9 +74,12 @@ exports.getRows = (Table, searchRow, page, showNumber) => {
 exports.getMaxCount = (Table, searchID) => {
     return new Promise((resolve, reject) => {
         this.getConnection((conn) => {
-            const rows = conn.query(`SELECT ${searchID} FROM ${Table} ORDER BY '${searchID}' DESC LIMIT 1;`)
-            resolve(rows)
-            conn.release()
+            try {
+                const rows = conn.query(`SELECT ${searchID} FROM ${Table} ORDER BY '${searchID}' DESC LIMIT 1;`)
+                resolve(row)
+            }
+            catch (err) { console.log(err); }
+            finally { if (conn) conn.release() }
         })
     })
 }

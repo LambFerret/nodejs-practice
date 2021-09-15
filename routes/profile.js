@@ -2,7 +2,6 @@ const router = require('express').Router();
 const config = require("../lib/partial").partialConfig
 
 router.get("*", (req, res, next) => {
-  res.render("loadingScreen",{layout:'loadingScreen'})
   if (req.user) next()
   else res.redirect("/")
 })
