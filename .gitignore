@@ -2,5 +2,5 @@
 node_modules/
 
 legacy/
-images/*
+.images/*
 sessions/*
