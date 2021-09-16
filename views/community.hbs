@@ -24,15 +24,17 @@
         <td>댓글수</td>
         <td>등록일</td>
     </tr>
+        {{{#each data}}}
     <tr>
-        <td>{{{num}}}</td>
-        <td>{{{userid}}}</td>
-        <td>{{{content}}}</td>
-        <td>{{{look}}}</td>
-        <td>{{{comment}}}</td>
-        <td>{{{like}}}</td>
-        <td>{{{date}}}</td>
+        <td>{{{PostID}}}</td>
+        <td>userid</td>
+        <td>{{{Post_Text}}}</td>
+        <td>look</td>
+        <td>comment</td>
+        <td>like</td>
+        <td>{{{Post_Time}}}</td>
     </tr>
+        {{{/each}}}
 </table>
 
 <script>

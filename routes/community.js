@@ -30,16 +30,13 @@ router.get("/page/:page", async (req, res) => {
     rows = await db.getRows("Posting", "PostID", page, showNumber)
     console.log(rows[0]);
     var teapot = rows[0]
-    console.log(showNumber);
+    console.log(rows[0]);
     ls = {
-        num : teapot.PostID,
+        data:rows, 
         userid : "유저아이디",
-        content : teapot.Post_Text,
         look :5,
         like : 1,
         comment:1,
-        date : teapot.Post_Time,
-
     }
     config(req, res, "community", ls)
 })
@@ -67,6 +64,7 @@ router.post("/create", (req, res) => {
     var type = 'winter' //req.query.type
     var list = [Postnumber, content, now, type]
     db.insertRow("UploadImg", [2,'asdfasdf','sampleimgName22'])
+    
     //db.insertRow("Posting", list)
     res.redirect("/community/post/"+Postnumber)
 })

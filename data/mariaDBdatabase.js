@@ -54,11 +54,25 @@ exports.getRow = (Table, searchRow, searchID) => {
  * @param {int} showNumber how many
  * @returns rows
  */
-exports.getRows = (Table, searchRow, page, showNumber) => {
+exports.getRows = (Table, searchRow, showNumber=10, page=1) => {
     return new Promise((resolve, reject) => {
         this.getConnection((conn) => {
             var num = page * showNumber
             const query = `SELECT * FROM ${Table} ORDER BY ${searchRow} DESC LIMIT ${num} OFFSET ${num - showNumber};`
+            try {
+                const row = conn.query(query)
+                resolve(row)
+            }
+            catch (err) { console.log(err); }
+            finally { if (conn) conn.release() }
+        })
+    })
+}
+
+exports.useWisely = (Table) => {
+    return new Promise((resolve, reject) => {
+        this.getConnection((conn) => {
+            const query = `${Table};`
             try {
                 const row = conn.query(query)
                 resolve(row)
