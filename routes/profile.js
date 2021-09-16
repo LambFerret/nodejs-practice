@@ -24,7 +24,7 @@ router.get("/admin", async (req, res) => {
   //   console.log(element);
   //   console.log("\n");
   // });
-  var file = `public/images/1234321.json`
+  var file = `1234321.json`
 
   console.log(rows);
   fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => {

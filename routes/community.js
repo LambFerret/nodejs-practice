@@ -26,8 +26,7 @@ router.get("*", (req, res, next) => {
 
 router.get("/page/:page", async (req, res) => {
     var page = req.params.page
-    var showNumber = req.query.number
-    rows = await db.getRows("Posting", "PostID", page, showNumber)
+    rows = await db.getRows("Posting", "PostID", page, 10)
     console.log(rows[0]);
     var teapot = rows[0]
     console.log(rows[0]);
