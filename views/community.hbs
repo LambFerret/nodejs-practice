@@ -25,7 +25,7 @@
         <td>등록일</td>
     </tr>
         {{{#each data}}}
-    <tr>
+    <tr id="{{{PostBoard_Type}}}" style="">
         <td>{{{PostID}}}</td>
         <td>userid</td>
         <td>{{{Post_Text}}}</td>
@@ -38,11 +38,13 @@
 </table>
 
 <script>
+
     function check(here){
         const checkbox = document.getElementsByName("season");
         checkbox.forEach((i)=>{
             i.checked = false;
         })
         here.checked = true
+
     }
 </script>

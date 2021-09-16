@@ -5,4 +5,5 @@ legacy/
 .images/*
 sessions/*
 .app.js.swp
+with_react/
 

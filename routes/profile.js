@@ -14,7 +14,8 @@ router.get("/", async (req, res) => {
 })
 router.get("/admin", async (req, res) => {
   rows = await db.useWisely(`
-  select * from Posting
+  
+  show table status
   
   `)
   // insert into Posting values (2,"test2","2021-09-13 06:30:23","summer");
@@ -26,9 +27,9 @@ router.get("/admin", async (req, res) => {
   var file = `public/images/1234321.json`
 
   console.log(rows);
-  fs.writeFile(file,JSON.stringify(rows), 'utf-8',(err,fd)=>{
+  fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => {
     if (err) throw err;
-})
+  })
   res.render("admin", {
     data: rows,
   })
