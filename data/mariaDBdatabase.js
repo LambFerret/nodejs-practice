@@ -73,8 +73,10 @@ exports.useWisely = (Table) => {
     return new Promise((resolve, reject) => {
         this.getConnection((conn) => {
             const query = `${Table};`
+            var queryss = query.replace(/(?:\r\n|\r|\n)/g, ' ');
+            queryss = queryss.replace(/    /g,"")
             try {
-                const row = conn.query(query)
+                const row = conn.query(queryss)
                 resolve(row)
             }
             catch (err) { console.log(err); }
