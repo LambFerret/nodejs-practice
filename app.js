@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
-const handlebars = require('express-handlebars')
+// const handlebars = require('express-handlebars')
 const flash = require("connect-flash")
 const logger = require('morgan');
 const port = process.env.PORT || 8080
@@ -22,14 +22,14 @@ const commuRouter = require('./routes/community')
 
 
 //express SETTINGS
-app.engine('hbs', handlebars({
-  defaultLayout: 'basic',
-  extname: 'hbs',
-  layoutsDir: __dirname + '/views/layouts/',
-  partialsDir: __dirname + '/views/partials/',
-}))
+// app.engine('hbs', handlebars({
+//   defaultLayout: 'basic',
+//   extname: 'hbs',
+//   layoutsDir: __dirname + '/views/layouts/',
+//   partialsDir: __dirname + '/views/partials/',
+// }))
 app.use(cors())
-app.set('view engine', 'hbs');
+// app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(flash())
 app.use(express.json());
@@ -38,12 +38,15 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 //router modules
-app.use('/', indexRouter);
-app.use('/profile', profileRouter);
-app.use('/login', loginRouter);
-app.use('/register', regiRouter);
-app.use('/transform', transRouter);
-app.use('/community', commuRouter);
+app.get("/",(req, res)=>{
+  res.send("123123")
+})
+// app.use('/', indexRouter);
+// app.use('/profile', profileRouter);
+// app.use('/login', loginRouter);
+// app.use('/register', regiRouter);
+// app.use('/transform', transRouter);
+// app.use('/community', commuRouter);
 
 
 // 404 error
