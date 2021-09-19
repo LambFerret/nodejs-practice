@@ -11,6 +11,7 @@ const sessionConfig = require("./lib/session")
 app.use(sessionConfig)
 const passport = require("./lib/pass")(app);
 const cors = require("cors")
+const graphQL = require("./data/graphQL")
 
 //router modules declare
 const indexRouter = require('./routes/index');
@@ -38,6 +39,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 //router modules
+app.use('/graphql', graphQL)
 app.use('/', indexRouter);
 app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
