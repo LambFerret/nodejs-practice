@@ -20,6 +20,7 @@
     "express-mysql-session": "^2.1.6",
     "express-session": "^1.17.1",
     "graphql": "^15.5.3",
+    "graphql-request": "^3.5.0",
     "http-errors": "~1.6.3",
     "mariadb": "^2.5.4",
     "mongodb": "^4.1.1",
@@ -28,5 +29,8 @@
     "passport-local": "^1.0.0",
     "pm2": "^5.1.1",
     "tfjs": "^0.6.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.7.7"
   }
 }

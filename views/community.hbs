@@ -20,27 +20,35 @@
         <td>댓글수</td>
         <td>등록일</td>
     </tr>
-        {{{#each data}}}
-    <tr id="{{{PostBoard_Type}}}" style="">
-        <td>{{{PostID}}}</td>
-        <td>userid</td>
-        <td>{{{Post_Text}}}</td>
+        {{#each data}}
+    <tr id="{{this.PostBoard_Type}}" onclick="location.href='/community/post/{{this.PostID}}'">
+        <td>{{this.PostID}}</td>
+        <td onclick="event.cancelBubble=true; location.href='/profile/{{this.UserID}};'">{{this.UserID}}</td>
+        <td>{{this.Post_Text}}</td>
         <td>look</td>
-        <td>comment</td>
         <td>like</td>
-        <td>{{{Post_Time}}}</td>
+        <td>comment</td>
+        <td>{{this.Post_Time}}</td
     </tr>
-        {{{/each}}}
+    {{/each}}
 </table>
-
+<style>
+    #season {
+        display:block;
+    }
+</style>
 <script>
 
     function check(here){
         const checkbox = document.getElementsByName("season");
+            console.log(checkbox[0].id)
+
         checkbox.forEach((i)=>{
             i.checked = false;
+            i.hide = true;
         })
-        here.checked = true
+        here.hide = false;
+        here.checked = true;
 
     }
 </script>

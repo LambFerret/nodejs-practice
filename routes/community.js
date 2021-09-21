@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const db = require("../data/mariaDBdatabase");
 const config = require("../lib/partial").partialConfig
+const { request } = require("graphql-request")
+const endpoint = "http://localhost:8080/graphql"
 
 function dateFormat(date) {
     let month = date.getMonth() + 1;
@@ -25,13 +27,20 @@ router.get("*", (req, res, next) => {
 })
 
 router.get("/page/:page", async (req, res) => {
-    var page = req.params.page
-    rows = await db.getRows("Posting", "PostID", page, 10)
-    console.log(rows[0]);
-    var teapot = rows[0]
-    console.log(rows[0]);
+    // var page = req.params.page
+    query = `{POSTING {
+        PostID
+        Post_Text
+        Post_Time
+        Post_Type
+        UserID
+        View_Count
+      }}`
+    rows = await request(endpoint, query)
+    var teapot = rows.POSTING
+    console.log(teapot[0].Post_Time);
     ls = {
-        data:rows, 
+        data:teapot, 
         userid : "유저아이디",
         look :5,
         like : 1,
@@ -42,7 +51,7 @@ router.get("/page/:page", async (req, res) => {
 
 router.get("/post/:id", async (req, res) => {
     var searchID = req.params.id
-    var row = await db.getRow('Posting', 'PostID', searchID)
+    var row = await db.getRow('POSTING', 'PostID', searchID)
     var teapot = row[0]
     ls = {
         image: searchID,
@@ -52,7 +61,7 @@ router.get("/post/:id", async (req, res) => {
     }
     config(req, res, "post", ls)
 })
-
+ 
 router.get("/create", (req, res) => config(req, res, "create"))
 
 router.post("/create", (req, res) => {

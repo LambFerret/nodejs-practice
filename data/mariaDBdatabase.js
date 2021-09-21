@@ -34,7 +34,6 @@ exports.getRow = (Table, searchRow, searchID) => {
             }
             catch (err) { console.log(err); }
             finally { if (conn) conn.release() }
-
         })
     })
 }
@@ -46,11 +45,10 @@ exports.getRow = (Table, searchRow, searchID) => {
  * @param {int} showNumber how many
  * @returns rows
  */
-exports.getRows = (Table, searchRow, showNumber=10, page=1) => {
+exports.getRows = (Table, searchRow,  page=1) => {
     return new Promise((resolve, reject) => {
         this.getConnection((conn) => {
-            var num = page * showNumber
-            const query = `SELECT * FROM ${Table} ORDER BY ${searchRow} DESC LIMIT ${num} OFFSET ${num - showNumber};`
+            const query = `SELECT * FROM ${Table} ORDER BY ${searchRow} DESC`// LIMIT ${page*10} OFFSET ${(page-1)*10};`
             try {
                 const row = conn.query(query)
                 resolve(row)
@@ -66,7 +64,7 @@ exports.useWisely = (Table) => {
         this.getConnection((conn) => {
             const query = `${Table};`
             var queryss = query.replace(/(?:\r\n|\r|\n)/g, ' ');
-            queryss = queryss.replace(/    /g,"")
+            // queryss = queryss.replace(/    /g,"")
             try {
                 const row = conn.query(queryss)
                 resolve(row)
