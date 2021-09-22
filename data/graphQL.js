@@ -101,7 +101,7 @@ var resolver = {
     POSTING: ()=>{
         return new Promise((resolve)=>{
             DB.getConnection((conn)=>{
-                const row = conn.query(`select * from POSTING`)
+                const row = conn.query(`select * from POSTING ORDER BY Post_Time DESC`)
                 resolve(row)
                 conn.release()
             })

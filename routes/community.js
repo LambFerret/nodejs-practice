@@ -56,11 +56,11 @@ router.get("/post/:id", async (req, res) => {
     ls = {
         number:searchID,
         comment: comment,
-        like: like[0].commentCount,
+        like: like,
         image: searchID,
         content: teapot.Post_Text,
         time: teapot.Post_Time,
-        type: teapot.PostBoard_Type,
+        type: teapot.Post_Type,
     }
     config(req, res, "post", ls)
 })
@@ -80,9 +80,10 @@ router.post("/post/:id", (req, res) => {
 router.get("/create", (req, res) => config(req, res, "create"))
 
 router.post("/create", (req, res) => {
+    var rand = Math.random()*10000
     var date = new Date()
     var now = dateFormat(date)
-    var postid = 3 //req.body.Pictureid
+    var postid = rand //req.body.Pictureid
     var content = req.body.content
     var user = req.user.id
     var type = 'winter' //req.query.type

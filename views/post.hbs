@@ -2,13 +2,13 @@
     image goes here! {{image}}
 </div>
 <div>
-    content goes here! {{content}}
+    내용 <br> {{content}} <br>
 </div>
 <div>
-    time goes here! {{time}}
+    작성일시 <br> {{time}} <br>
 </div>
 <div>
-    type goes here! {{type}}
+    타입 {{type}}
 </div>
 
 <div>
@@ -16,7 +16,7 @@
 </div>
 
 <br>
-<p>댓글창 시작!</p>
+<h3>댓글창 시작!</h3>
 {{#each comment}}
     <div>
         <p> 작성자 : {{this.UserID}} 내용 : {{this.Comment_Text}}</p>
@@ -24,7 +24,7 @@
 {{/each}}
 
 <form action="/community/post/{{number}}" method="POST">
-    <h3>코멘트창</h3>
+    <h5>코멘트창</h5>
     <input type="text" id="comment" name="comment">
     <button>갑니당</button>
 </form>

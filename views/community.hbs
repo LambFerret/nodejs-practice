@@ -10,6 +10,7 @@
     <button onclick="location.href='/community/create'">생성하기</button>
 </div>
 
+
 <table border="1">
     <tr>
         <td>Image</td>
@@ -21,29 +22,32 @@
         <td>등록일</td>
     </tr>
         {{#each data}}
-    <tr id="{{this.PostBoard_Type}}" onclick="location.href='/community/post/{{this.PostID}}'">
+    <tr id="{{this.Post_Type}}inBoard" onclick="location.href='/community/post/{{this.PostID}}'">
         <td>{{this.PostID}}</td>
         <td onclick="event.cancelBubble=true; location.href='/profile/{{this.UserID}}';">{{this.UserID}}</td>
         <td>{{this.Post_Text}}</td>
         <td>{{this.View_Count}}</td>
         <td>like</td>
         <td>comment</td>
-        <td>{{this.Post_Time}}</td
+        <td>{{this.Post_Time}}</td>
     </tr>
     {{/each}}
 </table>
-<script>
 
+
+
+<script>
     function check(here){
         const checkbox = document.getElementsByName("season");
-            console.log(checkbox[0].id)
-
+        var season = here.id
         checkbox.forEach((i)=>{
+           // console.log(i)
+          //  if (!(i.id == all)) {document.getElementById(i.id+"inBoard").style.display = "none"}
+          //  if (i.id == season) {document.getElementById(i.id+"inBoard").style.display = "block"}
             i.checked = false;
-            i.hide = true;
         })
-        here.hide = false;
         here.checked = true;
-
     }
+
+    check(all)
 </script>
