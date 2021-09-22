@@ -37,23 +37,26 @@ router.get("/page/:page", async (req, res) => {
         View_Count
       }}`
     rows = await request(endpoint, query)
+    // like = await db.getMaxCount("POSTLIKE", searchID)
+    // comment = await db.getMaxCount("COMMENT", searchID)
     var teapot = rows.POSTING
-    console.log(teapot[0].Post_Time);
-    ls = {
-        data:teapot, 
-        userid : "유저아이디",
-        look :5,
-        like : 1,
-        comment:1,
-    }
-    config(req, res, "community", ls)
+    config(req, res, "community", { 
+        data: teapot,
+
+     })
 })
 
 router.get("/post/:id", async (req, res) => {
     var searchID = req.params.id
+    var like = await db.getMaxCount("POSTLIKE", searchID)
+    var comment = await db.useWisely(`SELECT * FROM COMMENT WHERE PostID=${searchID} ORDER BY Comment_PK DESC`)
     var row = await db.getRow('POSTING', 'PostID', searchID)
+    db.useWisely(`update POSTING set View_Count=View_Count+1 where PostID=${searchID}`)
     var teapot = row[0]
     ls = {
+        number:searchID,
+        comment: comment,
+        like: like[0].commentCount,
         image: searchID,
         content: teapot.Post_Text,
         time: teapot.Post_Time,
@@ -61,20 +64,30 @@ router.get("/post/:id", async (req, res) => {
     }
     config(req, res, "post", ls)
 })
- 
+
+router.post("/post/:id", (req, res) => {
+    var selfuser = req.user.id
+    var postid = req.params.id
+    var text = req.body.comment
+    var ls = [selfuser, postid, text, null]
+    db.insertRow("COMMENT", ls)
+    res.redirect(`/community/post/${postid}`)
+})
+
+
+
+
 router.get("/create", (req, res) => config(req, res, "create"))
 
 router.post("/create", (req, res) => {
     var date = new Date()
     var now = dateFormat(date)
+    var postid = 3 //req.body.Pictureid
     var content = req.body.content
-    var Postnumber = 1
+    var user = req.user.id
     var type = 'winter' //req.query.type
-    var list = [Postnumber, content, now, type]
-    db.insertRow("UploadImg", [2,'asdfasdf','sampleimgName22'])
-    
-    //db.insertRow("Posting", list)
-    res.redirect("/community/post/"+Postnumber)
+    db.insertRow("POSTING", [postid, content, now, type, user, 0, null])
+    res.redirect("/community/page/1")
 })
 
 module.exports = router;

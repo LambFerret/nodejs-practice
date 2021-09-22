@@ -22,7 +22,7 @@ module.exports = function (passport) {
 
   router.post('/process',
     passport.authenticate('local', {
-      successRedirect: '/profile',
+      successRedirect: '/',
       failureRedirect: '/login/temp',
       failureFlash: true,
     })

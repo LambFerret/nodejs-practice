@@ -10,3 +10,21 @@
 <div>
     type goes here! {{type}}
 </div>
+
+<div>
+{{like}} -------> 좋아요 갯수
+</div>
+
+<br>
+<p>댓글창 시작!</p>
+{{#each comment}}
+    <div>
+        <p> 작성자 : {{this.UserID}} 내용 : {{this.Comment_Text}}</p>
+        </div> 
+{{/each}}
+
+<form action="/community/post/{{number}}" method="POST">
+    <h3>코멘트창</h3>
+    <input type="text" id="comment" name="comment">
+    <button>갑니당</button>
+</form>

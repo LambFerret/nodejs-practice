@@ -58,6 +58,7 @@ var resolver = {
             DB.getConnection((conn)=>{
                 const row = conn.query(`select * from USER`)
                 resolve(row)
+                conn.release()
             })
         })
     },
@@ -66,6 +67,7 @@ var resolver = {
             DB.getConnection((conn)=>{
                 const row = conn.query(`select * from UPLOADIMG`)
                 resolve(row)
+                conn.release()
             })
         })
     },
@@ -74,6 +76,7 @@ var resolver = {
             DB.getConnection((conn)=>{
                 const row = conn.query(`select * from CONV_IMG`)
                 resolve(row)
+                conn.release()
             })
         })
     },
@@ -82,6 +85,7 @@ var resolver = {
             DB.getConnection((conn)=>{
                 const row = conn.query(`select * from COMMENT`)
                 resolve(row)
+                conn.release()
             })
         })
     },
@@ -90,6 +94,7 @@ var resolver = {
             DB.getConnection((conn)=>{
                 const row = conn.query(`select * from POSTLIKE`)
                 resolve(row)
+                conn.release()
             })
         })
     },
@@ -98,6 +103,7 @@ var resolver = {
             DB.getConnection((conn)=>{
                 const row = conn.query(`select * from POSTING`)
                 resolve(row)
+                conn.release()
             })
         })
     }
