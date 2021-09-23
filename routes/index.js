@@ -12,10 +12,6 @@ router.get("/logout", (req, res) => {
 
 router.get("/admin", async (req, res) => {
   var queryss = `
-  select PostID, Post_Text, Post_Time, Post_Type, UserID, View_Count, Like_Count, Comment_Count
-from POSTING a left outer join (SELECT PostID as PostID1, count(*) as Like_Count from POSTLIKE group by PostID) b on a.PostID = b.PostID1 left outer join (SELECT PostID as PostID2, count(*) as Comment_Count from COMMENT group by PostID) c on a.PostID = c.PostID2
-group by a.PostID
-order by a.PostNum DESC
 
 
 

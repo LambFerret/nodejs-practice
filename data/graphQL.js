@@ -11,7 +11,6 @@ var schema = buildSchema(`
        POSTLIKE: [POSTLIKE]
        POSTING(PostID:ID): [POSTING]
        communityBoard(PostID:ID): POSTING
-       
     }
 
     type USER {

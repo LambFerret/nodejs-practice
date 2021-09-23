@@ -44,7 +44,6 @@ router.get("/page/:page", async (req, res) => {
     var teapot = rows.POSTING
     config(req, res, "community", { 
         data: teapot,
-
      })
 })
 
@@ -76,7 +75,6 @@ router.post("/post/:id", (req, res) => {
     res.redirect(`/community/post/${postid}`)
 })
 
-
 router.get("/create", (req, res) => config(req, res, "create"))
 
 router.post("/create", (req, res) => {
@@ -90,6 +88,7 @@ router.post("/create", (req, res) => {
     db.insertRow("POSTING", [postid, content, now, type, user, 0, null])
     res.redirect("/community/page/1")
 })
+
 
 
 module.exports = router;
