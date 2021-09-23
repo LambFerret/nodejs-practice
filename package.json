@@ -10,6 +10,8 @@
     "fsevents": "*"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^3.9.0",
+    "@tensorflow/tfjs-converter": "^3.9.0",
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
@@ -27,8 +29,7 @@
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pm2": "^5.1.1",
-    "tfjs": "^0.6.0"
+    "pm2": "^5.1.1"
   },
   "devDependencies": {
     "handlebars": "^4.7.7"
