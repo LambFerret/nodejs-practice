@@ -35,6 +35,8 @@ router.get("/page/:page", async (req, res) => {
         Post_Type
         UserID
         View_Count
+        Like_Count
+        Comment_Count
       }}`
     rows = await request(endpoint, query)
     // like = await db.getMaxCount("POSTLIKE", searchID)

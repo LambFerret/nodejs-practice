@@ -27,8 +27,8 @@
         <td onclick="event.cancelBubble=true; location.href='/profile/{{this.UserID}}';">{{this.UserID}}</td>
         <td>{{this.Post_Text}}</td>
         <td>{{this.View_Count}}</td>
-        <td>like</td>
-        <td>comment</td>
+        <td>{{this.Like_Count}}</td>
+        <td>{{this.Comment_Count}}</td>
         <td>{{this.Post_Time}}</td>
     </tr>
     {{/each}}

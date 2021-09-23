@@ -12,12 +12,25 @@ router.get("/logout", (req, res) => {
 
 router.get("/admin", async (req, res) => {
   var queryss = `
+  select PostID, Post_Text, Post_Time, Post_Type, UserID, View_Count, Like_Count, Comment_Count
+from POSTING a left outer join (SELECT PostID as PostID1, count(*) as Like_Count from POSTLIKE group by PostID) b on a.PostID = b.PostID1 left outer join (SELECT PostID as PostID2, count(*) as Comment_Count from COMMENT group by PostID) c on a.PostID = c.PostID2
+group by a.PostID
+order by a.PostNum DESC
+
+
 
 
   
   ;`
   
-  // select PostID, count(*) as commentCount from COMMENT group by PostID;
+  //조인조인
+  // select a.*, b.Post_Count, c.Comment_Count
+  // from POSTING a, (SELECT PostID, count(*) as Post_Count from POSTLIKE group by PostID) b, (SELECT PostID, count(*) as Comment_Count from COMMENT group by PostID) c
+  // where a.PostID = b.PostID AND a.PostID = c.PostID
+  // group by a.PostID
+
+
+
   // SELECT * FROM USER_CONS_COLUMNS WHERE TABLE_NAME = 'POSTING'; 
   // alter table POSTING modify PostNum auto_increment
   // insert into (select PostNum from POSTING where PostID = 1) values 1

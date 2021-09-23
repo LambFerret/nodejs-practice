@@ -37,6 +37,8 @@ var schema = buildSchema(`
         Post_Type : String
         UserID : String
         View_Count : Int
+        Like_Count : Int
+        Comment_Count : Int
 }
     type COMMENT {
         UserID : String
@@ -101,7 +103,11 @@ var resolver = {
     POSTING: ()=>{
         return new Promise((resolve)=>{
             DB.getConnection((conn)=>{
-                const row = conn.query(`select * from POSTING ORDER BY Post_Time DESC`)
+                const row = conn.query(`select PostID, Post_Text, Post_Time, Post_Type, UserID, View_Count, IFNULL(Like_Count,0) as Like_Count, IFNULL(Comment_Count,0) as Comment_Count
+                from POSTING a left outer join (SELECT PostID as PostID1, count(*) as Like_Count from POSTLIKE group by PostID) b on a.PostID = b.PostID1 left outer join (SELECT PostID as PostID2, count(*) as Comment_Count from COMMENT group by PostID) c on a.PostID = c.PostID2
+                group by a.PostID order by Post_Time desc
+                
+                `)
                 resolve(row)
                 conn.release()
             })
