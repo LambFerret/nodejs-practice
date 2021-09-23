@@ -75,8 +75,6 @@ router.post("/post/:id", (req, res) => {
 })
 
 
-
-
 router.get("/create", (req, res) => config(req, res, "create"))
 
 router.post("/create", (req, res) => {
@@ -85,10 +83,11 @@ router.post("/create", (req, res) => {
     var now = dateFormat(date)
     var postid = rand //req.body.Pictureid
     var content = req.body.content
-    var user = req.user.id
-    var type = 'winter' //req.query.type
+    var user = "asdfasdf" //req.user.id
+    var type = 'winter'  //req.query.type
     db.insertRow("POSTING", [postid, content, now, type, user, 0, null])
     res.redirect("/community/page/1")
 })
+
 
 module.exports = router;

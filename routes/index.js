@@ -13,7 +13,7 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  select * from COMMENT
+
   
   ;`
   
