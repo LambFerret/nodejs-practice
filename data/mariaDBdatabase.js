@@ -81,7 +81,7 @@ exports.getMaxCount = (Table, searchID) => {
     return new Promise((resolve, reject) => {
         this.getConnection((conn) => {
             try {
-                const rows = conn.query(`select PostID, count(*) as commentCount from ${Table} where PostID=${searchID} group by PostID;`)
+                const rows = conn.query(`select PostID, count(*) as commentCount from ${Table} where PostID="${searchID}" group by PostID;`)
                 resolve(rows)
             }
             catch (err) { console.log(err); }

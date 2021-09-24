@@ -14,7 +14,7 @@ module.exports = function (passport) {
   })
 
   router.get("/temp",(req, res)=>{
-    res.render("loadingScreen",{layout:"empty"})
+    res.render("loadingScreen",{layout:"empty"})  
     res.redirect("/login")
 
   }

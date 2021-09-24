@@ -13,7 +13,15 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-
+  CREATE TABLE COMMENT (
+    Comment_ID int AUTO_INCREMENT,
+    UserID varchar(30) NOT NULL,
+    PostID varchar(50) NOT NULL,
+    Comment_Text varchar(255) UNIQUE NOT NULL,
+    PRIMARY KEY (Comment_ID),
+    FOREIGN KEY (UserID) REFERENCES USER(UserID),
+    FOREIGN KEY (PostID) REFERENCES POSTING(PostID)
+);
 
 
   

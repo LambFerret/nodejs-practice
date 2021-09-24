@@ -50,9 +50,9 @@ router.get("/page/:page", async (req, res) => {
 router.get("/post/:id", async (req, res) => {
     var searchID = req.params.id
     var like = await db.getMaxCount("POSTLIKE", searchID)
-    var comment = await db.useWisely(`SELECT * FROM COMMENT WHERE PostID=${searchID} ORDER BY Comment_PK DESC`)
+    var comment = await db.useWisely(`SELECT * FROM COMMENT WHERE PostID='${searchID}' ORDER BY Comment_ID DESC`)
     var row = await db.getRow('POSTING', 'PostID', searchID)
-    db.useWisely(`update POSTING set View_Count=View_Count+1 where PostID=${searchID}`)
+    db.useWisely(`update POSTING set View_Count=View_Count+1 where PostID="${searchID}"`)
     var teapot = row[0]
     ls = {
         number:searchID,
@@ -70,7 +70,7 @@ router.post("/post/:id", (req, res) => {
     var selfuser = req.user.id
     var postid = req.params.id
     var text = req.body.comment
-    var ls = [selfuser, postid, text, null]
+    var ls = [null, selfuser, postid, text]
     db.insertRow("COMMENT", ls)
     res.redirect(`/community/post/${postid}`)
 })
