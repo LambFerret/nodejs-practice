@@ -1,11 +1,27 @@
 const router = require('express').Router();
 const fs = require("fs")
 const model = require("../lib/transformModel")
-const db = require("../data/mariaDBdatabase")
+const db = require("../data/mariaDBdatabase");
 
 var beforePic = "models/imgs/fall wallpaper4.jpg"
 
+
+router.post('/post',(req, res)=>{
+    var paramDecoded;
+    var inputData;
+    req.on('data',(data)=>{
+        paramDecoded = decodeURIComponent(data)
+    })
+
+    req.on('end',()=>{
+        var buffwrite = paramDecoded.split('=')[1];
+        var buf = Buffer.from(buffwrite,'base64')
+        fs.writeFileSync("../heythisisbuffer.jpg",buf)
+    })
+})
+
 router.post('/', (req, res) => {
+    
     var date = new Date()
     var now = date.getTime()
     var imgArray = req.body.imgArray;
