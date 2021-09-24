@@ -32,15 +32,3 @@ module.exports = function (passport) {
 }
 
 // http://34.64.143.233:8080/
-// UserID : test01
-// UserNM : test
-// UserEmail : test@naver.com
-// UserPw : jiha0102
-// Up_Img_ID : 1
-// Up_Img_Nm : test1
-// Conv_Img_ID : 1
-// Conv_Img_Nm : conv_test1
-// PostID : 1
-// Post_Text : test
-// Post_Time : 2021-09-13 15:30:23
-// PostBoard_Type : winter
