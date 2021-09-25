@@ -5,10 +5,11 @@ const fs = require("fs")
 
 router.get("/",(req, res)=> config(req, res, "index",{}, true) )
 
+
 router.post("/",(req, res)=> {
-  var body = req.body
-  console.log(body);
-  res.send({"result": "호출쓰"})
+  console.log(req.body);
+  {res.send({"result": "req.user.id"})}
+
 })
 
 router.get("/logout", (req, res) => {
@@ -19,14 +20,7 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  CREATE TABLE COMMENT (
-    Comment_ID int AUTO_INCREMENT,
-    UserID varchar(30) NOT NULL,
-    PostID varchar(50) NOT NULL,
-    Comment_Text varchar(255) UNIQUE NOT NULL,
-    PRIMARY KEY (Comment_ID),
-    FOREIGN KEY (UserID) REFERENCES USER(UserID),
-    FOREIGN KEY (PostID) REFERENCES POSTING(PostID)
+  select * from UPLOADIMG
 );
 
 

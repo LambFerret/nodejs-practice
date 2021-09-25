@@ -20,6 +20,7 @@ const loginRouter = require('./routes/login')(passport);
 const regiRouter = require('./routes/register')
 const transRouter = require('./routes/transform')
 const commuRouter = require('./routes/community')
+const RestRouter = require('./routes/restAPI')
 
 
 //express SETTINGS
@@ -46,7 +47,7 @@ app.use('/login', loginRouter);
 app.use('/register', regiRouter);
 app.use('/transform', transRouter);
 app.use('/community', commuRouter);
-
+app.use('/restapi', RestRouter);
 
 // 404 error
 app.use(function (req, res, next) {
