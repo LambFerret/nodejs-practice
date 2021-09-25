@@ -2,14 +2,13 @@ const router = require('express').Router();
 const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
+const multer = require("multer")
+const upload = multer({dest:"public"})
 
-router.get("/",(req, res)=> config(req, res, "index",{}, true) )
+router.get("/", (req, res) => config(req, res, "index", {}, true))
 
-
-router.post("/",(req, res)=> {
-  console.log(req.body);
-  {res.send({"result": "req.user.id"})}
-
+router.post("/",upload.single('img'),(req,res)=>{
+  console.log(req.file)
 })
 
 router.get("/logout", (req, res) => {
@@ -21,12 +20,12 @@ router.get("/admin", async (req, res) => {
   var queryss = `
 
   select * from UPLOADIMG
-);
+
 
 
   
   ;`
-  
+
   //조인조인
   // select a.*, b.Post_Count, c.Comment_Count
   // from POSTING a, (SELECT PostID, count(*) as Post_Count from POSTLIKE group by PostID) b, (SELECT PostID, count(*) as Comment_Count from COMMENT group by PostID) c
@@ -47,18 +46,18 @@ router.get("/admin", async (req, res) => {
   // CREATE TABLE POSTLIKE (  UserID varchar(30) NOT NULL,    PostID int NOT NULL,   LikeNum int AUTO_INCREMENT,   PRIMARY KEY (LikeNum),    FOREIGN KEY (UserID) REFERENCES USER(UserID),    FOREIGN KEY (PostID) REFERENCES POSTING(PostID));
   // delete from UPLOADIMG where UserID="asdfasdf"
   //COMMENT, CONV_IMG, POSTING, POSTLIKE, UPLOADIMG, USER
-  
+
   // select * from POSTING as A 
   // left outer join 
   // (select PostID as fkid FROM COMMENT)
   //  as B on A.UserID = B.fkid
-  
+
   // rows.forEach(element => {
-    //   console.log(element);
-    //   console.log("\n");
-    // });
-    
-    rows = await db.useWisely(queryss)
+  //   console.log(element);
+  //   console.log("\n");
+  // });
+
+  rows = await db.useWisely(queryss)
   var file = `1234321.json`
   fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => { if (err) throw err; })
   res.render("admin", {
