@@ -1,22 +1,36 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+import os, sys
+import keras
 import numpy as np
 from PIL import Image
-
-from typing import Optional
-from fastapi import FastAPI
 
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
-
-
-def load_img(path):
-    img = Image.open(path).resize((256,256))
+def prediction(dataset, imgpath):
+    model = keras.models.load_model("./" + dataset)
+    img = Image.open(imgpath).resize((256, 256))
     img = np.uint8(img) / 127.5 - 1
-    return img[np.newaxis, :, :, :]
+    model.predict(img)
+
+
+class Imgs(BaseModel):
+    UserID: str
+    origin: str
+    convert: str
+
+
+@app.post("/convert")
+async def read_root(img_info: Imgs):
+
+    # image 받으면 origin image로 저장
+    userid = img_info.UserID
+    ori = img_info.origin
+    conv = img_info.convert
+    dataset = ori+"2"+conv
+    prediction(dataset, )
+    return {"img_id": f'{userid}_{ori}_{conv}'}
+
+
+
