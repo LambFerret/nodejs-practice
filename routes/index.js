@@ -5,7 +5,11 @@ const fs = require("fs")
 
 router.get("/",(req, res)=> config(req, res, "index",{}, true) )
 
-router.post("/",(req, res)=> res.send({"result": "호출쓰"}))
+router.post("/",(req, res)=> {
+  var body = req.body
+  console.log(body);
+  res.send({"result": "호출쓰"})
+})
 
 router.get("/logout", (req, res) => {
   req.session.destroy()

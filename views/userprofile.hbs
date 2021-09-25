@@ -5,10 +5,10 @@
     {{name}} - sama <br>
     After all this time.. you reached here..
 </p>
-<input type="button" value="Say hello" onClick="showAndroidToast('Hello Android!')" />
+<input type="button" value="Say hello" onClick="showAndroidToast('{{id}}')" />
 
 <script type="text/javascript">
     function showAndroidToast(toast) {
-        Android.showToast(toast);
+        Android.AppConnection(toast);
     }
 </script>
