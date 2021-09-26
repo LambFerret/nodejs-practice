@@ -105,6 +105,22 @@ exports.insertRow = (table, list) => {
     })
 }
 
+/**
+ * 
+ * @param {string} table table name
+ * @param {string} key key in table
+ * @param {string} value Id
+ */
+exports.deleteRow = (table, key, value)=>{
+    this.getConnection(async (conn)=>{
+        query = `delete from ${table} where ${key} = '${value}'`
+        try { conn.query(query) }
+        catch (err) { console.log(err); }
+        finally { if (conn) conn.release() } 
+    })
+}
+
+
 // 34.64.143.233
 // jiha
 // qkrwlgk0102!

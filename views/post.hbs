@@ -10,21 +10,50 @@
 <div>
     타입 {{type}}
 </div>
-
+<div>
+    작성자 {{Owner}}
+</div>
 <div>
 {{like}} -------> 좋아요 갯수
 </div>
 
 <br>
+{{#if isOwner}}
+    <button onclick="comfirmAlert('{{Owner}}','{{number}}')">게시글 삭제</button>
+    <button onclick="location.href=''">게시글 수정</button>
+{{/if}}
 <h3>댓글창 시작!</h3>
 {{#each comment}}
     <div>
-        <p> 작성자 : {{this.UserID}} 내용 : {{this.Comment_Text}}</p>
+        <p> 작성자 : {{this.UserID}}</p><p name="icon">내용 : {{this.Comment_Text}}</p>
         </div> 
 {{/each}}
 
 <form action="/community/post/{{number}}" method="POST">
     <h5>코멘트창</h5>
-    <input type="text" id="comment" name="comment">
+    <input type="text" id="comment" name="comment" placeholder="icon">
     <button>갑니당</button>
 </form>
+
+
+
+
+<script>
+    content = document.getElementsByName("icon")
+    content.forEach(element => {
+    if (element.outerText=='내용 : icon') { element.innerHTML="<img src='/icon.png'>" }
+});
+    
+
+
+    
+    function comfirmAlert(user, number){
+        console.log(user + number)
+        if(confirm("정말 삭제하시겠습니까?")){
+            loc =`/restapi/post/delete?user=${user}&postid=${number}`
+            console.log(loc)
+            location.href=loc
+            alert("게시글 삭제 되었습니다.")
+            }
+    }
+</script>

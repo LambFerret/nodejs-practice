@@ -48,12 +48,14 @@ router.get("/page/:page", async (req, res) => {
 })
 
 router.get("/post/:id", async (req, res) => {
+    var isOwner
     var searchID = req.params.id
     var like = await db.getMaxCount("POSTLIKE", searchID)
     var comment = await db.useWisely(`SELECT * FROM COMMENT WHERE PostID='${searchID}' ORDER BY Comment_ID DESC`)
     var row = await db.getRow('POSTING', 'PostID', searchID)
     db.useWisely(`update POSTING set View_Count=View_Count+1 where PostID="${searchID}"`)
     var teapot = row[0]
+    if (teapot.UserID == req.user.id) {isOwner = true} else { isOwner = false}
     ls = {
         number:searchID,
         comment: comment,
@@ -62,6 +64,8 @@ router.get("/post/:id", async (req, res) => {
         content: teapot.Post_Text,
         time: teapot.Post_Time,
         type: teapot.Post_Type,
+        Owner:teapot.UserID,
+        isOwner:isOwner,
     }
     config(req, res, "post", ls)
 })
@@ -78,12 +82,11 @@ router.post("/post/:id", (req, res) => {
 router.get("/create", (req, res) => config(req, res, "create"))
 
 router.post("/create", (req, res) => {
-    var rand = Math.random()*10000
     var date = new Date()
     var now = dateFormat(date)
-    var postid = rand //req.body.Pictureid
+    var postid = "conv_test01" //req.body.Pictureid
     var content = req.body.content
-    var user = "asdfasdf" //req.user.id
+    var user = req.user.id
     var type = 'winter'  //req.query.type
     db.insertRow("POSTING", [postid, content, now, type, user, 0, null])
     res.redirect("/community/page/1")

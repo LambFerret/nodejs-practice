@@ -5,10 +5,25 @@
     {{name}} - sama <br>
     After all this time.. you reached here..
 </p>
-<input type="button" value="확인" onClick="showAndroidToast('{{id}}')" />
+<input type="button" value="회원탈퇴" onClick="comfirmAlert('{{id}}')">
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<input type="button" value="확인" onClick="showAndroidToast('{{id}}')" >
 
 <script type="text/javascript">
     function showAndroidToast(toast) {
         Android.AppConnection(toast);
+    }
+    function comfirmAlert(id){
+        if(confirm("정말 삭제하시겠습니까?")){
+            location.href="/restapi/member?user="+id
+            alert("회원 탈퇴 되었습니다.")
+            }
     }
 </script>

@@ -19,13 +19,13 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  select * from UPLOADIMG
-
-
-
+  drop index Comment_Text on COMMENT
+  
   
   ;`
-
+  
+  // insert into POSTING values ("conv_test01",'this text',0,'winter','asdfasdf',null, null)
+  // select * from POSTING
   //조인조인
   // select a.*, b.Post_Count, c.Comment_Count
   // from POSTING a, (SELECT PostID, count(*) as Post_Count from POSTLIKE group by PostID) b, (SELECT PostID, count(*) as Comment_Count from COMMENT group by PostID) c
