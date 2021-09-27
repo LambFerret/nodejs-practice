@@ -3,11 +3,14 @@ const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
 const multer = require("multer")
-const upload = multer({dest:"/public/test"})
 const storage = multer.diskStorage({
-	filename: (req, file, cb)=>{
-		cb(null, file.originalname)}
-})
+  destination: (req, file, cb)=>{
+    cb(null, 'uploads/')
+  },
+  filename: (req, file, cb)=>{
+    cb(null, file.originalname)}
+  })
+  const upload = multer({storage:storage})
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
 
