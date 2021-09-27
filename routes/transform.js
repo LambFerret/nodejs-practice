@@ -1,55 +1,30 @@
 const router = require('express').Router();
 const fs = require("fs")
-const model = require("../lib/transformModel")
 const db = require("../data/mariaDBdatabase");
-
-var beforePic = "models/imgs/fall wallpaper4.jpg"
-
-
-router.post('/post',(req, res)=>{
-    var paramDecoded;
-    var inputData;
-    req.on('data',(data)=>{
-        paramDecoded = decodeURIComponent(data)
-    })
-
-    req.on('end',()=>{
-        var buffwrite = paramDecoded.split('=')[1];
-        var buf = Buffer.from(buffwrite,'base64')
-        fs.writeFileSync("../heythisisbuffer.jpg",buf)
-    })
+// image upload
+const multer = require("multer")
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  }
 })
+const upload = multer({ storage: storage })
 
-router.post('/', (req, res) => {
-    
-    var date = new Date()
-    var now = date.getTime()
-    var imgArray = req.body.imgArray;
-    var file = `public/images/${now}.txt`
-    console.log(file);
-    fs.writeFile(file, imgArray, 'utf-8', (err, fd) => {
-        if (err) throw err;
-        console.log(file + "위치 확인 바람");
-    })
-    var origin = req.body.origin;
-    var convert = req.body.convert;
-    console.log(origin + convert);
-
+router.post("/", upload.single("image"), (req, res) => {
+  var id = 'asdfasdf'//req.body.id
+  var origin = req.body.origin
+  var convert = req.body.convert
+  console.log(req.file)
 })
-
+// --> image upload
 
 
 
 router.get('/', function (req, res) {
-    model.prediction(0, true, beforePic)
-        .then((value, err) => (
-            res.render('transform', {
-                title: 'Transform',
-                before: beforePic,
-                id: req.user,
-                after: value,
-            })
-        ))
+    res.send({hi:"HI"})
 });
 
 module.exports = router;
