@@ -2,10 +2,14 @@ const router = require('express').Router();
 const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
+const axios = require("axios")
+
+
+// image upload
 const multer = require("multer")
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/')
+    cb(null, 'public/uploads/')
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname)
@@ -14,12 +18,17 @@ const storage = multer.diskStorage({
 )
 const upload = multer({ storage: storage, limits: { fileSize: 3 * 1024 * 1024 } })
 
+router.post("/", upload.single("image"), (req, res) => {
+  var id = 'asdfasdf'//req.body.id
+  var origin = req.body.origin
+  var convert = req.body.convert
+  console.log(req.file)
+})
+// --> image upload
+
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
 
-router.post("/", upload.single("image"), (req, res) => {
-  console.log(req.file)
-})
 
 router.get("/logout", (req, res) => {
   req.session.destroy()
