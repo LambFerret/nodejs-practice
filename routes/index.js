@@ -4,20 +4,21 @@ const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
 const multer = require("multer")
 const storage = multer.diskStorage({
-  destination: (req, file, cb)=>{
+  destination: (req, file, cb) => {
     cb(null, 'uploads/')
   },
-  filename: (req, file, cb)=>{
-    cb(null, file.originalname)}
-  },
-  lim
-  )
-  const upload = multer({storage:storage, limits:{fileSize:3*1024*1024}})
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  }
+},
+)
+const upload = multer({ storage: storage, limits: { fileSize: 3 * 1024 * 1024 } })
+
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
 
-router.post("/", upload.single("image"), (req,res)=>{
-	console.log(req.file)
+router.post("/", upload.single("image"), (req, res) => {
+  console.log(req.file)
 })
 
 router.get("/logout", (req, res) => {
@@ -32,7 +33,7 @@ router.get("/admin", async (req, res) => {
   
   
   ;`
-  
+
   // insert into POSTING values ("conv_test01",'this text',0,'winter','asdfasdf',null, null)
   // select * from POSTING
   //조인조인
