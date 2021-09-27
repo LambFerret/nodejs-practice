@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import os, sys
 import keras
 import numpy as np
 from PIL import Image
+import uvicorn
 
 app = FastAPI()
 
@@ -23,14 +23,16 @@ class Imgs(BaseModel):
 
 @app.post("/convert")
 async def read_root(img_info: Imgs):
-
     # image 받으면 origin image로 저장
     userid = img_info.UserID
     ori = img_info.origin
     conv = img_info.convert
-    dataset = ori+"2"+conv
+    dataset = ori + "2" + conv
     prediction(dataset, )
     return {"img_id": f'{userid}_{ori}_{conv}'}
 
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=9889)
 
+#  pip install -r requirements.txt

@@ -30,5 +30,3 @@ module.exports = function (passport) {
 
   return router;
 }
-
-// http://34.64.143.233:8080/
