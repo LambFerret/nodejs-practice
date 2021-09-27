@@ -3,12 +3,12 @@ const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
 const multer = require("multer")
-const upload = multer({dest:"public"})
+const upload = multer({dest:"./public/test"})
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
 
-router.post("/",upload.single('img'),(req,res)=>{
-  console.log(req.file)
+router.post("/", upload.single("image"), (req,res)=>{
+	console.log(req.file)
 })
 
 router.get("/logout", (req, res) => {
