@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const handlebars = require('express-handlebars')
 const flash = require("connect-flash")
 const logger = require('morgan');
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8001
 //const hostname = '10.178.0.2'
 const sessionConfig = require("./lib/session")
 app.use(sessionConfig)
