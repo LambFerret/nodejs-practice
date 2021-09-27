@@ -2,7 +2,7 @@ const router = require('express').Router();
 const db = require("../data/mariaDBdatabase");
 const config = require("../lib/partial").partialConfig
 const { request } = require("graphql-request")
-const endpoint = "http://localhost:8080/graphql"
+const endpoint = "http://localhost:8001/graphql"
 
 function dateFormat(date) {
     let month = date.getMonth() + 1;
