@@ -7,15 +7,8 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads/')
     },
-    filename: async (req, file, cb) => {
-        var id = req.body.userInfo
-        var origin = req.body.origin
-        var convert = req.body.convert
-        var dataset = `${origin}2${convert}`
-        var count = await db.getCount("UPLOADIMG", dataset, id)
-        var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
-        console.log(filename);
-        cb(null, filename)
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
     }
 })
 const upload = multer({ storage: storage, limits: { fileSize: 3 * 1024 * 1024 } })
@@ -28,6 +21,7 @@ router.get("/", async (req, res) => {
 router.post("/",
     upload.single("image"),
     async (req, res) => {
+        str1 = "/public/uploads/"
         console.log(req.body);
         console.log(req.file);
         var id = req.body.userInfo
@@ -36,7 +30,8 @@ router.post("/",
         var dataset = `${origin}2${convert}`
         var count = await db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
-        // try{
+        fs.renameSync(str1+req.file.originalname, str2+filename,(err)=>{console.log(err);})
+                // try{
         //     db.insertRow("UPLOADIMG", [count, id, filename, dataset])
         //     fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`, { method: "get" })
 
