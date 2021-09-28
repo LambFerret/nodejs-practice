@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const fs = require("fs")
 const db = require("../data/mariaDBdatabase");
-const axios = require('axios')
+const axios = require('axios').default
 const fetch = require("node-fetch")
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -28,9 +28,10 @@ router.post("/",
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
         var realpaths = req.file.originalname
         console.log(filename);
+        redUrl = `http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`
         setTimeout(()=>{
             db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
-            fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`, { method: "get" })
+            axios.get(redUrl)
         }, 1500)
 
 
