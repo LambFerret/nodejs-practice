@@ -21,9 +21,11 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/",
-    // upload.single("image"),
+    upload.single("image"),
     async (req, res) => {
-        var id = 'asdfasdf'//req.body.id
+        console.log(req.body);
+        console.log(req.file);
+        var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
