@@ -12,24 +12,35 @@ const storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 })
-const upload = multer({ storage: storage, limits:{fileSize: 3*1024*1024 } })
+const upload = multer({ storage: storage, limits: { fileSize: 3 * 1024 * 1024 } })
 
-router.get("/",(req, res)=>{
-    res.render("mutl")
+router.get("/", async (req, res) => {
+    var count = await db.getCount("UPLOADIMG", "dataset", "id")
+    console.log(count[0].ctd);
+
 })
 
-router.post("/", upload.single("image"), async (req, res) => {
-    var id = 'asdfasdf'//req.body.id
-    var origin = req.body.origin
-    var convert = req.body.convert
-    var dataset = `${origin}2${convert}`
-    var filename = `${id}_${dataset}`
-    
-    fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`,{method:"get"})
-    // var filenumber =await db.getMaxCount()
-    res.send({'asdf':'asdf'})
-    console.log(req.file)
-})
+router.post("/",
+    // upload.single("image"),
+    async (req, res) => {
+        var id = 'asdfasdf'//req.body.id
+        var origin = req.body.origin
+        var convert = req.body.convert
+        var dataset = `${origin}2${convert}`
+        var count = await db.getCount("UPLOADIMG", dataset, id)
+        var filename = `${id}_${dataset}_${count[0].ctd}`
+        // try{
+        //     db.insertRow("UPLOADIMG", [count, id, filename, dataset])
+        //     fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`, { method: "get" })
+
+        // }
+        // catch (err) {if (err) console.error(err);}
+
+
+        // var filenumber =await db.getMaxCount()
+        res.send({ 'asdf': 'asdf' })
+        console.log(filename)
+    })
 // --> image upload
 
 

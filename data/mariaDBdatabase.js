@@ -95,7 +95,7 @@ exports.getCount = (Table, searchID, userID) => {
         this.getConnection((conn) => {
             try {
                 const rows = conn.query(`select count(*) as ctd from ${Table} where Up_Img_Method="${searchID}" and UserID="${userID}";`)
-                resolve(rows[0])
+                resolve(rows)
             }
             catch (err) { console.log(err); }
             finally { if (conn) conn.release() }
