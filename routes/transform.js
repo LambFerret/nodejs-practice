@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads/')
     },
-    filename: (req, file, cb) => {
+    filename: async (req, file, cb) => {
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
