@@ -14,9 +14,10 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  select * from UPLOADIMG
+  alter table UPLOADIMG add realpaths varchar(50)
   
   ;`
+  // select * from UPLOADIMG
   // insert into UPLOADIMG values (0, "asdfasdf", "asdfasdf_spring2summer_0.jpg","spring2summer")
   // ALTER TABLE UPLOADIMG MODIFY Up_Img_Method varchar(20)
   // alter table CONV_IMG add constraint CONV_IMG_ibfk_1 foreign key(Up_Img_ID) references UPLOADIMG (Up_Img_Nm)

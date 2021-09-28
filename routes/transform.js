@@ -30,27 +30,12 @@ router.post("/",
         var dataset = `${origin}2${convert}`
         var count = await db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
-        db.insertRow("UPLOADIMG", [count, id, filename, dataset])
-        redUrl = `/transform/convert/process?old=${req.file.originalname}&new=${filename}&dataset=${dataset}`
-        console.log(filename)
-        console.log(redUrl);
-        res.redirect(redUrl)
+        var realpaths = req.file.originalname
+        try{
+            db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
+            fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`, { method: "get" })
+        } catch (e) {if (e) console.log(e);}
     })
-
-router.get("/convert/process", (req, res) => {
-    str1 = "/public/uploads/"
-    oldname = req.query.old
-    newname = req.query.new
-    dataset = req.query.dataset
-    
-    try{
-        fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${oldname}`, { method: "get" })
-        .then(fs.renameSync(str1 + oldname, str1 +newname, (err) => { console.log(err); }))
-    }
-    catch (err) {if (err) console.error(err);}
-
-
-})
 
 
 router.get('/', function (req, res) {
