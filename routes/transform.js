@@ -28,18 +28,17 @@ router.post("/",
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
-        await db.getCount("UPLOADIMG", dataset, id).then((count)=>
-            {
-                var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
-            fs.rename(originFileName, filename)
+        await db.getCount("UPLOADIMG", dataset, id).then((count) => {
+            var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
+            fs.rename(originFileName, filename, (err)=>{if(err)throw err})
             // try{
             //     db.insertRow("UPLOADIMG", [count, id, filename, dataset])
             //     fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`, { method: "get" })
-    
+
             // }
             // catch (err) {if (err) console.error(err);}
 
-    })
+        })
 
 
         // var filenumber =await db.getMaxCount()
