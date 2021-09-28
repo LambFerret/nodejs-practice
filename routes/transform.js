@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 
 router.post("/",
     upload.single("image"),
-    async (req, res) => {
+    (req, res) => {
         str1 = "/public/uploads/"
         console.log(req.body);
         console.log(req.file);
@@ -28,7 +28,7 @@ router.post("/",
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
-        var count = await db.getCount("UPLOADIMG", dataset, id)
+        var count = db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
         fs.rename(str1+req.file.originalname, str1+filename,(err)=>{console.log(err);})
                 // try{
