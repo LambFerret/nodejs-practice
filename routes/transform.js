@@ -24,7 +24,7 @@ router.post("/",
     async (req, res) => {
         console.log(req.body);
         console.log(req.file);
-        var id = req.body.userInfo
+        var id = "asdfasdf"//req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
