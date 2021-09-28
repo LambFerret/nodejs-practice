@@ -8,7 +8,14 @@ const storage = multer.diskStorage({
         cb(null, 'public/uploads/')
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname)
+        var id = req.body.userInfo
+        var origin = req.body.origin
+        var convert = req.body.convert
+        var dataset = `${origin}2${convert}`
+        var count = await db.getCount("UPLOADIMG", dataset, id)
+        var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
+        console.log(filename);
+        cb(null, filename)
     }
 })
 const upload = multer({ storage: storage, limits: { fileSize: 3 * 1024 * 1024 } })
@@ -23,22 +30,18 @@ router.post("/",
     async (req, res) => {
         console.log(req.body);
         console.log(req.file);
-        var originFileName = req.file.originalname
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
-        await db.getCount("UPLOADIMG", dataset, id).then((count) => {
-            var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
-            fs.rename(originFileName, filename, (err)=>{if(err)throw err})
-            // try{
-            //     db.insertRow("UPLOADIMG", [count, id, filename, dataset])
-            //     fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`, { method: "get" })
+        var count = await db.getCount("UPLOADIMG", dataset, id)
+        var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
+        // try{
+        //     db.insertRow("UPLOADIMG", [count, id, filename, dataset])
+        //     fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`, { method: "get" })
 
-            // }
-            // catch (err) {if (err) console.error(err);}
-
-        })
+        // }
+        // catch (err) {if (err) console.error(err);}
 
 
         // var filenumber =await db.getMaxCount()
