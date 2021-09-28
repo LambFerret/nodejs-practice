@@ -30,7 +30,7 @@ router.post("/",
         var dataset = `${origin}2${convert}`
         var count = db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
-        fs.rename(str1+req.file.originalname, str1+filename,(err)=>{console.log(err);})
+        fs.renameSync(str1+req.file.originalname, str1+filename,(err)=>{console.log(err);})
                 // try{
         //     db.insertRow("UPLOADIMG", [count, id, filename, dataset])
         //     fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`, { method: "get" })
