@@ -3,8 +3,6 @@ node_modules/
 
 legacy/
 .images/*
-sessions/*
-with_react/
 
 /1234321.json
 package.json
