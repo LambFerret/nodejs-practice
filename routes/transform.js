@@ -6,7 +6,7 @@ const fetch = require("node-fetch")
 const multer = require("multer");
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/uploads/')
+        cb(null, 'webpy/uploads/')
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname)
@@ -26,9 +26,10 @@ router.post("/",
         var count = await db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
         var realpaths = req.file.originalname
-
-        db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
-        fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`, { method: "get" })
+        console.log(filename);
+        
+        // db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
+        // fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`, { method: "get" })
 
 
 
