@@ -31,10 +31,12 @@ router.post("/",
         var count = await db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
         var realpaths = req.file.originalname
-        try{
-            db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
-            fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`, { method: "get" })
-        } catch (e) {if (e) console.log(e);}
+
+        db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
+        fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`, { method: "get" })
+
+
+
     })
 
 
