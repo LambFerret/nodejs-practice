@@ -25,7 +25,8 @@ router.post("/",
         var dataset = `${origin}2${convert}`
         var count = await db.getCount("UPLOADIMG", dataset, id)
         console.log(count);
-        var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
+        count = count[0].ctd
+        var filename = `${id}_${dataset}_${count}.jpg`
         var realpaths = req.file.originalname
         console.log(filename);
         redUrl = `http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`
