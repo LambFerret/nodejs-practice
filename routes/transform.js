@@ -24,6 +24,7 @@ router.post("/",
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
         var count = await db.getCount("UPLOADIMG", dataset, id)
+        console.log(count);
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
         var realpaths = req.file.originalname
         console.log(filename);
