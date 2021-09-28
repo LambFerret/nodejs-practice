@@ -9,13 +9,12 @@ router.get('/convert', async (req, res) => {
     res.send({ "result": result })
 })
 
-router.get('/member', async (req, res) => {
+router.delete('/member', (req, res) => {
     username = req.query.user
     if (username == req.user.id) {
         db.deleteRow('USER', 'UserID', username)
     }
     req.session.destroy()
-    res.redirect("/")
 })
 
 router.get('/post/delete', async (req, res) => {

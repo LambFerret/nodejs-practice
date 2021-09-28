@@ -14,11 +14,15 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  drop index Comment_Text on COMMENT
-  
+  select * from UPLOADIMG
   
   ;`
-
+  // insert into UPLOADIMG values (0, "asdfasdf", "asdfasdf_spring2summer_0.jpg","spring2summer")
+  // ALTER TABLE UPLOADIMG MODIFY Up_Img_Method varchar(20)
+  // alter table CONV_IMG add constraint CONV_IMG_ibfk_1 foreign key(Up_Img_ID) references UPLOADIMG (Up_Img_Nm)
+  // alter table UPLOADIMG add primary key(Up_Img_Nm);
+  // SELECT * FROM information_schema.table_constraints;
+  // alter table CONV_IMG drop foreign key CONV_IMG_ibfk_1
   // insert into POSTING values ("conv_test01",'this text',0,'winter','asdfasdf',null, null)
   // select * from POSTING
   //조인조인

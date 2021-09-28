@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const fs = require("fs")
 const db = require("../data/mariaDBdatabase");
+const axios = require('axios')
 // image upload
-const multer = require("multer")
+const multer = require("multer");
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads/')
@@ -23,6 +24,8 @@ router.post("/", upload.single("image"), async (req, res) => {
     var convert = req.body.convert
     var dataset = `${origin}2${convert}`
     var filename = `${id}_${dataset}`
+    
+    fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`,{method:"get"})
     // var filenumber =await db.getMaxCount()
     res.send({'asdf':'asdf'})
     console.log(req.file)

@@ -1,6 +1,6 @@
 {{#if isLoggedIn}}
 <p>
-<ul>
+<ul class="lists">
   <li><a href="/logout">Logout</a></li>
   <li><a href="/transform">transform</a></li>
   <li><a href="/profile/{{id}}">profile</a></li>
@@ -15,3 +15,8 @@
 </ul>
 </p>
 {{/if}}
+<style>
+  .lists li{
+    font-size: 50px;
+  }
+</style>

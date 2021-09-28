@@ -90,6 +90,19 @@ exports.getMaxCount = (Table, searchID) => {
     })
 }
 
+exports.getCount = (Table, searchID, userID) => {
+    return new Promise((resolve, reject) => {
+        this.getConnection((conn) => {
+            try {
+                const rows = conn.query(`select count(*) as ctd from ${Table} where Up_Img_Method="${searchID}" and UserID="${userID}";`)
+                resolve(rows[0])
+            }
+            catch (err) { console.log(err); }
+            finally { if (conn) conn.release() }
+        })
+    })
+}
+
 /**
  * 
  * @param {string} table table name
