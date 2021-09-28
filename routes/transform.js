@@ -2,6 +2,7 @@ const router = require('express').Router();
 const fs = require("fs")
 const db = require("../data/mariaDBdatabase");
 const axios = require('axios')
+const fetch = require("node-fetch")
 const multer = require("multer");
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
