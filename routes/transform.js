@@ -21,7 +21,6 @@ router.get("/", async (req, res) => {
 router.post("/",
     upload.single("image"),
     (req, res) => {
-        str1 = "/public/uploads/"
         console.log(req.body);
         console.log(req.file);
         var id = req.body.userInfo
@@ -30,21 +29,25 @@ router.post("/",
         var dataset = `${origin}2${convert}`
         var count = db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
-        fs.renameSync(str1+req.file.originalname, str1+filename,(err)=>{console.log(err);})
-                // try{
-        //     db.insertRow("UPLOADIMG", [count, id, filename, dataset])
-        //     fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${filename}`, { method: "get" })
-
-        // }
-        // catch (err) {if (err) console.error(err);}
-
-
-        // var filenumber =await db.getMaxCount()
-        res.send({ 'asdf': 'asdf' })
+        db.insertRow("UPLOADIMG", [count, id, filename, dataset])
+        res.redirect(`/transform/convert/process?old=${req.file.originalname}&new=${filename}&dataset=${dataset}`)
         console.log(filename)
     })
 
+router.get("/convert/process", (req, res) => {
+    str1 = "/public/uploads/"
+    oldname = req.query.old
+    newname = req.query.new
+    dataset = req.query.dataset
+    
+    try{
+        fetch(`http://localhost:9889/convert?dataset=${dataset}&imgname=${oldname}`, { method: "get" })
+        .then(fs.renameSync(str1 + oldname, str1 +newname, (err) => { console.log(err); }))
+    }
+    catch (err) {if (err) console.error(err);}
 
+
+})
 
 
 router.get('/', function (req, res) {
