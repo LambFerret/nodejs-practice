@@ -14,11 +14,6 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage, limits: { fileSize: 3 * 1024 * 1024 } })
 
-router.get("/", async (req, res) => {
-    var count = await db.getCount("UPLOADIMG", "dataset", "id")
-    console.log(count[0].ctd);
-})
-
 router.post("/",
     upload.single("image"),
     async (req, res) => {
