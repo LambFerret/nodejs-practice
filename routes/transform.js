@@ -21,14 +21,14 @@ router.get("/", async (req, res) => {
 
 router.post("/",
     upload.single("image"),
-    (req, res) => {
+    async (req, res) => {
         console.log(req.body);
         console.log(req.file);
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
-        var count = db.getCount("UPLOADIMG", dataset, id)
+        var count = await db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
         db.insertRow("UPLOADIMG", [count, id, filename, dataset])
         redUrl = `/transform/convert/process?old=${req.file.originalname}&new=${filename}&dataset=${dataset}`
