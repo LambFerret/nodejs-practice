@@ -31,8 +31,10 @@ router.post("/",
         var count = db.getCount("UPLOADIMG", dataset, id)
         var filename = `${id}_${dataset}_${count[0].ctd}.jpg`
         db.insertRow("UPLOADIMG", [count, id, filename, dataset])
-        res.redirect(`/transform/convert/process?old=${req.file.originalname}&new=${filename}&dataset=${dataset}`)
+        redUrl = `/transform/convert/process?old=${req.file.originalname}&new=${filename}&dataset=${dataset}`
         console.log(filename)
+        console.log(redUrl);
+        res.redirect(redUrl)
     })
 
 router.get("/convert/process", (req, res) => {
