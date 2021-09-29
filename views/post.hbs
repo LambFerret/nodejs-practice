@@ -52,9 +52,7 @@
 
     function likes() {
         var dom = document.getElementById("PostLike")
-        isLiked = {{ isLiked }}
-    console.log(isLiked)
-    if (isLiked) { dom.innerHTML = `<img src="/icons/like.png" alt="post_like">` }
+    if (!{{ isLiked }}) { dom.innerHTML = `<img src="/icons/like.png" alt="post_like">` }
     else dom.innerHTML = `<img src="/icons/what.png" alt="post_like">`
     }
     likes()
