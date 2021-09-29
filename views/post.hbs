@@ -1,37 +1,43 @@
 <div>
-    image goes here! {{image}}
+    image goes here! {{teapot.Post_Text}}
 </div>
 <div>
-    내용 <br> {{content}} <br>
+    내용 <br> {{teapot.Post_Text}} <br>
 </div>
 <div>
-    작성일시 <br> {{time}} <br>
+    작성일시 <br> {{teapot.Post_Time}} <br>
 </div>
 <div>
-    타입 {{type}}
+    타입 {{teapot.Post_Type}}
 </div>
 <div>
-    작성자 {{Owner}}
+    작성자 {{teapot.UserID}}
 </div>
 <div>
-{{like}} -------> 좋아요 갯수
+    {{like}} -------> 좋아요 갯수
 </div>
 
 <br>
 {{#if isOwner}}
-    <button onclick="comfirmAlert('{{Owner}}','{{number}}')">게시글 삭제</button>
-    <button onclick="location.href=''">게시글 수정</button>
+<button onclick="comfirmAlert('{{Owner}}','{{number}}')">게시글 삭제</button>
+<button onclick="location.href=''">게시글 수정</button>
+{{else}}
+
+<p>click me</p>
+<div id="PostLike">
+</div>
 {{/if}}
 <h3>댓글창 시작!</h3>
 {{#each comment}}
-    <div>
-        <p> 작성자 : {{this.UserID}}</p><p name="icon">내용 : {{this.Comment_Text}}</p>
-        </div> 
+<div>
+    <p> 작성자 : {{this.UserID}}</p>
+    <p name="icon">내용 : {{this.Comment_Text}}</p>
+</div>
 {{/each}}
 
 <form action="/community/post/{{number}}" method="POST">
     <h5>코멘트창</h5>
-    <input type="text" id="comment" name="comment" placeholder="icon">
+    <input type="text" id="comment" name="comment" placeholder="emoticons">
     <button>갑니당</button>
 </form>
 
@@ -39,21 +45,33 @@
 
 
 <script>
-    content = document.getElementsByName("icon")
-    content.forEach(element => {
-    if (element.outerText=='내용 : icon') { element.innerHTML="<img src='/icon.png'>" }
-});
-    
+    document.getElementsByName("icon").forEach(element => {
+        str = element.outerText
+        if (str.match(/emoticons/)) { element.innerHTML = `<img src='/icons/${str.split(': ')[1]}.png'>` }
+    });
+
+    function likes() {
+        var dom = document.getElementById("PostLike")
+        isLiked = {{ isLiked }}
+    console.log(isLiked)
+    if (isLiked) { dom.innerHTML = `<img src="/icons/like.png" alt="post_like">` }
+    else dom.innerHTML = `<img src="/icons/what.png" alt="post_like">`
+    }
+    likes()
+
+    document.getElementById("PostLike").onclick = () => {
+        var url = `/restapi/post/like?user={{{user}}}&postid={{{number}}}`
+        var option = {method:"get"}
+        
+        fetch(url , option)
+    }
 
 
-    
-    function comfirmAlert(user, number){
-        console.log(user + number)
-        if(confirm("정말 삭제하시겠습니까?")){
-            loc =`/restapi/post/delete?user=${user}&postid=${number}`
-            console.log(loc)
-            location.href=loc
+
+    function comfirmAlert(user, number) {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            location.href = `/restapi/post/delete?user=${user}&postid=${number}`
             alert("게시글 삭제 되었습니다.")
-            }
+        }
     }
 </script>

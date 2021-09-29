@@ -49,23 +49,31 @@ router.get("/page/:page", async (req, res) => {
 
 router.get("/post/:id", async (req, res) => {
     var isOwner
+    var isLiked
     var searchID = req.params.id
+    var currentUser = req.user.id
+    var someLike = await db.useWisely(`select * from POSTLIKE where PostID='${searchID}' and UserID='${currentUser}' `)
+    someLike = someLike[0]
+    console.log(someLike);
+    console.log("hi");
+    if (someLike) {isLiked=true} else {isLiked=false}
     var like = await db.getMaxCount("POSTLIKE", searchID)
+    try {like = like[0].commentCount}
+    catch {like = 0}
     var comment = await db.useWisely(`SELECT * FROM COMMENT WHERE PostID='${searchID}' ORDER BY Comment_ID DESC`)
     var row = await db.getRow('POSTING', 'PostID', searchID)
     db.useWisely(`update POSTING set View_Count=View_Count+1 where PostID="${searchID}"`)
     var teapot = row[0]
-    if (teapot.UserID == req.user.id) {isOwner = true} else { isOwner = false}
+    console.log(teapot);
+    if (teapot.UserID == currentUser) {isOwner = true} else { isOwner = false}
     ls = {
-        number:searchID,
+        isLiked : isLiked,
+        number: searchID,
         comment: comment,
         like: like,
-        image: searchID,
-        content: teapot.Post_Text,
-        time: teapot.Post_Time,
-        type: teapot.Post_Type,
-        Owner:teapot.UserID,
+        teapot: teapot,
         isOwner:isOwner,
+        user:currentUser,
     }
     config(req, res, "post", ls)
 })
@@ -79,15 +87,22 @@ router.post("/post/:id", (req, res) => {
     res.redirect(`/community/post/${postid}`)
 })
 
-router.get("/create", (req, res) => config(req, res, "create"))
+router.get("/create", async (req, res) => {
+    var imagesUserID = await db.getRow('UPLOADIMG', 'UserID', req.user.id)
+    ls = {
+        image:imagesUserID,
+    }
+    config(req, res, "create", ls)
+})
 
 router.post("/create", (req, res) => {
     var date = new Date()
     var now = dateFormat(date)
-    var postid = "conv_test01" //req.body.Pictureid
+    var postid = "testtest"//req.body.Pictureid
     var content = req.body.content
     var user = req.user.id
-    var type = 'winter'  //req.query.type
+    var type = "winter" //postid.split("2")[1].split('_')[0]
+    console.log(type);
     db.insertRow("POSTING", [postid, content, now, type, user, 0, null])
     res.redirect("/community/page/1")
 })

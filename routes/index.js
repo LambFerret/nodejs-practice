@@ -14,7 +14,9 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  select * from UPLOADIMG
+  select * from POSTLIKE
+
+
   ;`
   // select * from UPLOADIMG
   // insert into UPLOADIMG values (0, "asdfasdf", "asdfasdf_spring2summer_0.jpg","spring2summer")
