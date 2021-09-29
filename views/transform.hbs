@@ -3,31 +3,3 @@
 <img src="{{{before}}}" alt="before" id="before">
 <p>after</p>
 <img src="{{{after}}}" alt="after" id="after">
-
-
-
-<!-- this is deprecated code
-<script>
-var imgsrc = document.getElementById("before").src
-console.log("in javascript"+imgsrc)
-
-$("button").click(()=>{
-    $.ajax({
-        type:"GET",
-        url:"../lib/model_prediction.py",
-        data:{
-            sets:imgsrc,
-            "some":12341,
-            "thing":true
-
-        },
-        success: (data)=>{
-            alert(data)
-        }
-    }).then((v)=>{
-        //console.log(v)
-        console.log("after then sc")
-    })
-})
-</script>
--->

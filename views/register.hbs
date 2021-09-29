@@ -50,7 +50,6 @@
             var pwd = $("#pwd").val()
             var cd = $("#check").val()
             if (!(pwd == cd)) {
-                console.log("why")
                 $("#same").text("달라요")
                 ischecked = false
             }
@@ -72,7 +71,6 @@
                 url: "/register/idcheck",
                 success: (txt) => {
                     var target = document.getElementById("target_btn");
-                    console.log(txt.length)
                     if (txt.length) {
                         $("#isFailed").css("display", "inline").text("존재하는 아이디입니다.")
                         isPassed = false

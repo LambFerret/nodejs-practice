@@ -54,8 +54,6 @@ router.get("/post/:id", async (req, res) => {
     var currentUser = req.user.id
     var someLike = await db.useWisely(`select * from POSTLIKE where PostID='${searchID}' and UserID='${currentUser}' `)
     someLike = someLike[0]
-    console.log(someLike);
-    console.log("hi");
     if (someLike) {isLiked=true} else {isLiked=false}
     var like = await db.getMaxCount("POSTLIKE", searchID)
     try {like = like[0].commentCount}
@@ -64,7 +62,6 @@ router.get("/post/:id", async (req, res) => {
     var row = await db.getRow('POSTING', 'PostID', searchID)
     db.useWisely(`update POSTING set View_Count=View_Count+1 where PostID="${searchID}"`)
     var teapot = row[0]
-    console.log(teapot);
     if (teapot.UserID == currentUser) {isOwner = true} else { isOwner = false}
     ls = {
         isLiked : isLiked,
@@ -102,7 +99,6 @@ router.post("/create", (req, res) => {
     var content = req.body.content
     var user = req.user.id
     var type = "winter" //postid.split("2")[1].split('_')[0]
-    console.log(type);
     db.insertRow("POSTING", [postid, content, now, type, user, 0, null])
     res.redirect("/community/page/1")
 })

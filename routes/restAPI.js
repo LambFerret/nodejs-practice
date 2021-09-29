@@ -29,17 +29,14 @@ router.get('/post/delete', async (req, res) => {
 })
 
 router.get("/post/like", async (req, res)=>{
-    username = req.query.user
+    var username = req.query.user
     var postID = req.query.postid
-    console.log(username);
     var someLike = await db.useWisely(`select * from POSTLIKE where PostID='${postID}' and UserID='${username}' `)
     someLike = someLike[0]
-    console.log(someLike);
         if (someLike) {
             db.useWisely(`delete from POSTLIKE where PostID='${postID}' and UserID="${username}"`)
         }
         else {
-            console.log('here i am');
             db.insertRow("POSTLIKE", [null, username, postID])
         }
     })
