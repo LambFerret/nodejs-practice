@@ -21,6 +21,7 @@ router.post("/",
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
+        dataset = dataset.toLowerCase()
         var count = await db.getCount("UPLOADIMG", dataset, id)
         var date = new Date()
         var now = date.getTime()
@@ -45,5 +46,5 @@ router.post("/",
 router.get('/', function (req, res) {
     res.render('transform')
 });
-
+// http://localhost:9889/convert?dataset=Spring2Autumn&imgname=cropped357621109953827379
 module.exports = router;
