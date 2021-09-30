@@ -28,7 +28,7 @@ router.post("/",
         count = count[0].ctd
         var filename = `${id}_${dataset}_${count}.jpg`
         var realpaths = req.file.originalname.split('.')[0]
-        redUrl = `http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`
+        redUrl = `http://localhost:9889/convert?dataset='${dataset}'&imgname='${realpaths}'`
         setTimeout(()=>{
             db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
             axios.get(redUrl)
