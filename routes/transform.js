@@ -32,9 +32,9 @@ router.post("/",
         setTimeout(()=>{
             db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
             axios.get(redUrl)
-            .then(config(req, res, "transform", {
+            config(req, res, "transform", {
                 imgpath:"/webpy/converts/"+realpaths
-            }))
+            })
         }, 1500)
 
 
