@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const fs = require("fs")
+const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase");
 const axios = require('axios').default
 const fetch = require("node-fetch")
@@ -22,13 +22,19 @@ router.post("/",
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
         var count = await db.getCount("UPLOADIMG", dataset, id)
+        var date = new Date()
+        var now = date.getTime()
+
         count = count[0].ctd
         var filename = `${id}_${dataset}_${count}.jpg`
-        var realpaths = req.file.originalname
+        var realpaths = req.file.originalname.split('.')[0]
         redUrl = `http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`
         setTimeout(()=>{
             db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
             axios.get(redUrl)
+            .then(config(req, res, "transform", {
+                imgpath:"/webpy/converts/"+realpaths
+            }))
         }, 1500)
 
 
@@ -37,7 +43,7 @@ router.post("/",
 
 
 router.get('/', function (req, res) {
-    res.send({ hi: "HI" })
+    res.render('transform')
 });
 
 module.exports = router;

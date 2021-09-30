@@ -14,7 +14,7 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  select * from POSTLIKE
+  select * from UPLOADIMG
 
 
   ;`

@@ -26,6 +26,7 @@ def prediction(dataset, imgname):
 
 @app.get("/convert")
 async def convert(dataset: str, imgname: str):
+    print(imgname)
     prediction(dataset, imgname+'.jpg')
     str1 = f'{dataset}_{imgname}'
     return {"img_id": str1}
