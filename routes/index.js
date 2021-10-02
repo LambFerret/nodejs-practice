@@ -60,7 +60,7 @@ router.get("/admin", async (req, res) => {
   // });
   var dataset = 'spring2summer'
   var realpaths = 'cropped1072195021063691977'
-  axios.get(`http://localhost:9889/convert?dataset='${dataset}'&imgname='${realpaths}'`)
+  axios.get(`http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`)
   // rows = await db.useWisely(queryss)
   var file = `1234321.json`
   // fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => { if (err) throw err; })
