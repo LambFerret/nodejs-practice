@@ -1,15 +1,24 @@
+
+
 <form action="/community/create" method="post">
+<div style="margin: 10px;">
    <select name="Pictureid" id="Pictureid">
         {{#each image}}
         <option value="{{this.Up_Img_Nm}}">{{this.Up_Img_Nm}}</option>
         {{/each}}
     </select>
+</div>
+    
 
-    <div id="in_content">
-        <textarea name="content" id="content" placeholder="내용" required></textarea>
+
+    <div class="form-floating" style="width: 800px;margin:10px" >
+        <textarea class="form-control" placeholder="Leave a comment here" name="content" id="content" style="width: 800px; height: 100px" required></textarea>
+        <label for="floatingTextarea2">Comments</label>
     </div>
 
-    <div class="bt_se">
-        <button type="submit">글 작성</button>
+    <div style="text-align: center; padding: 10px; ">
+        <button type="submit" class="btn btn-outline btn-sm" style="background-color: #9C9584;" value="Login">
+            <a style="color: white;">Create</a>
+        </button>
     </div>
 </form>

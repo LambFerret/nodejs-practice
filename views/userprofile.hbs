@@ -1,13 +1,14 @@
+<h3><p class="text-center fw-bold" style="margin : 30px; color:#4E5255">Hi {{id}}</p></h3>
 
-<br>
-    <img src="/tutorial/1.png" alt="tutorial_1" width="380" class="img-responsive center-block"><br>
-    <img src="/tutorial/2.png" alt="tutorial_2" width="380" class="img-responsive center-block">
-<br>
-<br>
-<br>
-
-<input type="button" value="확인" onClick="showAndroidToast('{{id}}')">
-
+<div class="text-center">
+    <img src="/tutorial/1.png" alt="tutorial_1" width="380" style="padding: 10px;"><br>
+    <img src="/tutorial/2.png" alt="tutorial_2" width="380" style="padding: 10px;">
+</div>
+<div class="text-center" > 
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584; " onClick="showAndroidToast('{{id}}')">
+        <a style="color: white;">확인</a>
+    </button>
+</div>
 <script type="text/javascript">
     function showAndroidToast(toast) {
         Android.AppConnection(toast);
