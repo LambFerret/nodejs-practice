@@ -18,6 +18,7 @@ def prediction(dataset, imgname):
     output = model.predict(img)
     output = 0.5 * output + 0.5
     plt.imshow(output[0])
+    plt.axis("off")
     endpoint = 'converts/'+imgname
     plt.savefig(endpoint)
     plt.close()
