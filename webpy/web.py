@@ -1,4 +1,3 @@
-import os
 from fastapi import FastAPI
 import keras
 import numpy as np

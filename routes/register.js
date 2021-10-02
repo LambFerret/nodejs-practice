@@ -4,11 +4,11 @@ const crypt = require("bcrypt")
 const db = require("../data/mariaDBdatabase");
 const config = require("../lib/partial").partialConfig
 
-/*
 //mongoDB Import
-const mdb = require("../data/mongodatabase");
-const User = require("../data/users")
-*/
+// const mdb = require("../data/mongodatabase");
+// const User = require("../data/users")
+
+
 router.get("*", (req, res, next)=>{
   if (req.user) {res.redirect("/")}
   else next()

@@ -6,7 +6,6 @@ const handlebars = require('express-handlebars')
 const flash = require("connect-flash")
 const logger = require('morgan');
 const port = process.env.PORT || 8001
-//const hostname = '10.178.0.2'
 const sessionConfig = require("./lib/session")
 app.use(sessionConfig)
 const passport = require("./lib/pass")(app);
@@ -46,7 +45,6 @@ app.use(express.static(__dirname+'/node_modules/bootstrap/dist'))
 app.use('/graphql', graphQL)
 app.use('/', indexRouter);
 app.use('/settings', settRouter);
-
 app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
 app.use('/register', regiRouter);
