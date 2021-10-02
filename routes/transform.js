@@ -33,7 +33,7 @@ router.post("/",
         setTimeout(()=>{
             db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
             db.insertRow("CONV_IMG", [now+filename,filename])
-            axios.get(redUrl)
+            await axios.get(redUrl)
             .then((v)=>{
                 console.log(v);
             })
