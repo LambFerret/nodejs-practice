@@ -21,6 +21,7 @@ const regiRouter = require('./routes/register')
 const transRouter = require('./routes/transform')
 const commuRouter = require('./routes/community')
 const RestRouter = require('./routes/restAPI')
+const settRouter =require("./routes/settings")
 
 
 //express SETTINGS
@@ -38,10 +39,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use(express.static(__dirname+'/node_modules/bootstrap/dist'))
+
 
 //router modules
 app.use('/graphql', graphQL)
 app.use('/', indexRouter);
+app.use('/settings', settRouter);
+
 app.use('/profile', profileRouter);
 app.use('/login', loginRouter);
 app.use('/register', regiRouter);
