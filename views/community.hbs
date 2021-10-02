@@ -1,38 +1,51 @@
-<p> huh, this is cozy </p>
-<div>
-    <input type="checkbox" name="season" id="all" onclick="check(this)">전부
-    <input type="checkbox" name="season" id="spring" onclick="check(this)">봄
-    <input type="checkbox" name="season" id="summer" onclick="check(this)">여름
-    <input type="checkbox" name="season" id="autumn" onclick="check(this)">가을
-    <input type="checkbox" name="season" id="winter" onclick="check(this)">겨울
-</div>
-<div>
-    <button onclick="location.href='/community/create'">생성하기</button>
+
+<div class="text-center">
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="padding: 10px; " >
+  <input type="radio" class="btn-check" name="season" id="all" onclick="check(this)" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio1" style="border-color: #606F76; color:#606F76;">All</label>
+
+  <input type="radio" class="btn-check" name="season" id="spring" onclick="check(this)" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio2" style="border-color: #606F76; color:#606F76;">Spring</label>
+
+  <input type="radio" class="btn-check" name="season" id="summer" onclick="check(this)" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio3" style="border-color: #606F76; color:#606F76;">Summer</label>
+
+  <input type="radio" class="btn-check" name="season" id="autumn" onclick="check(this)" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio3" style="border-color: #606F76; color:#606F76;">Autumn</label>
+
+  <input type="radio" class="btn-check" name="season" id="winter" onclick="check(this)" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio3" style="border-color: #606F76; color:#606F76;">Winter</label>
 </div>
 
 
-<table border="1">
-    <tr>
-        <td>Image</td>
-        <td>게시자 ID</td>
-        <td>내용</td>
-        <td>조회수</td>
-        <td>좋아요ㅎ</td>
-        <td>댓글수</td>
-        <td>등록일</td>
-    </tr>
-        {{#each data}}
-    <tr id="{{this.Post_Type}}inBoard" onclick="location.href='/community/post/{{this.PostID}}'">
-        <td>{{this.PostID}}</td>
-        <td onclick="event.cancelBubble=true; location.href='/profile/{{this.UserID}}';">{{this.UserID}}</td>
-        <td>{{this.Post_Text}}</td>
-        <td>{{this.View_Count}}</td>
-        <td>{{this.Like_Count}}</td>
-        <td>{{this.Comment_Count}}</td>
-        <td>{{this.Post_Time}}</td>
-    </tr>
+<div style="padding:15px;">
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="location.href='/community/create'; "><a style="color: white">생성하기</a></button>
+</div>
+</div>
+
+<div class="position-absolute top-50 start-50 translate-middle">
+<div class="row row-cols-1 row-cols-md-2" style="width: 40rem"> 
+    {{#each data}}
+    <div class="col" id="{{this.Post_Type}}inBoard" onclick="location.href='/community/post/{{this.PostID}}'" style="max-width: 20rem;">
+        <div class="card border border-secondary rounded" style="height: 25rem;">
+        <img src="" class="card-img-top" alt={{this.PostID}}>
+        <div class="card-body">
+            <h5 class="card-title" onclick="event.cancelBubble=true; location.href='/profile/{{this.UserID}}';">{{this.UserID}}</h5>
+            <p class="card-text">{{this.Post_Text}}</p>
+            <p class="card-text">{{this.View_Count}}</p>
+            <p class="card-text">{{this.Like_Count}} likes</p>
+            <p class="card-text">{{this.Comment_Count}} comments</p>
+            <p class="card-text"><small class="text-muted">{{this.Post_Time}}</small></p>
+        </div>
+        </div>
+    </div>
     {{/each}}
-</table>
+  </div>
+  </div>
+
+
+  
+
 
 
 
@@ -49,5 +62,5 @@
         here.checked = true;
     }
 
-    check(all)
+
 </script>

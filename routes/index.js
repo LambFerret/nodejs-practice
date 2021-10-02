@@ -2,7 +2,6 @@ const router = require('express').Router();
 const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
-const axios = require("axios").default
 
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
@@ -15,18 +14,18 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  
-  select * from CONV_IMG
-  
-  
+  select * from UPLOADIMG
+
+
   ;`
-  // insert into POSTING values ("1633145371658asdfasdf_spring2autumn_0.jpg",'this33222 text',0,'winter','qwerqwer',0, null)
+  // select * from UPLOADIMG
   // insert into UPLOADIMG values (0, "asdfasdf", "asdfasdf_spring2summer_0.jpg","spring2summer")
   // ALTER TABLE UPLOADIMG MODIFY Up_Img_Method varchar(20)
   // alter table CONV_IMG add constraint CONV_IMG_ibfk_1 foreign key(Up_Img_ID) references UPLOADIMG (Up_Img_Nm)
   // alter table UPLOADIMG add primary key(Up_Img_Nm);
   // SELECT * FROM information_schema.table_constraints;
   // alter table CONV_IMG drop foreign key CONV_IMG_ibfk_1
+  // insert into POSTING values ("conv_test01",'this text',0,'winter','asdfasdf',null, null)
   // select * from POSTING
   //조인조인
   // select a.*, b.Post_Count, c.Comment_Count
@@ -54,10 +53,17 @@ router.get("/admin", async (req, res) => {
   // (select PostID as fkid FROM COMMENT)
   //  as B on A.UserID = B.fkid
 
+  // rows.forEach(element => {
+  //   console.log(element);
+  //   console.log("\n");
+  // });
+
   rows = await db.useWisely(queryss)
   var file = `1234321.json`
   fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => { if (err) throw err; })
-  res.render("admin")
+  res.render("admin", {
+    // data: rows,
+  })
 })
 
 module.exports = router;
