@@ -6,3 +6,4 @@ legacy/
 
 /1234321.json
 package.json
+webpy/__pycache__/

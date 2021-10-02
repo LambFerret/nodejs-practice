@@ -3,7 +3,6 @@ from fastapi import FastAPI
 import keras
 import numpy as np
 from PIL import Image
-import uvicorn
 import matplotlib.pyplot as plt
 
 app = FastAPI()
@@ -33,10 +32,6 @@ async def convert(dataset: str, imgname: str):
     return {"img_id": str1}
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=9889)
-
-# pip install -r /webpy/requirements.txt
-
+# pip install -r ./webpy/requirements.txt
 # start with..
-# python webpy/web.py
+# uvicorn web:app --reload --port=9889

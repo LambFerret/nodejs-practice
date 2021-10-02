@@ -10,6 +10,10 @@ router.get("*", (req, res, next) => {
   else res.redirect("/")
 })
 
+router.get('/', (req, res)=>{
+  config(req, res, "userprofile")
+})
+
 router.get("/:id", async (req, res) => {
   var targetid = req.params.id
   var isUser = await db.getRow('USER', 'UserID', targetid)

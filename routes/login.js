@@ -16,13 +16,11 @@ module.exports = function (passport) {
   router.get("/temp",(req, res)=>{
     res.render("loadingScreen",{layout:"empty"})  
     res.redirect("/login")
-
-  }
-  )
+  })
 
   router.post('/process',
     passport.authenticate('local', {
-      successRedirect: '/',
+      successRedirect: '/profile',
       failureRedirect: '/login/temp',
       failureFlash: true,
     })

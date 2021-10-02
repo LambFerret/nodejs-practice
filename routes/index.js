@@ -2,6 +2,7 @@ const router = require('express').Router();
 const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
+const axios = require("axios").default
 
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
@@ -57,10 +58,12 @@ router.get("/admin", async (req, res) => {
   //   console.log(element);
   //   console.log("\n");
   // });
-
-  rows = await db.useWisely(queryss)
+  var dataset = 'spring2summer'
+  var realpaths = 'cropped1072195021063691977'
+  axios.get(`http://localhost:9889/convert?dataset='${dataset}'&imgname='${realpaths}'`)
+  // rows = await db.useWisely(queryss)
   var file = `1234321.json`
-  fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => { if (err) throw err; })
+  // fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => { if (err) throw err; })
   res.render("admin", {
     // data: rows,
   })
