@@ -4,6 +4,7 @@ import keras
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
+import datetime
 
 app = FastAPI()
 
@@ -25,11 +26,12 @@ def prediction(dataset, imgname):
 
 @app.get("/convert")
 async def convert(dataset: str, imgname: str):
+    now = datetime.datetime.now()
     dataset = dataset.lower()
     prediction(dataset, imgname+'.jpg')
     print(dataset, imgname+'.jpg')
     str1 = f'{dataset}_{imgname}'
-    return {"img_id": str1}
+    return {"img_id": str1, "time": now}
 
 
 # pip install -r ./webpy/requirements.txt

@@ -2,8 +2,6 @@ const router = require('express').Router();
 const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
 const fs = require("fs")
-const axios = require("axios").default
-
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
 
