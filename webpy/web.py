@@ -19,7 +19,7 @@ def prediction(dataset, imgname, imgID):
     output = 0.5 * output + 0.5
     t = datetime.datetime.now()
     a = (t-datetime.datetime(2021,1,1)).total_seconds()
-    a = int(a)
+    a = str(int(a))
     plt.imshow(output[0])
     plt.axis("off")
     endpoint = 'converts/'+a+imgID
