@@ -42,9 +42,9 @@ router.post("/",
             }
         })
             .then((v) => {
-                db.insertRow("CONV_IMG", [v.data.time + filename, filename])
+                db.insertRow("CONV_IMG", [v.data.img_id, filename])
                 config(req, res, "transform", {
-                    imgpath: "/webpy/converts/" + v.data.time + filename
+                    imgpath: "/webpy/converts/" + v.data.img_id
                 })
             })
     })
