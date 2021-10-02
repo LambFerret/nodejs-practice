@@ -5,7 +5,7 @@ const fs = require("fs")
 const axios = require("axios").default
 
 
-router.get("/", (req, res) => config(req, res, "index", {}, true))
+router.get("/", (req, res) => config(req, res, "settings"))
 
 router.get("/logout", (req, res) => {
   req.session.destroy()

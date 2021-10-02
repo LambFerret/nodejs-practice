@@ -6,14 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
+    <!-- 부트스트랩 -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!--  부트스트랩 js 사용 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
 </head>
+
 
 <body>
 
     {{>header}}
     {{{body}}}
     {{#if isEmpty}}
-    <p><a href="/">BACK TO HOME</a></p>
+    <p class="position-absolute bottom-0 start-50 translate-middle-x" ><a href="/" style="color: #606F76 ;">BACK TO HOME</a></p>
     {{else}}
     {{>footer}}
     {{/if}}

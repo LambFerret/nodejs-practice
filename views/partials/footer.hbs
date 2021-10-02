@@ -1,17 +1,16 @@
 {{#if isLoggedIn}}
-<p>
-<ul class="lists">
-  <li><a href="/logout">Logout</a></li>
-  <li><a href="/transform">transform</a></li>
-  <li><a href="/profile/{{id}}">profile</a></li>
-  <li><a href="/community/page/1">community</a></li>
-</ul>
-</p>
+
 {{else}}
 <p>
 <ul>
-  <li><a href="/login">Login</a></li>
-  <li><a href="/register">Register</a></li>
+  <div class="d-grid gap-2 col-6 mx-auto position-absolute top-50 start-50 translate-middle" >
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584; ">
+      <a href="/login" style="color: white;">Login</a>
+    </button>
+      <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;">
+        <a href="/register" style="color: white;">Register</a>
+      </button>
+  </div>
 </ul>
 </p>
 {{/if}}

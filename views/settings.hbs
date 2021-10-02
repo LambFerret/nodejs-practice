@@ -1,0 +1,23 @@
+<p>
+<ul class="lists">
+  <li><a href="/logout">Logout</a></li>
+  <li><a href="/transform">transform</a></li>
+  <li><a href="/profile/{{id}}">profile</a></li>
+  <li><a href="/community/page/1">community</a></li>
+</ul>
+</p>
+
+<div style="text-align: left; padding: 10px; color: #4E5255;">
+<input type="button" value="회원탈퇴" onClick="comfirmAlert('{{id}}')">
+</div>
+
+<script type="text/javascript">
+    function comfirmAlert(id) {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            options = {
+                method: 'delete'
+            }
+            fetch('/restapi/member?user=' + id, options).then(location.replace("/"))
+        }
+    }
+</script>

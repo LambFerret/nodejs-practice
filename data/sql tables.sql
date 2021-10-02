@@ -11,6 +11,7 @@ CREATE TABLE UPLOADIMG (
     UserID varchar(30) NOT NULL, 
     Up_Img_Nm varchar(50) NOT NULL,
     Up_Img_Method varchar(15) NOT NULL,
+    realpath varchar(50)
     PRIMARY KEY (Up_Img_Nm),
     FOREIGN KEY (UserID) REFERENCES USER(UserID)
 ); 

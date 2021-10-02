@@ -1,26 +1,7 @@
-<h1>
-    {{id}} Profile
-</h1>
-<p>
-    {{name}} - sama <br>
-    After all this time.. you reached here..
-</p>
-<input type="button" value="회원탈퇴" onClick="comfirmAlert('{{id}}')">
-<br>
 
-<img src="/tutorial/1.png" alt="tutorial_1">
-<img src="/tutorial/2.png" alt="tutorial_2">
 <br>
-<br>
-<form action="/profile/{{id}}" method="post">
-    <select name="before" id="before">
-        {{#each beforeImgs}}
-        <option value="{{this.Up_Img_Nm}}">{{this.Up_Img_Nm}}</option>
-        {{/each}}
-    </select>
-    <input type="submit" value="변환하기" id="transform">
-
-</form>
+    <img src="/tutorial/1.png" alt="tutorial_1" width="380" class="img-responsive center-block"><br>
+    <img src="/tutorial/2.png" alt="tutorial_2" width="380" class="img-responsive center-block">
 <br>
 <br>
 <br>
@@ -30,13 +11,5 @@
 <script type="text/javascript">
     function showAndroidToast(toast) {
         Android.AppConnection(toast);
-    }
-    function comfirmAlert(id) {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            options = {
-                method: 'delete'
-            }
-            fetch('/restapi/member?user=' + id, options).then(location.replace("/"))
-        }
     }
 </script>
