@@ -26,13 +26,12 @@ def prediction(dataset, imgname):
 
 
 @app.get("/convert")
-async def convert(dataset: str, imgname: str):
+async def convert(dataset: str, imgname: str, imgID: str):
     now = datetime.datetime.now()
     dataset = dataset.lower()
     prediction(dataset, imgname+'.jpg')
     print(dataset, imgname+'.jpg')
-    str1 = f'{dataset}_{imgname}'
-    return {"img_id": str1, "time": now}
+    return {"img_id": imgID, "time": now}
 
 
 # pip install -r ./webpy/requirements.txt
