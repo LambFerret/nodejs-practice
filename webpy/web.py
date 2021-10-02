@@ -27,11 +27,13 @@ def prediction(dataset, imgname):
 
 @app.get("/convert")
 async def convert(dataset: str, imgname: str, imgID: str):
-    now = datetime.datetime.now()
+    t = datetime.datetime.now()
+    a = (t-datetime.datetime(2021,1,1)).total_seconds()
+    a = int(a)
     dataset = dataset.lower()
     prediction(dataset, imgname+'.jpg')
     print(dataset, imgname+'.jpg')
-    return {"img_id": imgID, "time": now}
+    return {"img_id": imgID, "time": a}
 
 
 # pip install -r ./webpy/requirements.txt

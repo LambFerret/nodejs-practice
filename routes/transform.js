@@ -30,9 +30,9 @@ router.post("/",
         var filename = `${id}_${dataset}_${count}.jpg`
         var realpaths = req.file.originalname.split('.')[0]
         redUrl = `http://localhost:9889/convert`
-        res.render("loadingImg", {
-            layout: "empty"
-        })
+        // res.render("loadingImg", {
+        //     layout: "empty"
+        // })
         db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
         await axios.get(redUrl, {
             params: {
