@@ -29,9 +29,10 @@ router.post("/",
         count = count[0].ctd
         var filename = `${id}_${dataset}_${count}.jpg`
         var realpaths = req.file.originalname.split('.')[0]
-        redUrl = `http://localhost:9889/convert?dataset='${dataset}'&imgname='${realpaths}'`
+        redUrl = `http://localhost:9889/convert?dataset=${dataset}&imgname=${realpaths}`
         setTimeout(()=>{
             db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
+            db.insertRow("CONV_IMG", [now+filename,filename])
             axios.get(redUrl)
             config(req, res, "transform", {
                 imgpath:"/webpy/converts/"+realpaths
