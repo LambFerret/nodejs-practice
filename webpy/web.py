@@ -10,14 +10,14 @@ app = FastAPI()
 
 def prediction(dataset, imgname):
 
-    model = keras.models.load_model("webpy/datasets/" + dataset)
-    img = Image.open("webpy/uploads/"+imgname).resize((256, 256))
+    model = keras.models.load_model("datasets/" + dataset)
+    img = Image.open("uploads/"+imgname).resize((256, 256))
     img = np.uint8(img) / 127.5 - 1
     img = img[np.newaxis, :, :, :]
     output = model.predict(img)
     output = 0.5 * output + 0.5
     plt.imshow(output[0])
-    endpoint = 'webpy/converts/'+imgname
+    endpoint = 'converts/'+imgname
     plt.savefig(endpoint)
     plt.close()
     return endpoint
