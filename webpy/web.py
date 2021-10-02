@@ -4,11 +4,12 @@ import keras
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
+import datetime
 
 app = FastAPI()
 
 
-def prediction(dataset, imgname):
+def prediction(dataset, imgname, imgID):
 
     model = keras.models.load_model("datasets/" + dataset)
     img = Image.open("uploads/"+imgname).resize((256, 256))
@@ -16,20 +17,23 @@ def prediction(dataset, imgname):
     img = img[np.newaxis, :, :, :]
     output = model.predict(img)
     output = 0.5 * output + 0.5
+    t = datetime.datetime.now()
+    a = (t-datetime.datetime(2021,1,1)).total_seconds()
+    a = int(a)
     plt.imshow(output[0])
-    endpoint = 'converts/'+imgname
+    plt.axis("off")
+    endpoint = 'converts/'+a+imgID
     plt.savefig(endpoint)
     plt.close()
     return endpoint
 
 
 @app.get("/convert")
-async def convert(dataset: str, imgname: str):
+async def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
-    prediction(dataset, imgname+'.jpg')
+    filename = prediction(dataset, imgname+'.jpg', imgID)
     print(dataset, imgname+'.jpg')
-    str1 = f'{dataset}_{imgname}'
-    return {"img_id": str1}
+    return {"img_id": filename}
 
 
 # pip install -r ./webpy/requirements.txt
