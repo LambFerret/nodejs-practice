@@ -35,7 +35,8 @@ router.post("/",
             }
         })
             .then((v) => {
-                db.insertRow("CONV_IMG", [v.data.img_id, filename])
+                var convID = v.data.img_id
+                db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
                 config(req, res, "transform", {
                     imgpath: "/webpy/converts/" + v.data.img_id
                 })
