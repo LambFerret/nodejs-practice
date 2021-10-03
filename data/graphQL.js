@@ -118,7 +118,7 @@ var resolver = {
 graphql = graphqlHTTP({
     schema: schema,
     rootValue: resolver,
-    graphiql:true
+    graphiql:false
 })
 
 module.exports = graphql

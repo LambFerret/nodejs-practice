@@ -1,5 +1,4 @@
-const pool = require("./poolConfig")
-
+const {pool} = require("./poolConfig")
 exports.getConnection = function (callback) {
     pool.getConnection()
         .then(conn => {
@@ -133,8 +132,3 @@ exports.deleteRow = (table, key, value)=>{
     })
 }
 
-
-// 34.64.143.233
-// jiha
-// qkrwlgk0102!
-//10.5.12
