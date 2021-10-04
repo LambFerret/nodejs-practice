@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const config = require("../lib/partial").partialConfig
 const db = require("../data/mariaDBdatabase")
-const fs = require("fs")
 
 router.get("/", (req, res) => config(req, res, "index", {}, true))
 
@@ -14,7 +13,7 @@ router.get("/admin", async (req, res) => {
   var queryss = `
 
   
-  select * from CONV_IMG
+  select * from USER
   
   
   ;`
@@ -53,9 +52,7 @@ router.get("/admin", async (req, res) => {
   //  as B on A.UserID = B.fkid
 
   rows = await db.useWisely(queryss)
-  var file = `1234321.json`
-  fs.writeFile(file, JSON.stringify(rows), 'utf-8', (err, fd) => { if (err) throw err; })
-  res.render("admin")
+  res.send(JSON.stringify(rows, null, /\n/))
 })
 
 module.exports = router;
