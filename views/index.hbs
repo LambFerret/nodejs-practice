@@ -1,5 +1,18 @@
 <h1><p class="text-center fw-bold" style="color: #4E5255; margin : 30px">PicSeason</p></h1>
 
+{{#if isLoggedIn}}
+<div class="text-center" >
+    <a href="/logout">Logout</a> 
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584; " onClick="showAndroidToast('{{id}}')">
+        <a style="color: white;">확인</a>
+    </button>
+</div>
+<script type="text/javascript">
+    function showAndroidToast(toast) {
+        Android.AppConnection(toast);
+    }
+</script>
+{{else}}
 <a href="/profile">나중에 지울것</a>
 <p>
 <ul>
@@ -13,3 +26,4 @@
   </div>
 </ul>
 </p>
+{{/if}}
