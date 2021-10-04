@@ -1,41 +1,54 @@
+<h1><p class="text-center fw-bold" style="color: #4E5255; margin : 30px">PicSeason</p></h1>
+
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<div class="d-flex justify-content-center">
 <form action="/register" method="post" id="register">
     <div>
-        <div>
-            이메일 :
-            <input type="email" name="email" id="email" required>
+        <span class="fs-4 fw-bold" style="color: #4E5255; margin: 3px;">Email</span>
+        <div class="input-group mb-3" style="width: 400px;">
+            <input type="email" class="form-control" placeholder="Enter Email Address" name="email" id="email" required>
         </div>
-        <div>
-            아이디 5에서 15자 사이 영문 :
-            <input type="text" name="id" id="id" pattern="[A-Za-z].{5,15}" required>
-            <p id="isFailed"></p>
-            <p id="test">에러입니다 새로고침을 눌러주세요</p>
 
+        <span class="fs-4 fw-bold" style="color: #4E5255; margin: 3px;">ID</span>
+        <p id="isFailed"></p>
+        <p id="test">Error. Please press refresh.</p>
+        <div class="input-group mb-3" style="width: 400px;">
+            <input type="text" class="form-control" placeholder="Between 5 and 10 in English" name="id" id="id" pattern="[A-Za-z].{5,15}" required>
         </div>
-        <div>
-            비번 5에서 10자 사이:
-            <input type="password" name="pwd" id="pwd" pattern=".{5,10}" required>
+
+        <span class="fs-4 fw-bold" style="color: #4E5255; margin: 3px;">Password</span>
+        <div class="input-group mb-3" style="width: 400px;">
+            <input type="password" class="form-control" placeholder="Enter password  between 5 and 10 characters" name="pwd" id="pwd" pattern=".{5,10}" required>
         </div>
-        <div>
-            비번 다시적어요:
-            <input type="password" name="check" id="check" pattern=".{5,10}" required>
-            <p id="same"></p>
+        
+        <span class="fs-4 fw-bold" style="color: #4E5255; margin: 3px;">Confirm Password</span>
+        <p id="same"></p>
+        <div class="input-group mb-3" style="width: 400px;">
+            <input type="password" class="form-control" placeholder="Enter Confirm Password" name="check" id="check" pattern=".{5,10}" required>
         </div>
-        <div>
-            이름 1에서 8자 사이:
-            <input type="text" name="name" id="name" pattern=".{1,8}" required>
+        
+        <span class="fs-4 fw-bold" style="color: #4E5255; margin: 3px;">Name</span>
+        <div class="input-group mb-3" style="width: 400px;">
+            <input type="text" class="form-control" placeholder="Enter your name between 1 and 8 characters" name="name" id="name" pattern=".{1,8}" required>
         </div>
-        <input type="submit" value="회원가입" id="target" disabled="false">
+
+        <div class="text-center">
+        <button type="submit" id="target" disabled="false" class="btn btn-outline btn-sm" style="background-color: #9C9584;">
+                <a style="color: white;">Register</a>
+        </button>
+        </div>
     </div>
 </form>
+</div>
+
 <style>
     #isFailed {
         display: none;
-        color: red;
+        color: #DC143C;
     }
 
     #same {
-        color: red;
+        color: #DC143C;
     }
 
     #test {
@@ -50,11 +63,11 @@
             var pwd = $("#pwd").val()
             var cd = $("#check").val()
             if (!(pwd == cd)) {
-                $("#same").text("달라요")
+                $("#same").text("Please check again.")
                 ischecked = false
             }
             else { 
-                $("#same").text("OK!")
+                $("#same").text("The same password")
                 ischecked = true
                  }
 
@@ -72,11 +85,11 @@
                 success: (txt) => {
                     var target = document.getElementById("target_btn");
                     if (txt.length) {
-                        $("#isFailed").css("display", "inline").text("존재하는 아이디입니다.")
+                        $("#isFailed").css("display", "inline").text("This ID exists.")
                         isPassed = false
                     }
                     else {
-                        $("#isFailed").css("display", "inline").text("사용할 수 있는 아이디입니다.")
+                        $("#isFailed").css("display", "inline").text("Available")
                         isPassed = true
                     }
                 },
@@ -91,6 +104,6 @@
     })
     btn = document.getElementById("target")
     btn.onclick = () => {
-        alert("환영합니다~")
+        alert("Welcome!")
     }
 </script>

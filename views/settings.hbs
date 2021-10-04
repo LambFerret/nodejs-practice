@@ -1,14 +1,17 @@
-<p>
-<ul class="lists">
-  <li><a href="/logout">Logout</a></li>
-  <li><a href="/transform">transform</a></li>
-  <li><a href="/profile/{{id}}">profile</a></li>
-  <li><a href="/community/page/1">community</a></li>
-</ul>
-</p>
 
-<div style="text-align: left; padding: 10px; color: #4E5255;">
-<input type="button" value="회원탈퇴" onClick="comfirmAlert('{{id}}')">
+
+<div class="d-grid gap-2 col-6 mx-auto text-center" style="margin:50px;">
+    <button type="button" class="fw-bold btn btn-outline btn-lg" style="background-color: #9C9584;" ><a href= "/logout" style="color: white">Logout</a></button>
+    <button type="button" class="fw-bold btn btn-outline btn-lg" style="background-color: #9C9584;" ><a href="/transform" style="color: white">Transform</a></button>
+    <button type="button" class="fw-bold btn btn-outline btn-lg" style="background-color: #9C9584;" ><a href="/profile/{{id}}" style="color: white">My Profile</a></button>
+    <button type="button" class="fw-bold btn btn-outline btn-lg" style="background-color: #9C9584;" ><a href="/community/page/1" style="color: white">Community</a></button>
+</div>
+
+
+<div class="text-center" style="margin: 50px;"> 
+    <button type="button" class="fw-bold btn btn-outline btn-lg" style="background-color: #4E5255; " onClick="comfirmAlert('{{id}}')">
+        <a style="color: white;">Unregister</a>
+    </button>
 </div>
 
 <script type="text/javascript">
