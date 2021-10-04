@@ -6,19 +6,15 @@
     <option value="{{this.Up_Img_Nm}}">{{this.Up_Img_Nm}}</option>
     {{/each}}
 </select>
-<button id="before">before</button>
-<p>after</p>
-<button id="after">transforming</button>
 
-<img src="webpy\converts\cropped8742910357553085691.jpg" alt="after img">
+
+<p>after</p>
+<select name="after" id="after">
+    {{#each afterImgs}}
+    <option id="{{this.Conv_Img_ID}}">{{this.Conv_Img_ID}}</option>
+    {{/each}}
+</select>
+<img src="#" alt="afterPicHere" id="afterPicHere">
 <script>
-    $(() => {
-        $("after").click(() => {
-            $.ajax({
-                beforeSend: () => {
-                    $('#after').blur()
-                }
-            })
-        })
-    })
+    
 </script>

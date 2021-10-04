@@ -34,17 +34,24 @@ router.post("/",
                 imgID: filename,
             }
         })
-            .then((v) => {
+            .then(async (v) => {
                 var convID = v.data.img_id
                 db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
+                imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID  from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
                 config(req, res, "transform", {
-                    imgpath: "/webpy/converts/" + v.data.img_id
+                    imgpath: "/webpy/converts/" + v.data.img_id,
+                    afterImgs: imageRows[0],
                 })
             })
     })
 
 
-router.get('/', function (req, res) {
-    res.render('transform')
+router.get('/', async (req, res) =>{
+    imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID  from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
+    console.log(imageRows[1]);
+    config(req, res, "transform", {
+        imgpath: "/webpy/converts/",
+        afterImgs: imageRows,
+    })
 });
 module.exports = router;
