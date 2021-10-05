@@ -1,5 +1,36 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<h1> transform</h1>
+<div class="d-flex justify-content-center" style="margin: 10px; margin-top: 50px;">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title fw-bold" style="color: #4E5255;">Before</h5>
+            <p class="card-text">여기에 변환 전 계절이 뜨면 좋겠음 안되면 말고!</p>
+        </div>
+        <select name="before" id="before">
+            {{#each beforeImgs}}
+            <option value="{{this.Up_Img_Nm}}">{{this.Up_Img_Nm}}</option>
+            {{/each}}
+        </select>
+        <img src="..." class="card-img-bottom" alt="...">
+    </div>
+</div>
+
+<div class="d-flex justify-content-center" style="margin: 10px;">
+    <div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title fw-bold" style="color: #4E5255;">After</h5>
+        <p class="card-text">여기에 변환 계절이 뜨면 좋겠음 안되면 말고!</p>
+    </div>
+    <select name="after" id="after">
+        {{#each afterImgs}}
+        <option id="{{this.Conv_Img_ID}}">{{this.Conv_Img_ID}}</option>
+        {{/each}}
+    </select>
+    <img src="..." class="card-img-bottom" alt="afterPicHere" id="afterPicHere">
+    </div>
+</div>
+
+
+
 <p>before</p>
 <select name="before" id="before">
     {{#each beforeImgs}}
@@ -15,6 +46,7 @@
     {{/each}}
 </select>
 <img src="#" alt="afterPicHere" id="afterPicHere">
+
 <script>
     $((=>{
         $("{{this.Conv_Img_ID}}").focusin(()=>{
