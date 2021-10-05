@@ -28,7 +28,7 @@
     {{#each data}}
     <div class="col" id="{{this.Post_Type}}inBoard" onclick="location.href='/community/post/{{this.PostID}}'" style="max-width: 12rem;">
         <div class="card border border-secondary rounded" style="height: 25rem;">
-        <img src="" class="card-img-top" alt={{this.PostID}}>
+        <img src="/converts/{{this.PostID}}" class="card-img-top" alt={{this.PostID}}>
         <div class="card-body">
             <h5 class="card-title" onclick="event.cancelBubble=true; location.href='/profile/{{this.UserID}}';">{{this.UserID}}</h5>
             <p class="card-text">{{this.Post_Text}}</p>

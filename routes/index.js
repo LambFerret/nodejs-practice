@@ -12,7 +12,7 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  SELECT * FROM information_schema.table_constraints where TABLE_NAME = 'CONV_IMG';
+  SELECT * from CONV_IMG
   
   
   ;`
