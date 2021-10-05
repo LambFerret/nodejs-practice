@@ -39,7 +39,7 @@ router.get("/post/:id", async (req, res) => {
     if (someLike[0]) {isLiked=true} else {isLiked=false}
     var like = await db.getMaxCount("POSTLIKE", searchID)
     try {like = like[0].commentCount} catch {like = 0}
-    var comment = await db.useWisely(`SELECT * FROM COMMENT WHERE PostID='${searchID}' ORDER BY Comment_ID DESC`)
+    var comment = await db.useWisely(`SELECT * FROM COMMENT WHERE PostID='${searchID}' ORDER BY Comment_ID ASC`)
     var row = await db.getRow('POSTING', 'PostID', searchID)
     db.useWisely(`update POSTING set View_Count=View_Count+1 where PostID="${searchID}"`)
     var teapot = row[0]
