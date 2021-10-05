@@ -9,7 +9,7 @@ router.get("*", (req, res, next) => {
 })
 
 router.get('/', (req, res)=>{
-  config(req, res, "userprofile")
+  config(req, res, "userprofile", {id: req.user.name})
 })
 
 router.get("/:id", async (req, res) => {
@@ -23,17 +23,17 @@ router.get("/:id", async (req, res) => {
     var imagesUserID = await db.getRow('UPLOADIMG', 'UserID', req.user.id)
       config(req, res, "userprofile", {
         beforeImgs: imagesUserID, 
-        id: req.user.id, 
+        id: req.user.name, 
 
       })
     }
     else {
       config(req, res, "commonprofile", {
         id: targetid,
-        name: req.user.id,
+        name: req.user.name,
       })
     }
   }
 })
-
+// targetid : (검색해서 들어간 profile의 주인 id), (req.user.name : 로그인된 사람의 네임), (req.user.id : 로그인된 사람의 id)
 module.exports = router;
