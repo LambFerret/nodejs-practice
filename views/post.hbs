@@ -1,32 +1,31 @@
-<div>
-    image goes here! {{teapot.Post_Text}}
-</div>
-<div>
-    내용 <br> {{teapot.Post_Text}} <br>
-</div>
-<div>
-    작성일시 <br> {{teapot.Post_Time}} <br>
-</div>
-<div>
-    타입 {{teapot.Post_Type}}
-</div>
-<div>
-    작성자 {{teapot.UserID}}
-</div>
-<div>
-    {{like}} -------> 좋아요 갯수
+<div class="d-flex justify-content-center" style="margin: 30px;">
+    <div class="card mb-3" style="width: 40rem;">
+    <img src="..." class="card-img-top" alt="{{teapot.Post_Text}}">
+    <div class="card-body">
+        <div>
+            <div id="PostLike"><span class="card-text">{{like}} likes</span></div>
+            <p class="card-text">{{like}} likes</p>
+            <p class="text-end">{{teapot.Post_Type}}</p>
+        </div>
+        <h4 class="card-title">{{teapot.UserID}}</h4>
+        <p class="card-text">{{teapot.Post_Text}}</p>
+        <p class="card-text"><small class="text-muted">{{teapot.Post_Time}}</small></p>
+    </div>
+    </div>
 </div>
 
-<br>
+
+
+
 {{#if isOwner}}
 <button onclick="comfirmAlert('{{Owner}}','{{number}}')">게시글 삭제</button>
 <button onclick="location.href=''">게시글 수정</button>
 {{else}}
 
-<p>click me</p>
-<div id="PostLike">
-</div>
+
 {{/if}}
+
+
 <h3>댓글창 시작!</h3>
 {{#each comment}}
 <div>
@@ -52,8 +51,8 @@
 
     function likes() {
         var dom = document.getElementById("PostLike")
-    if (!{{ isLiked }}) { dom.innerHTML = `<img src="/icons/like.png" alt="post_like">` }
-    else dom.innerHTML = `<img src="/icons/what.png" alt="post_like">`
+    if (!{{ isLiked }}) { dom.innerHTML = `<img src="/icons/heart_before.png" alt="post_like" width="30px">` }
+    else dom.innerHTML = `<img src="/icons/heart_after.png" alt="post_like" width="30px">`
     }
     likes()
 

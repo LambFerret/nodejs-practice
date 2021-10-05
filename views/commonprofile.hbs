@@ -1,23 +1,8 @@
 <h3><p class="text-center fw-bold" style="margin : 50px; color:#4E5255">{{id}} Profile</p></h3>
 
 
-<p>
-    hi! foreigner {{name}} <br>
-    this is {{id}} `s home <br>
-<br>
-take a look
-
-    
-</p>
-
 <div class="d-grid gap-2 col-6 mx-auto text-center" style="margin:10px;">
-    <button type="button" class="fw-bold btn btn-outline btn-sm" style="background-color: #9C9584;" ><a href= "/community/page/1" style="color: white">Go Back</a></button>
+    <span class="fs-6">Hi {{name}}.<br> This is {{id}}'s home. Taka a look.</span>
+    <button type="button" class="fw-bold btn btn-outline btn-sm" style="background-color: #9C9584; margin:30px" ><a href= "/community/page/1" style="color: white">Go Back</a></button>
 </div>
 
-<input type="button" value="Say hello" onClick="showAndroidToast('Hello Android!')" />
-
-<script type="text/javascript">
-    function showAndroidToast(toast) {
-        Android.showToast(toast);
-    }
-</script>
