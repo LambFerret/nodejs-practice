@@ -15,19 +15,19 @@ const upload = multer({ storage: storage, limits: { fileSize: 10 * 1024 * 1024 }
 
 router.post("/",
     upload.single("image"),
-     (req, res) => {
+    async (req, res) => {
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
         dataset = dataset.toLowerCase()
-        var count = db.getCount("UPLOADIMG", dataset, id)
+        var count = await db.getCount("UPLOADIMG", dataset, id)
         count = count[0].ctd
         var filename = `${id}_${dataset}_${count}.jpg`
         var realpaths = req.file.originalname.split('.')[0]
         redUrl = `http://localhost:9889/convert`
         db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
-         axios.get(redUrl, {
+        await axios.get(redUrl, {
             params: {
                 dataset: dataset,
                 imgname: realpaths,
