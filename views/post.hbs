@@ -1,45 +1,56 @@
-<div class="d-flex justify-content-center" style="margin: 30px;">
-    <div class="card mb-3" style="width: 40rem;">
-    <img src="..." class="card-img-top" alt="{{teapot.Post_Text}}">
-    <div class="card-body">
-        <div>
-            <div id="PostLike"><span class="card-text">{{like}} likes</span></div>
-            <p class="card-text">{{like}} likes</p>
-            <p class="text-end">{{teapot.Post_Type}}</p>
-        </div>
-        <h4 class="card-title">{{teapot.UserID}}</h4>
-        <p class="card-text">{{teapot.Post_Text}}</p>
-        <p class="card-text"><small class="text-muted">{{teapot.Post_Time}}</small></p>
-    </div>
-    </div>
-</div>
-
-
-
 
 {{#if isOwner}}
-<button onclick="comfirmAlert('{{Owner}}','{{number}}')">게시글 삭제</button>
-<button onclick="location.href=''">게시글 수정</button>
+<div class="d-flex justify-content-end" style="padding: 30px;">
+<div style="width: 150px; ">
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="comfirmAlert('{{Owner}}','{{number}}')"><a style="color: white">Delete</a></button>
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="location.href=''"><a style="color: white">Modify</a></button>
+</div>
+</div>
 {{else}}
-
 
 {{/if}}
 
-
-<h3>댓글창 시작!</h3>
-{{#each comment}}
-<div>
-    <p> 작성자 : {{this.UserID}}</p>
-    <p name="icon">내용 : {{this.Comment_Text}}</p>
+<div class="d-flex justify-content-center" style="margin: 10px;">
+    <div class="card mb-3" style="width: 40rem;">
+        <img src="..." class="card-img-top" alt="{{teapot.Post_Text}}">
+        <div class="card-body">
+            <p class="text-end">{{teapot.Post_Type}}</p>    
+            <div id="PostLike"></div>
+            <span class="card-text">{{like}} likes</span>
+            <h4 class="card-title">{{teapot.UserID}}</h4>
+            <p class="card-text">{{teapot.Post_Text}}</p>
+            <p class="card-text"><small class="text-muted">{{teapot.Post_Time}}</small></p>
+        </div>
+    </div>
 </div>
-{{/each}}
 
-<form action="/community/post/{{number}}" method="POST">
-    <h5>코멘트창</h5>
-    <input type="text" id="comment" name="comment" placeholder="emoticons">
-    <button>갑니당</button>
-</form>
 
+
+<div class="d-flex justify-content-center" style="margin: 10px;">
+    <div class="card" style="width: 40rem;">
+    <div class="card-header"><img src="/icons/comments.png"  width="25px"> Comments</div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            {{#each comment}}
+            <div>
+                <span class="fw-bold" style="color: #4E5255;">{{this.UserID}}</span><br>
+                <span class="fw-light fs-6" name="icon">{{this.Comment_Text}}</span>
+            </div>
+            {{/each}}
+            <br>
+        <footer class="blockquote-footer">The end of the comments ...</cite></footer>
+
+        <form action="/community/post/{{number}}" method="POST">
+            <div class="input-group mb-3" style="width: 400px;">
+                <input type="text" id="comment" name="comment" class="form-control" placeholder="Comments as {{id}}">
+                <button class="btn btn-outline btn-sm" style="background-color: #9C9584;"><a style="color: white;">Post</a></button>
+            </div>
+        </form>
+
+        </blockquote>
+    </div>
+    </div>
+</div>
 
 
 
@@ -52,8 +63,7 @@
     function likes() {
         var dom = document.getElementById("PostLike")
     if (!{{ isLiked }}) { dom.innerHTML = `<img src="/icons/heart_before.png" alt="post_like" width="30px">` }
-    else dom.innerHTML = `<img src="/icons/heart_after.png" alt="post_like" width="30px">`
-    }
+    else dom.innerHTML = `<img src="/icons/heart_after.png" alt="post_like" width="30px">` }
     likes()
 
     document.getElementById("PostLike").onclick = () => {
@@ -66,9 +76,9 @@
 
 
     function comfirmAlert(user, number) {
-        if (confirm("정말 삭제하시겠습니까?")) {
+        if (confirm("Delete Bulletin?")) {
             location.href = `/restapi/post/delete?user=${user}&postid=${number}`
-            alert("게시글 삭제 되었습니다.")
+            alert("Deleted it.")
         }
     }
 </script>
