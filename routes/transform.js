@@ -47,7 +47,7 @@ router.post("/",
 
 
 router.get('/', async (req, res) =>{
-    imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID  from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
+    imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
     console.log(imageRows[1]);
     config(req, res, "transform", {
         imgpath: "/webpy/converts/",
