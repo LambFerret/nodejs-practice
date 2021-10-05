@@ -54,7 +54,7 @@
 <script>
     document.getElementsByName("icon").forEach(element => {
         str = element.outerText
-        if (str.match(/emoticons/)) { element.innerHTML = `<img src='/icons/${str.split(': ')[1]}.png'>` }
+        if (str.match(/emoticons/)) { element.innerHTML = `<img src='/icons/${str}.png'>` }
     });
 
     function likes() {
