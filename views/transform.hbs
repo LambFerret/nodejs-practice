@@ -6,12 +6,7 @@
             <h5 class="card-title fw-bold" style="color: #4E5255;">Before</h5>
             <p class="card-text">여기에 변환 전 계절이 뜨면 좋겠음 안되면 말고!</p>
         </div>
-        <select name="before" id="before">
-            {{#each afterImgs}}
-            <option value="{{this.Up_Img_ID}}">{{this.Up_Img_ID}}</option>
-            {{/each}}
-        </select>
-        <img src="uploads/cropped3653158691613770189.jpg" class="card-img-bottom" alt="beforePicHere">
+        <img src="uploads/{{afterImgs.Up_Img_ID}}" class="card-img-bottom" alt="beforePicHere">
     </div>
 </div>
 
@@ -21,12 +16,11 @@
         <h5 class="card-title fw-bold" style="color: #4E5255;">After</h5>
         <p class="card-text">여기에 변환 계절이 뜨면 좋겠음 안되면 말고!</p>
     </div>
-    <select name="after" id="after">
-        {{#each afterImgs}}
-        <option id="{{this.Conv_Img_ID}}">{{this.Conv_Img_ID}}</option>
-        {{/each}}
-    </select>
-    <img src="converts/23798294jinnhs_spring2winter_1.jpg" class="card-img-bottom" alt="afterPicHere" id="afterPicHere">
+    <a download='/converts/{{afterImgs.Conv_Img_ID}}'></button>
+    <img src="/converts/{{afterImgs.Conv_Img_ID}}" class="card-img-bottom" alt="afterPicHere" id="afterPicHere">
     </div>
 </div>
 
+<script>
+    
+</script>
