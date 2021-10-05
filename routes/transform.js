@@ -37,20 +37,26 @@ router.post("/",
             .then(async (v) => {
                 var convID = v.data.img_id
                 db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-                imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID  from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
+                imageRows = await db.useWisely(`
+                Select a.*, b.UserID
+                from CONV_IMG a left outer join UPLOADIMG b
+                on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
+                `)                
                 config(req, res, "transform", {
-                    imgpath: "/webpy/converts/" + v.data.img_id,
-                    afterImgs: imageRows[0],
+                    afterImgs: imageRows,
                 })
             })
     })
 
 
 router.get('/', async (req, res) =>{
-    imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
-    console.log(imageRows[1]);
+    imageRows = await db.useWisely(`
+    Select a.*, b.UserID
+    from CONV_IMG a left outer join UPLOADIMG b
+    on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
+    `)
+    console.log(imageRows[0]);
     config(req, res, "transform", {
-        imgpath: "/webpy/converts/",
         afterImgs: imageRows,
     })
 });

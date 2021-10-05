@@ -7,11 +7,11 @@
             <p class="card-text">여기에 변환 전 계절이 뜨면 좋겠음 안되면 말고!</p>
         </div>
         <select name="before" id="before">
-            {{#each beforeImgs}}
-            <option value="{{this.Up_Img_Nm}}">{{this.Up_Img_Nm}}</option>
+            {{#each afterImgs}}
+            <option value="{{this.Up_Img_ID}}">{{this.Up_Img_ID}}</option>
             {{/each}}
         </select>
-        <img src="..." class="card-img-bottom" alt="...">
+        <img src="uploads/cropped3653158691613770189.jpg" class="card-img-bottom" alt="beforePicHere">
     </div>
 </div>
 
@@ -26,32 +26,7 @@
         <option id="{{this.Conv_Img_ID}}">{{this.Conv_Img_ID}}</option>
         {{/each}}
     </select>
-    <img src="..." class="card-img-bottom" alt="afterPicHere" id="afterPicHere">
+    <img src="converts/23798294jinnhs_spring2winter_1.jpg" class="card-img-bottom" alt="afterPicHere" id="afterPicHere">
     </div>
 </div>
 
-
-
-<p>before</p>
-<select name="before" id="before">
-    {{#each beforeImgs}}
-    <option value="{{this.Up_Img_Nm}}">{{this.Up_Img_Nm}}</option>
-    {{/each}}
-</select>
-
-
-<p>after</p>
-<select name="after" id="after">
-    {{#each afterImgs}}
-    <option id="{{this.Conv_Img_ID}}">{{this.Conv_Img_ID}}</option>
-    {{/each}}
-</select>
-<img src="#" alt="afterPicHere" id="afterPicHere">
-
-<script>
-    $((=>{
-        $("{{this.Conv_Img_ID}}").focusin(()=>{
-            ${"#id"}
-        })
-    }))
-</script>
