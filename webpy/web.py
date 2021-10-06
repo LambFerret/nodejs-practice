@@ -7,7 +7,7 @@ import datetime
 
 app = FastAPI()
 
-async def prediction(dataset, imgname, imgID):
+def prediction(dataset, imgname, imgID):
     model = keras.models.load_model("datasets/" + dataset)
     img = Image.open("uploads/"+imgname).resize((256, 256))
     img = np.uint8(img) / 127.5 - 1
