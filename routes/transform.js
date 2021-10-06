@@ -67,6 +67,7 @@ router.get('/result', (req, res) => {
 
 
 router.get('/result', (req, res) => {
+    console.log("hihihihi");
     res.render("justRender")
 })
 
