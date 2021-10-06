@@ -58,7 +58,7 @@ router.post("/",
 
 // 쿼리문에 limit 1 이 최신꺼가 뜨던지 아니면 
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
     console.log(req.body);
     // var convID = v.data.img_id
     // db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
