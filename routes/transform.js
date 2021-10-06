@@ -57,6 +57,7 @@ router.post("/",
 // 위에 axios가 동기적으로 페이지 오픈하도록
 
 // 쿼리문에 limit 1 이 최신꺼가 뜨던지 아니면 
+/*
 router.get('/', async (req, res) => {
     imageRows = await db.useWisely(`
     Select a.*, b.UserID
@@ -69,5 +70,5 @@ router.get('/', async (req, res) => {
         afterImgs: imageRows[0],
     })
 });
-
+*/
 module.exports = router;
