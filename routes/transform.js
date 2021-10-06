@@ -16,10 +16,12 @@ const upload = multer({ storage: storage, limits: { fileSize: 10 * 1024 * 1024 }
 router.post("/",
     upload.single("image"),
     async (req, res) => {
+        console.log(req.user);
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
         var dataset = `${origin}2${convert}`
+        var UserID = req.user.id
         dataset = dataset.toLowerCase()
         var count = await db.getCount("UPLOADIMG", dataset, id)
         count = count[0].ctd
@@ -43,7 +45,7 @@ router.post("/",
                 imageRows = await db.useWisely(`
                 Select a.*, b.UserID
                 from CONV_IMG a left outer join UPLOADIMG b
-                on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
+                on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${UserID}'
                 limits 1
                 `)      
 
