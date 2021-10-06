@@ -70,9 +70,9 @@ router.get('/', (req, res) => {
     // limit 1
     // `)
 
-    res.render("loadingImg", {
-        afterImgs: "imageRows[0]",
-    })
+    res.send("index")
+
+    res.redirect('/result')
 
 });
 

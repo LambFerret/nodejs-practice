@@ -26,9 +26,9 @@ async def prediction(dataset, imgname, imgID):
 
 
 @app.get("/convert")
-async def convert(dataset: str, imgname: str, imgID: str):
+def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
-    filename = await prediction(dataset, imgname+'.jpg', imgID)
+    filename = prediction(dataset, imgname+'.jpg', imgID)
     print(dataset, imgname+'.jpg')
     return {"img_id": filename}
 
