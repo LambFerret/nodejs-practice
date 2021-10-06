@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
     // `)
 
     res.render("transform", {
-        afterImgs: imageRows[0],
+        afterImgs: "imageRows[0]",
     })
 
 });
