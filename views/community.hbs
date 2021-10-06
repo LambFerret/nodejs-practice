@@ -19,7 +19,7 @@
 
 
 <div style="padding:15px;">
-    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="location.href='/community/create'; "><a style="color: white">Create</a></button>
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="location.href='/community/create'; "><img src="/icons/pen.png" width="15px" align="center"><a style="color: white"> Create</a></button>
 </div>
 </div>
 
@@ -31,7 +31,7 @@
         <img src="/converts/{{this.PostID}}" class="card-img-top" alt={{this.PostID}}>
         <div class="card-body">
             <h5 class="card-title" onclick="event.cancelBubble=true; location.href='/profile/{{this.UserID}}';">{{this.UserID}}</h5>
-            <p class="card-text">{{this.Post_Text}}</p>
+            <p class="card-text" name="post_text">{{this.Post_Text}}</p>
             <p class="card-text" style="font-size: 15px;"><img src="/icons/view.png" alt="post_like" width="15px">  {{this.View_Count}}</p>
             <p class="card-text" style="font-size: 15px;"><img src="/icons/heart_after.png" alt="post_like" width="15px">  {{this.Like_Count}}</p>
             <p class="card-text" style="font-size: 15px;"><img src="/icons/comments.png" alt="post_like" width="15px">  {{this.Comment_Count}}</p>
@@ -63,11 +63,26 @@
         })
         here.checked = true;
     }
-
+    
+    
+    var domtext = document.getElementsByName('post_text')
+    domtext.forEach(element=>{
+    console.log(element.innerText)
+    element.innerText = view(element.innerText)
+    })
     function view(content) {
         if(content.length >= 40){
-            content = content.slice(0, 40)
+            content = content.slice(0, 40) + " ..."
             return content
         }
     }
+   
+        
+/*
+    domtext.forEach(list)=>{
+        console.log(list)
+        list.innerText = view(list.innerText)
+    }
+     */
+
 </script>
