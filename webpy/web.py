@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 import keras
 import numpy as np
 from PIL import Image
@@ -30,7 +31,7 @@ def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
     filename = prediction(dataset, imgname+'.jpg', imgID)
     print(dataset, imgname+'.jpg')
-    return {"img_id": filename}
+    return RedirectResponse("http://localhost:8001/transform/result?img_id:"+filename)
 
 
 # pip install -r ./webpy/requirements.txt
