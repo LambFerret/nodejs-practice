@@ -49,8 +49,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/result', (req, res) => {
-
+    console.log("hi");
     var convID = req.query.img_id
+    console.log(convID);
     res.send(`nice! good job! you good job!! ${convID} : ${typeof convID}`)
     // res.render("create")
     // db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
