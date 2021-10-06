@@ -7,8 +7,7 @@ import datetime
 
 app = FastAPI()
 
-def prediction(dataset, imgname, imgID):
-
+async def prediction(dataset, imgname, imgID):
     model = keras.models.load_model("datasets/" + dataset)
     img = Image.open("uploads/"+imgname).resize((256, 256))
     img = np.uint8(img) / 127.5 - 1
@@ -29,9 +28,9 @@ def prediction(dataset, imgname, imgID):
 @app.get("/convert")
 async def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
-    filename = prediction(dataset, imgname+'.jpg', imgID)
+    filename = await prediction(dataset, imgname+'.jpg', imgID)
     print(dataset, imgname+'.jpg')
-    return await {"img_id": filename}
+    return {"img_id": filename}
 
 
 # pip install -r ./webpy/requirements.txt
