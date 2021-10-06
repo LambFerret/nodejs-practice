@@ -12,17 +12,16 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  
-  select Conv_Img_ID,Up_Img_ID,UserID  from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = 'testid' group by Up_Img_ID
+  SELECT * from CONV_IMG
   
   
   ;`
+  // select * from UPLOADIMG
   // insert into POSTING values ("1633145371658asdfasdf_spring2autumn_0.jpg",'this33222 text',0,'winter','qwerqwer',0, null)
   // insert into UPLOADIMG values (0, "asdfasdf", "asdfasdf_spring2summer_0.jpg","spring2summer")
   // ALTER TABLE UPLOADIMG MODIFY Up_Img_Method varchar(20)
   // alter table CONV_IMG add constraint CONV_IMG_ibfk_1 foreign key(Up_Img_ID) references UPLOADIMG (Up_Img_Nm)
   // alter table UPLOADIMG add primary key(Up_Img_Nm);
-  // SELECT * FROM information_schema.table_constraints;
   // alter table CONV_IMG drop foreign key CONV_IMG_ibfk_1
   // select * from POSTING
   //조인조인

@@ -1,18 +1,22 @@
-
-
 <form action="/community/create" method="post">
-<div class="d-flex justify-content-center" style="margin: 10px;">
-   <select name="Pictureid" id="Pictureid">
-        {{#each image}}
-        <option value="{{this.Up_Img_Nm}}">{{this.Up_Img_Nm}}</option>
-        {{/each}}
-    </select>
-</div>
-    
+    <div class="d-flex justify-content-center" style="margin: 10px;">
+        <select name="Pictureid" id="Pictureid">
+            {{#each image}}
+            <option value="{{this.Conv_Img_ID}}" id="selectedPic">{{this.Conv_Img_ID}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <div class="d-flex justify-content-center" >
-        <div class="form-floating" style="width: 400px;margin:10px" >
-            <textarea class="form-control" placeholder="Leave a comment here" name="content" id="content" style="width: 400px; height: 100px" required></textarea>
+    {{!-- 여기 html 부탁드립니다 이미지 고르면 여기서 이미지 나옵니다 그리고 안되면
+    밑에줄에 안된다고 뜨게 했습니다 --}}
+        <img src="" alt="displayPicture" id="displayPicture">
+        <p id="isFailed"></p>
+
+
+    <div class="d-flex justify-content-center">
+        <div class="form-floating" style="width: 400px;margin:10px">
+            <textarea class="form-control" placeholder="Leave a comment here" name="content" id="content"
+                style="width: 400px; height: 100px" required></textarea>
             <label for="floatingTextarea2">Comments</label>
         </div>
     </div>
@@ -23,3 +27,33 @@
         </button>
     </div>
 </form>
+
+<script>
+    $(() => {
+        $('#Pictureid').focusout(() => {
+            var Pictureid = $("#Pictureid option:selected").val();
+            $.ajax({
+                type: 'post',
+                data: { Pictureid: Pictureid },
+                url: "/community/create/check",
+                success: (txt) => {
+                    if (txt == "error") { $("#isFailed").css("display", "inline").text("error!!") }
+                    else {
+                        if (txt.length) {
+                            $("#isFailed").css("display", "inline").text("This Picture of post already exists.")
+                        }
+                        else {
+                            $("#isFailed").css("display", "none")
+                        }
+                    }
+                    $('#displayPicture').src = '/converts/'+txt
+                }
+            })
+        })
+    })
+</script>
+<style>
+    #isFailed {
+        display: none;
+    }
+</style>

@@ -66,7 +66,11 @@ router.post("/post/:id", (req, res) => {
 })
 
 router.get("/create", async (req, res) => {
-    var imagesUserID = await db.getRow('UPLOADIMG', 'UserID', req.user.id)
+    imagesUserID = await db.useWisely(`
+                Select a.*, b.UserID
+                from CONV_IMG a left outer join UPLOADIMG b
+                on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
+                `)  
     ls = {
         image:imagesUserID,
     }
@@ -74,14 +78,25 @@ router.get("/create", async (req, res) => {
 })
 
 router.post("/create", (req, res) => {
-    var postid = "testtest"//req.body.Pictureid
+    var postid = req.body.Pictureid
     var content = req.body.content
     var user = req.user.id
-    var type = "winter" //postid.split("2")[1].split('_')[0]
+    var type = postid.split('_')[1].split('2')[1]
     db.insertRow("POSTING", [postid, content, null, type, user, 0, null])
     res.redirect("/community/page/1")
 })
 
-
+router.post('/create/check',async (req, res)=>{
+    try{
+        var PostID = req.body.Pictureid
+        count = await db.getRow("POSTING", "PostID", PostID)
+        console.log(PostID);
+        res.json(count[0].PostID);
+    }catch (e) {
+        if (e.name == "TypeError") {
+            res.send("error")
+        }
+    }
+})
 
 module.exports = router;

@@ -27,6 +27,7 @@ router.post("/",
         var realpaths = req.file.originalname.split('.')[0]
         redUrl = `http://localhost:9889/convert`
         db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
+        console.log(" 1 axios.get( ..... ");
         await axios.get(redUrl, {
             params: {
                 dataset: dataset,
@@ -34,24 +35,38 @@ router.post("/",
                 imgID: filename,
             }
         })
-            .then(async (v) => {
+            .then((v) => { 
+                console.log("2  axios.get( ..... ");
                 var convID = v.data.img_id
                 db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-                imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID  from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
+            }).then(async()=>{
+                imageRows = await db.useWisely(`
+                Select a.*, b.UserID
+                from CONV_IMG a left outer join UPLOADIMG b
+                on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
+                limit 1
+                `)      
+
                 config(req, res, "transform", {
-                    imgpath: "/webpy/converts/" + v.data.img_id,
                     afterImgs: imageRows[0],
                 })
+
             })
     })
+// 위에 axios가 동기적으로 페이지 오픈하도록
 
-
+// 쿼리문에 limit 1 이 최신꺼가 뜨던지 아니면 
 router.get('/', async (req, res) =>{
-    imageRows = await db.useWisely(`select Conv_Img_ID,Up_Img_ID,UserID  from CONV_IMG conv left join (select UserID, Up_Img_ID as id_a from UPLOADIMG) ori on conv.Up_Img_ID = ori.id_a where UserID = '${req.user.id}' group by Up_Img_ID`)
-    console.log(imageRows[1]);
+    imageRows = await db.useWisely(`
+    Select a.*, b.UserID
+    from CONV_IMG a left outer join UPLOADIMG b
+    on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
+    limit 1
+    `)
+    console.log(imageRows[0]);
     config(req, res, "transform", {
-        imgpath: "/webpy/converts/",
-        afterImgs: imageRows,
+        afterImgs: imageRows[0],
     })
 });
+
 module.exports = router;
