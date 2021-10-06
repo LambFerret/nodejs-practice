@@ -16,6 +16,7 @@ const upload = multer({ storage: storage, limits: { fileSize: 10 * 1024 * 1024 }
 router.post("/",
     upload.single("image"),
     async (req, res) => {
+        res.render("loadingImg")
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
@@ -48,10 +49,8 @@ router.post("/",
                 on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
                 limit 1
                 `)
+                res.redirect('/transform/result')
 
-                res.render("transform", {
-                    afterImgs: imageRows[0],
-                })
             })
     })
 // 위에 axios가 동기적으로 페이지 오픈하도록
@@ -71,13 +70,19 @@ router.get('/', (req, res) => {
     // limit 1
     // `)
 
-    res.render("transform", {
+    res.render("loadingImg", {
         afterImgs: "imageRows[0]",
     })
 
 });
 
+router.get('/result', (req, res)=>{
+    res.send("get")
+})
+router.get('/result', (req, res)=>{
+    res.send("post")
 
+})
 
     /*
     imageRows = await db.useWisely(`
