@@ -7,7 +7,6 @@ import datetime
 
 app = FastAPI()
 
-
 def prediction(dataset, imgname, imgID):
 
     model = keras.models.load_model("datasets/" + dataset)
@@ -28,9 +27,9 @@ def prediction(dataset, imgname, imgID):
 
 
 @app.get("/convert")
-def convert(dataset: str, imgname: str, imgID: str):
+async def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
-    filename = prediction(dataset, imgname+'.jpg', imgID)
+    filename = await prediction(dataset, imgname+'.jpg', imgID)
     print(dataset, imgname+'.jpg')
     return {"img_id": filename}
 
