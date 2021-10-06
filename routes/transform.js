@@ -47,23 +47,23 @@ router.post("/",
 //     res.render('loadingImg')
 // });
 
-router.get('/result', (req, res) => {
-    console.log("hi");
-    var convID = req.query.img_id
-    console.log(convID);
-    // res.render(`nice! good job! you good job!! ${convID} : ${typeof convID}`)
-    res.render("create")
-    // db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-    // res.render("loading")
-    // console.log('3 axios');
-    // imageRows = await db.useWisely(`
-    //             Select a.*, b.UserID
-    //             from CONV_IMG a left outer join UPLOADIMG b
-    //             on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
-    //             limit 1
-    //             `)
-    // res.redirect('/transform/result')
-})
+// router.get('/result', (req, res) => {
+//     console.log("hi");
+//     var convID = req.query.img_id
+//     console.log(convID);
+//     // res.render(`nice! good job! you good job!! ${convID} : ${typeof convID}`)
+//     res.render("create")
+//     db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
+//     res.render("loading")
+//     console.log('3 axios');
+//     imageRows = await db.useWisely(`
+//                 Select a.*, b.UserID
+//                 from CONV_IMG a left outer join UPLOADIMG b
+//                 on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
+//                 limit 1
+//                 `)
+//     res.redirect('/transform/result')
+// })
 
 
 router.get('/result', (req, res) => {
