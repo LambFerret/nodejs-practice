@@ -35,11 +35,13 @@ router.post("/",
                 imgID: filename,
             }
         })
-            .then(async(v) => {
+            .then((v) => {
                 console.log("2  axios.get( ..... ");
                 var convID = v.data.img_id
                 db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-
+                res.render("loading")
+            }).then(async (v) => {
+                console.log('3 axios');
                 imageRows = await db.useWisely(`
                 Select a.*, b.UserID
                 from CONV_IMG a left outer join UPLOADIMG b
