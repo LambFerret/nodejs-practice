@@ -68,7 +68,7 @@ router.post("/",
 
 router.get('/result', (req, res) => {
     console.log("hihihihi");
-    res.render("justRender")
+    res.send("justRender")
 })
 
 /*
