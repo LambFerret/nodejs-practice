@@ -12,7 +12,7 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  SELECT * from CONV_IMG
+  SELECT * from POSTING
   
   
   ;`

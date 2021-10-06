@@ -4,9 +4,11 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import datetime
+import tensorflow as tf
 
 app = FastAPI()
 
+@tf.function
 async def prediction(dataset, imgname, imgID):
     model = keras.models.load_model("datasets/" + dataset)
     img = Image.open("uploads/"+imgname).resize((256, 256))

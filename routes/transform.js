@@ -35,28 +35,27 @@ router.post("/",
                 imgID: filename,
             }
         })
-            .then((v) => { 
+            .then((v) => {
                 console.log("2  axios.get( ..... ");
                 var convID = v.data.img_id
                 db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-            }).then(async()=>{
+            }).then(async () => {
                 imageRows = await db.useWisely(`
                 Select a.*, b.UserID
                 from CONV_IMG a left outer join UPLOADIMG b
                 on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
                 limit 1
-                `)      
+                `)
 
-                config(req, res, "transform", {
+                res.render("transform", {
                     afterImgs: imageRows[0],
                 })
-
             })
     })
 // 위에 axios가 동기적으로 페이지 오픈하도록
 
 // 쿼리문에 limit 1 이 최신꺼가 뜨던지 아니면 
-router.get('/', async (req, res) =>{
+router.get('/', async (req, res) => {
     imageRows = await db.useWisely(`
     Select a.*, b.UserID
     from CONV_IMG a left outer join UPLOADIMG b
@@ -64,7 +63,7 @@ router.get('/', async (req, res) =>{
     limit 1
     `)
     console.log(imageRows[0]);
-    config(req, res, "transform", {
+    res.render("transform", {
         afterImgs: imageRows[0],
     })
 });

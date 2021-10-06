@@ -21,17 +21,19 @@ router.get('/post/delete', async (req, res) => {
     res.redirect("/")
 })
 
-router.get("/post/like", async (req, res)=>{
+router.get("/post/like", async (req, res) => {
     var username = req.query.user
     var postID = req.query.postid
     var someLike = await db.useWisely(`select * from POSTLIKE where PostID='${postID}' and UserID='${username}' `)
     someLike = someLike[0]
-        if (someLike) {
-            db.useWisely(`delete from POSTLIKE where PostID='${postID}' and UserID="${username}"`)
-        }
-        else {
-            db.insertRow("POSTLIKE", [null, username, postID])
-        }
-    })
+    if (someLike) {
+        db.useWisely(`delete from POSTLIKE where PostID='${postID}' and UserID="${username}"`)
+        res.send(true)
+    }
+    else {
+        db.insertRow("POSTLIKE", [null, username, postID])
+        res.send(false)
+    }
+})
 
 module.exports = router;
