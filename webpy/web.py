@@ -20,7 +20,7 @@ def prediction(dataset, imgname, imgID):
     a = str(int(a))
     plt.imshow(output[0])
     plt.axis("off")
-    endpoint = 'converts/'+a+imgID
+    endpoint = a+imgID
     plt.savefig(endpoint)
     plt.close()
     return endpoint
@@ -31,7 +31,7 @@ def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
     filename = prediction(dataset, imgname+'.jpg', imgID)
     print(dataset, imgname+'.jpg')
-    return RedirectResponse(f"http://localhost:8001/transform/result?img_id:'{filename}'")
+    return RedirectResponse(f"http://localhost:8001/transform/result?img_id:{filename}")
 
 
 # pip install -r ./webpy/requirements.txt
