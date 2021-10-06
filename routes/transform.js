@@ -67,8 +67,7 @@ router.get('/result', (req, res) => {
 
 
 router.get('/result', (req, res) => {
-    res.send("post")
-
+    res.render("justRender")
 })
 
 /*
