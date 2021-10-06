@@ -35,23 +35,9 @@ router.post("/",
                 imgname: realpaths,
                 imgID: filename,
             }
-        })
-            .then((v) => {
-                console.log("2  axios.get( ..... ");
-                var convID = v.data.img_id
-                db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-                res.render("loading")
-            }).then(async (v) => {
-                console.log('3 axios');
-                imageRows = await db.useWisely(`
-                Select a.*, b.UserID
-                from CONV_IMG a left outer join UPLOADIMG b
-                on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
-                limit 1
-                `)
-                res.redirect('/transform/result')
 
-            })
+
+        })
     })
 // 위에 axios가 동기적으로 페이지 오픈하도록
 
@@ -62,25 +48,40 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/result', (req, res)=>{
-    res.send("get")
+router.get('/result', (req, res) => {
+
+    var convID = req.body.img_id
+    res.send(`nice! good job! you good job!! ${convID}`)
+    
+    // db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
+    // res.render("loading")
+    // console.log('3 axios');
+    // imageRows = await db.useWisely(`
+    //             Select a.*, b.UserID
+    //             from CONV_IMG a left outer join UPLOADIMG b
+    //             on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
+    //             limit 1
+    //             `)
+    // res.redirect('/transform/result')
 })
-router.get('/result', (req, res)=>{
+
+
+router.get('/result', (req, res) => {
     res.send("post")
 
 })
 
-    /*
-    imageRows = await db.useWisely(`
-    Select a.*, b.UserID
-    from CONV_IMG a left outer join UPLOADIMG b
-    on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
-    limit 1
-    `)
-    console.log(imageRows[0]);
-    res.render("transform", {
-        afterImgs: imageRows[0],
-    })
-    */
+/*
+imageRows = await db.useWisely(`
+Select a.*, b.UserID
+from CONV_IMG a left outer join UPLOADIMG b
+on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
+limit 1
+`)
+console.log(imageRows[0]);
+res.render("transform", {
+    afterImgs: imageRows[0],
+})
+*/
 
 module.exports = router;
