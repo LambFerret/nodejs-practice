@@ -28,7 +28,6 @@ app.engine('hbs', handlebars({
   defaultLayout: 'basic',
   extname: 'hbs',
   layoutsDir: __dirname + '/views/layouts/',
-  partialsDir: __dirname + '/views/partials/',
 }))
 app.use(cors())
 app.set('view engine', 'hbs');
