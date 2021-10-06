@@ -23,7 +23,8 @@ router.get("/:id", async (req, res) => {
     var imagesUserID = await db.getRow('UPLOADIMG', 'UserID', req.user.id)
       config(req, res, "userprofile", {
         beforeImgs: imagesUserID, 
-        id: req.user.name, 
+        name: req.user.name, 
+        id: req.user.id, 
 
       })
     }

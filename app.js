@@ -31,7 +31,7 @@ app.engine('hbs', handlebars({
 }))
 app.use(cors())
 app.set('view engine', 'hbs');
-app.use(logger('dev'));
+app.use(logger());
 app.use(flash())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
