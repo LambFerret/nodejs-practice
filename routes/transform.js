@@ -29,29 +29,29 @@ router.post("/",
         redUrl = `http://localhost:9889/convert`
         db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
         console.log(" 1 axios.get( ..... ");
-        await axios.get(redUrl, {
-            params: {
-                dataset: dataset,
-                imgname: realpaths,
-                imgID: filename,
-            }
-        })
-            .then((v) => {
-                console.log("2  axios.get( ..... ");
-                var convID = v.data.img_id
-                db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-                res.render("loading")
-            }).then(async (v) => {
-                console.log('3 axios');
-                imageRows = await db.useWisely(`
-                Select a.*, b.UserID
-                from CONV_IMG a left outer join UPLOADIMG b
-                on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
-                limit 1
-                `)
-                res.redirect('/transform/result')
+        // await axios.get(redUrl, {
+        //     params: {
+        //         dataset: dataset,
+        //         imgname: realpaths,
+        //         imgID: filename,
+        //     }
+        // })
+        //     .then((v) => {
+        //         console.log("2  axios.get( ..... ");
+        //         var convID = v.data.img_id
+        //         db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
+        //         res.render("loading")
+        //     }).then(async (v) => {
+        //         console.log('3 axios');
+        //         imageRows = await db.useWisely(`
+        //         Select a.*, b.UserID
+        //         from CONV_IMG a left outer join UPLOADIMG b
+        //         on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
+        //         limit 1
+        //         `)
+        //         res.redirect('/transform/result')
 
-            })
+        //     })
     })
 // 위에 axios가 동기적으로 페이지 오픈하도록
 
