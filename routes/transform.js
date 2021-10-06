@@ -44,7 +44,7 @@ router.post("/",
                 Select a.*, b.UserID
                 from CONV_IMG a left outer join UPLOADIMG b
                 on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
-                limits 1
+                limit 1
                 `)      
 
                 config(req, res, "transform", {
