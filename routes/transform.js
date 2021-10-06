@@ -43,10 +43,9 @@ router.post("/",
 
 // 쿼리문에 limit 1 이 최신꺼가 뜨던지 아니면 
 
-router.get('/', (req, res) => {
-    res.render('loadingImg')
-
-});
+// router.get('/', (req, res) => {
+//     res.render('loadingImg')
+// });
 
 router.get('/result', (req, res) => {
     console.log("hi");
