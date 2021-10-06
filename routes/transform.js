@@ -51,8 +51,8 @@ router.get('/', (req, res) => {
 router.get('/result', (req, res) => {
 
     var convID = req.body.img_id
-    // res.send(`nice! good job! you good job!! ${convID}`)
-    res.render("create")
+    res.send(`nice! good job! you good job!! ${convID} : ${typeof convID}`)
+    // res.render("create")
     // db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
     // res.render("loading")
     // console.log('3 axios');
