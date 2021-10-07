@@ -28,6 +28,8 @@ def prediction(dataset, imgname, imgID):
 @app.get("/convert")
 def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
+    print("filename")
+
     filename = prediction(dataset, imgname+'.jpg', imgID)
     print(filename)
     return {"img_id": filename}

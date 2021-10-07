@@ -19,6 +19,7 @@ router.post("/",
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
+        console.log("gethere");
         var dataset = `${origin}2${convert}`
         dataset = dataset.toLowerCase()
         var count = await db.getCount("UPLOADIMG", dataset, id)
