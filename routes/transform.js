@@ -58,6 +58,8 @@ router.get('/result', async (req, res) => {
                     on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
                     limit 1
                     `)
+    console.log(oriID);
+    console.log(convID);
     res.render("transform",{
         beforeImg: oriID,
         afterImg: convID,
