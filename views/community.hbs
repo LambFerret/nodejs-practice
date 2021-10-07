@@ -56,18 +56,14 @@
         const checkbox = document.getElementsByName("season");
         var season = here.id
         checkbox.forEach((i)=>{
-           // console.log(i)
           //  if (!(i.id == all)) {document.getElementById(i.id+"inBoard").style.display = "none"}
           //  if (i.id == season) {document.getElementById(i.id+"inBoard").style.display = "block"}
             i.checked = false;
         })
         here.checked = true;
     }
-    
-    
     var domtext = document.getElementsByName('post_text')
     domtext.forEach(element=>{
-    console.log(element.innerText)
     element.innerText = view(element.innerText)
     })
     function view(content) {
@@ -76,13 +72,4 @@
             return content
         }
     }
-   
-        
-/*
-    domtext.forEach(list)=>{
-        console.log(list)
-        list.innerText = view(list.innerText)
-    }
-     */
-
 </script>

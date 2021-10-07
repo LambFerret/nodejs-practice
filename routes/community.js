@@ -82,7 +82,7 @@ router.post("/create", (req, res) => {
     var content = req.body.content
     var user = req.user.id
     var type = postid.split('_')[1].split('2')[1]
-    db.insertRow("POSTING", [postid, content, null, type, user, 0, null])
+    db.insertRow("POSTING", [postid, content, null, type, user, 0])
     res.redirect("/community/page/1")
 })
 
@@ -90,7 +90,6 @@ router.post('/create/check',async (req, res)=>{
     try{
         var PostID = req.body.Pictureid
         count = await db.getRow("POSTING", "PostID", PostID)
-        console.log(PostID);
         res.json(count[0].PostID);
     }catch (e) {
         if (e.name == "TypeError") {

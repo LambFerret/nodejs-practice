@@ -6,7 +6,6 @@ module.exports = function (passport) {
     if (req.user) {res.redirect("/")} // 로그인상태에서 로그인창 들오면 나가게함
 
     message = req.flash("error")
-    console.log(message);
     config(req, res, "LoginPage", {
       isEmpty: true,
       message: message,

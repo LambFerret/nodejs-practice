@@ -26,7 +26,6 @@ exports.Login = async (id, pwd) => {
     try {
         conn = await pool.getConnection()
         .then((con)=>{
-            console.log("??Is Login??");
             const res = await con.query(`select `)
         }).then(conn.end);
     }
