@@ -19,7 +19,7 @@ def prediction(dataset, imgname, imgID):
     a = str(int(a))
     plt.imshow(output[0])
     plt.axis("off")
-    endpoint = a+imgID
+    endpoint = "converts/"+a+imgID
     plt.savefig(endpoint)
     plt.close()
     return endpoint
