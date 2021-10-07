@@ -9,7 +9,7 @@
 
     
    <div class="d-flex justify-content-center">
-        <img src="" class="img-fluid" alt="displayPicture" id="displayPicture" style="padding: 10px;">
+        <img src="/tutorial/3.png" class="img-fluid" alt="displayPicture" id="displayPicture" style="padding: 10px;">
         <p id="isFailed"></p>
     </div>     
 
@@ -38,7 +38,7 @@
                 data: { Pictureid: Pictureid },
                 url: "/community/create/check",
                 success: (txt) => {
-                    if (txt == "error") { $("#isFailed").css("display", "inline").text("error!!") }
+                    if (txt == "error") { $("#isFailed").css("display", "none") }
                     else {
                         if (txt.length) {
                             $("#isFailed").css("display", "inline").text("This Picture of post already exists.")
@@ -47,7 +47,7 @@
                             $("#isFailed").css("display", "none")
                         }
                     }
-                    $('#displayPicture').src = '/converts/'+txt
+                    $('#displayPicture').attr("src", '/converts/'+Pictureid)
                 }
             })
         })
