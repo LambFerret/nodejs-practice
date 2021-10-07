@@ -35,7 +35,7 @@ router.post("/",
                 imgID: filename,
             }
         }).then((responseData) => {
-            console.log("responseData");
+            console.log(responseData);
             var convID = responseData.data.img_id
             global.convID = convID.split('/')[1]
             db.insertRow("CONV_IMG", [convID, filename])
