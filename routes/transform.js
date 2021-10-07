@@ -19,7 +19,6 @@ router.post("/",
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
-        console.log("gethere");
         var dataset = `${origin}2${convert}`
         dataset = dataset.toLowerCase()
         var count = await db.getCount("UPLOADIMG", dataset, id)
@@ -34,15 +33,9 @@ router.post("/",
                 imgname: realpaths,
                 imgID: filename,
             }
-        }).then(responseData => {
-            console.log(responseData);
-            console.log(responseData.data)
+        }).then((responseData) => {
             var convID = responseData.data.img_id
-            console.log(convID)
-
             convID = convID.split('/')[1]
-            console.log(convID)
-
             db.insertRow("CONV_IMG", [convID, filename])
         })
     })
