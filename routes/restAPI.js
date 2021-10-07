@@ -11,10 +11,12 @@ router.delete('/member', (req, res) => {
 })
 
 router.get('/post/delete', async (req, res) => {
+    console.log(req.user);
     username = req.query.user
     postID = req.query.postid
     if (username == req.user.id) {
-        db.deleteRow('COMMENT', "postID", postID)
+        abs = db.deleteRow('COMMENT', "postID", postID)
+        console.log(abs);
         db.deleteRow('POSTLIKE', "postID", postID)
     }
     if (username == req.user.id) db.deleteRow('POSTING', "postID", postID)
