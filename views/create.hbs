@@ -7,17 +7,16 @@
         </select>
     </div>
 
-    
-   <div class="d-flex justify-content-center">
-        <img src="" class="img-fluid" alt="displayPicture" id="displayPicture" style="padding: 10px;">
+    {{!-- 여기 html 부탁드립니다 이미지 고르면 여기서 이미지 나옵니다 그리고 안되면
+    밑에줄에 안된다고 뜨게 했습니다 --}}
+        <img src="" alt="displayPicture" id="displayPicture">
         <p id="isFailed"></p>
-    </div>     
 
 
     <div class="d-flex justify-content-center">
-        <div class="form-floating" style="width: 400px;margin:10px">    
+        <div class="form-floating" style="width: 400px;margin:10px">
             <textarea class="form-control" placeholder="Leave a comment here" name="content" id="content"
-                style="width: 400px; height: 100px; " required></textarea>
+                style="width: 400px; height: 100px" required></textarea>
             <label for="floatingTextarea2">Comments</label>
         </div>
     </div>

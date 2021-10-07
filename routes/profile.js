@@ -9,7 +9,7 @@ router.get("*", (req, res, next) => {
 })
 
 router.get('/', (req, res)=>{
-  config(req, res, "userprofile", {id: req.user.id})
+  config(req, res, "userprofile", {id: req.user.name})
 })
 
 router.get("/:id", async (req, res) => {
