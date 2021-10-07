@@ -25,7 +25,6 @@ router.post("/",
         count = count[0].ctd
         var filename = `${id}_${dataset}_${count}.jpg`
         var realpaths = req.file.originalname.split('.')[0]
-        global.oriID = realpaths
         redUrl = `http://localhost:9889/convert`
         db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
         await axios.get(redUrl, {
@@ -34,11 +33,14 @@ router.post("/",
                 imgname: realpaths,
                 imgID: filename,
             }
-        }).then((responseData) => {
-            console.log(responseData.data);
+        }).then(responseData => {
+            console.log(responseData);
+            console.log(responseData.data)
             var convID = responseData.data.img_id
+            console.log(convID)
+
             convID = convID.split('/')[1]
-            global.convID = convID
+            console.log(convID)
 
             db.insertRow("CONV_IMG", [convID, filename])
         })
@@ -61,11 +63,9 @@ router.get('/result', async (req, res) => {
                     on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
                     limit 1
                     `)
-    console.log(oriID);
-    console.log(convID);
+
     res.render("transform",{
-        beforeImg: oriID,
-        afterImg: convID,
+        imgs:imageRows[0]
     })
 })
 
