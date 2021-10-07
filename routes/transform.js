@@ -56,7 +56,7 @@ router.get('/', (req, res) => {
 router.get('/result', async (req, res) => {
     var id = req.user.id
     imageRows = await db.useWisely(`
-                    Select a.*, b.UserID, b.realpaths
+                    Select a.*, b.UserID, b.realpath
                     from CONV_IMG a left outer join UPLOADIMG b
                     on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
                     limit 1
