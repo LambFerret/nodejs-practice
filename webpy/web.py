@@ -29,7 +29,7 @@ def prediction(dataset, imgname, imgID):
 def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
     filename = prediction(dataset, imgname+'.jpg', imgID)
-    print(dataset, imgname+'.jpg')
+    print(filename)
     return {"img_id": filename}
 
 
