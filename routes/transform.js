@@ -16,7 +16,6 @@ const upload = multer({ storage: storage, limits: { fileSize: 10 * 1024 * 1024 }
 router.post("/",
     upload.single("image"),
     async (req, res) => {
-        res.render("loadingImg")
         var id = req.body.userInfo
         var origin = req.body.origin
         var convert = req.body.convert
@@ -26,59 +25,47 @@ router.post("/",
         count = count[0].ctd
         var filename = `${id}_${dataset}_${count}.jpg`
         var realpaths = req.file.originalname.split('.')[0]
+        global.oriID = realpaths
         redUrl = `http://localhost:9889/convert`
         db.insertRow("UPLOADIMG", [count, id, filename, dataset, realpaths])
-        console.log(" 1 axios.get( ..... ");
         await axios.get(redUrl, {
             params: {
                 dataset: dataset,
                 imgname: realpaths,
                 imgID: filename,
             }
-
-
+        }).then((responseData) => {
+            var convID = responseData.data.img_id
+            global.convID = convID.split('/')[1]
+            db.insertRow("CONV_IMG", [convID, filename])
         })
     })
-// 위에 axios가 동기적으로 페이지 오픈하도록
 
-// 쿼리문에 limit 1 이 최신꺼가 뜨던지 아니면 
-
-// router.get('/', (req, res) => {
-//     res.render('loadingImg')
-// });
+router.get('/', (req, res) => {
+    res.render('loadingImg')
+});
 
 // router.get('/result', (req, res) => {
-//     console.log("hi");
 //     var convID = req.query.img_id
-//     console.log(convID);
-//     // res.render(`nice! good job! you good job!! ${convID} : ${typeof convID}`)
-//     res.render("create")
-//     db.insertRow("CONV_IMG", [convID.split('/')[1], filename])
-//     res.render("loading")
-//     console.log('3 axios');
-//     imageRows = await db.useWisely(`
-//                 Select a.*, b.UserID
-//                 from CONV_IMG a left outer join UPLOADIMG b
-//                 on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
-//                 limit 1
-//                 `)
-//     res.redirect('/transform/result')
 // })
 
 
-router.get('/result', (req, res) => {
-    console.log("hihihihi");
-    res.send("justRender")
+router.get('/result', async (req, res) => {
+    var id = req.user.id
+    imageRows = await db.useWisely(`
+                    Select a.*, b.UserID
+                    from CONV_IMG a left outer join UPLOADIMG b
+                    on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
+                    limit 1
+                    `)
+    res.render("transform",{
+        beforeImg: oriID,
+        afterImg: convID,
+    })
 })
 
 /*
-imageRows = await db.useWisely(`
-Select a.*, b.UserID
-from CONV_IMG a left outer join UPLOADIMG b
-on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${req.user.id}'
-limit 1
-`)
-console.log(imageRows[0]);
+
 res.render("transform", {
     afterImgs: imageRows[0],
 })
