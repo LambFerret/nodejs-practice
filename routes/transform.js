@@ -33,10 +33,14 @@ router.post("/",
                 imgname: realpaths,
                 imgID: filename,
             }
-        // }).then((responseData) => {
-        //     var convID = responseData.data.img_id
-        //     convID = convID.split('/')[1]
-        //     db.insertRow("CONV_IMG", [convID, filename])
+        }).then((responseData) => {
+            console.log(responseData);
+            console.log(responseData.data);
+            var convID = responseData.data.img_id
+            console.log(convID);
+            convID = convID.split('/')[1]
+            console.log(convID);
+            db.insertRow("CONV_IMG", [convID, filename])
         })
     })
 
@@ -51,15 +55,15 @@ router.get('/', (req, res) => {
 
 router.get('/result', async (req, res) => {
     var id = req.user.id
-    // imageRows = await db.useWisely(`
-    //                 Select a.*, b.UserID, b.realpaths
-    //                 from CONV_IMG a left outer join UPLOADIMG b
-    //                 on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
-    //                 limit 1
-    //                 `)
+    imageRows = await db.useWisely(`
+                    Select a.*, b.UserID, b.realpaths
+                    from CONV_IMG a left outer join UPLOADIMG b
+                    on a.Up_Img_ID = b.Up_Img_Nm where UserID = '${id}'
+                    limit 1
+                    `)
 
     res.render("transform", {
-        imgs: id // imageRows[0]
+        imgs: imageRows[0]
     })
 })
 
