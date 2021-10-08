@@ -60,9 +60,18 @@ router.get('/result', async (req, res) => {
                     limit 1 
                     
                     `)
-
+    var realpath = imageRows[0].realpath
+    var Conv_Img_ID = imageRows[0].Conv_Img_ID
+    var conv_season = Conv_Img_ID.split('_').reverse()[1].split('2')[1]
+    var ori_season = Conv_Img_ID.split('_').reverse()[1].split('2')[0]
+    console.log(Conv_Img_ID);
+    console.log(ori_season);
+    console.log(conv_season);
     res.render("transform", {
-        imgs: imageRows[0]
+        realpath:realpath,
+        Conv_Img_ID:Conv_Img_ID,
+        ori_season:ori_season,
+        conv_season:conv_season
     })
 })
 

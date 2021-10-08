@@ -4,9 +4,9 @@
     <div class="card mb-3">
         <div class="card-body">
             <h5 class="card-title fw-bold" style="color: #4E5255;">Before</h5>
-            <p class="card-text">여기에 변환 {{imgs.realpath}}전 계절이 뜨면 좋겠음 안되면 말고!</p>
+            <p class="card-text">{{ori_season}}</p>
         </div>
-        <img src='/uploads/{{imgs.realpath}}.jpg' class="card-img-bottom" alt="beforePicHere">
+        <img src='/uploads/{{realpath}}.jpg' class="card-img-bottom" alt="beforePicHere">
     </div>
 </div>
 
@@ -14,14 +14,9 @@
     <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title fw-bold" style="color: #4E5255;">After</h5>
-        <p class="card-text">여기에 변환{{imgs.Conv_Img_ID}} 계절이 뜨면 좋겠음 안되면 말고!</p>
+        <p class="card-text">{{conv_season}}</p>
     </div>
-    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="location.href='/converts/{{imgs.Conv_Img_ID}}"><a style="color: white">Download</a></button>
-    <a href="/converts/{{imgs.Conv_Img_ID}}" download>Download</a>
-    <img src="/converts/{{imgs.Conv_Img_ID}}" class="card-img-bottom" alt="afterPicHere" id="afterPicHere">
+    <button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="location.href='/converts/{{Conv_Img_ID}};"><a style="color: white">Download</a></button>
+    <img src="/converts/{{Conv_Img_ID}}" class="card-img-bottom" alt="afterPicHere" id="afterPicHere">
     </div>
 </div>
-
-<script>
-    
-</script>
