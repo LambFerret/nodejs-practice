@@ -81,8 +81,7 @@ router.post("/create", (req, res) => {
     var postid = req.body.Pictureid
     var content = req.body.content
     var user = req.user.id
-    var type = postid.split('2')[-1].split('_')[0]
-    console.log(type);
+    var type = postid.split('_').reverse()[1].split('2')[1]
     db.insertRow("POSTING", [postid, content, null, type, user, 0])
     res.redirect("/community/page/1")
 })
