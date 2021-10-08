@@ -15,10 +15,7 @@
 <script type="text/javascript">
     function comfirmAlert(id) {
         if (confirm("정말 삭제하시겠습니까?")) {
-            options = {
-                method: 'delete'
-            }
-            fetch('/restapi/member?user=' + id, options).then(location.replace("/"))
+            fetch('/restapi/member?user=' + id, {method: 'delete'}).then(location.replace("/"))
         }
     }
 </script>
