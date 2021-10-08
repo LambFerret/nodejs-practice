@@ -1,8 +1,13 @@
-<img src="/icons/loading.gif" alt="load">
-<p id="time">
+<div class="d-flex justify-content-center">
+    <img src="/icons/loading.gif" alt="load">
+</div>
+<div class="d-flex justify-content-center">
+    <p id="time" style="margin: 10PX;"></p>
+</div>
 
-</p>
 <script>
     var dom = document.getElementById("time")
-    setTimeout(()=>{dom.innerHTML = `<a href='/transform/result'> 보러가기 </a>`}, 15000)
+    setTimeout(()=>{dom.innerHTML = `<button type="button" class="btn btn-outline btn-sm" style="background-color: #9C9584;" onclick="location.href='/transform/result'; "><a style="color: white">SHOW</a></button>`}, 15000)
 </script>
+
+    
