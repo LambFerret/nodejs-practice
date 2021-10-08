@@ -12,11 +12,7 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  Select a.*, b.UserID, b.realpath
-from CONV_IMG a left outer join UPLOADIMG b
-on a.Up_Img_ID = b.Up_Img_Nm where UserID = 'asdfasdf'
-order by left(Conv_Img_ID,8) asc
-limit 1;
+  delete from COMMENT where Comment_ID = 
   
   ;`
   
