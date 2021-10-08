@@ -44,11 +44,6 @@ router.get('/', (req, res) => {
     res.render('loadingImg')
 });
 
-// router.get('/result', (req, res) => {
-//     var convID = req.query.img_id
-// })
-
-
 router.get('/result', async (req, res) => {
     var id = req.user.id
     imageRows = await db.useWisely(`
@@ -64,9 +59,6 @@ router.get('/result', async (req, res) => {
     var Conv_Img_ID = imageRows[0].Conv_Img_ID
     var conv_season = Conv_Img_ID.split('_').reverse()[1].split('2')[1]
     var ori_season = Conv_Img_ID.split('_').reverse()[1].split('2')[0]
-    console.log(Conv_Img_ID);
-    console.log(ori_season);
-    console.log(conv_season);
     res.render("transform", {
         realpath:realpath,
         Conv_Img_ID:Conv_Img_ID,
