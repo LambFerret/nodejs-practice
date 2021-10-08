@@ -12,7 +12,7 @@ router.get("/logout", (req, res) => {
 router.get("/admin", async (req, res) => {
   var queryss = `
 
-  delete from COMMENT where Comment_ID = 
+  delete from POSTI4NG 
   
   ;`
   
