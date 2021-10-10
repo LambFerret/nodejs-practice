@@ -27,6 +27,8 @@ def prediction(dataset, imgname, imgID):
     except e:
         print(e)
 
+prediction('spring2summer', 'cropped6353605316224991158', 'asdfasdf333')
+
 
 @app.get("/convert")
 def convert(dataset: str, imgname: str, imgID: str):
