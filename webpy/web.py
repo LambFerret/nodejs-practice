@@ -24,10 +24,9 @@ def prediction(dataset, imgname, imgID):
         plt.savefig(endpoint)
         plt.close()
         return endpoint
-    except e:
+    except Exception as e:
         print(e)
 
-prediction('spring2summer', 'cropped6353605316224991158', 'asdfasdf333')
 
 
 @app.get("/convert")
