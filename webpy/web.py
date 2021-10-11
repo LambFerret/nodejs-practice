@@ -26,8 +26,8 @@ app = FastAPI()
 print("bye")
 @app.get("/convert")
 def convert(dataset: str, imgname: str, imgID: str):
-    dataset = dataset.lower()
     print("hihihihi")
+    dataset = dataset.lower()
     filename = "asdfasdf" #prediction(dataset, imgname+'.jpg', imgID)
     return {"img_id": filename}
 
