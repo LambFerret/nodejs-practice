@@ -31,10 +31,12 @@ def convert():#dataset: str, imgname: str, imgID: str):
     filename = "asdfasdf" #prediction(dataset, imgname+'.jpg', imgID)
     return {"img_id": filename}
 
-@app.get("/")
+@app.get("/test")
 def test():
     print('hi')
     return {"img_id": "filename"}
+
+test()
 # pip install -r ./webpy/requirements.txt
 # start with..
 # uvicorn web:app --reload --port=9889
