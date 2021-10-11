@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 # import keras
-import numpy as np
-from PIL import Image
-import matplotlib.pyplot as plt
-import datetime
+# import numpy as np
+# from PIL import Image
+# import matplotlib.pyplot as plt
+# import datetime
 
 app = FastAPI()
 
@@ -27,6 +27,7 @@ app = FastAPI()
 @app.get("/convert")
 def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
+    print("hihihihi")
     filename = "asdfasdf" #prediction(dataset, imgname+'.jpg', imgID)
     return {"img_id": filename}
 
