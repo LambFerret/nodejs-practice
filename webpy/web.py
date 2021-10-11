@@ -24,12 +24,10 @@ def prediction(dataset, imgname, imgID):
     plt.close()
     return endpoint
 
-
-
 @app.get("/convert")
 def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
-    filename = prediction(dataset, imgname+'.jpg', imgID)
+    filename = "asdfasdf" #prediction(dataset, imgname+'.jpg', imgID)
     return {"img_id": filename}
 
 
