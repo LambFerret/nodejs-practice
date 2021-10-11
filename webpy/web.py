@@ -23,7 +23,7 @@ app = FastAPI()
 #     plt.savefig(endpoint)
 #     plt.close()
 #     return endpoint
-
+print("bye")
 @app.get("/convert")
 def convert(dataset: str, imgname: str, imgID: str):
     dataset = dataset.lower()
